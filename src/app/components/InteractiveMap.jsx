@@ -126,7 +126,7 @@ export default function InteractiveMap() {
         <button
           key={area.id}
           onClick={(e) => handleAreaClick(area, e)}
-          className="absolute  transition-all duration-200 shadow-lg hover:shadow-xl"
+          className="absolute  transition-all duration-200 "
           style={{
             left: `${left}px`,
             top: `${top}px`,
