@@ -1,11 +1,13 @@
 "use client";
 import Image from "next/image";
 import React, { useState, useRef, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+
+/* Assets */
 import dholeraMap from "@/app/assets/dholera-map-with-icons.webp";
 import dholeraMapM from "@/app/assets/dholera-map-mobile.webp";
 import metro from "@/app/assets/metro.webp";
 import abcd from "@/app/assets/abcd-building.webp";
-import activationArea from "@/app/assets/Activation-Area.webp";
 import dia from "@/app/assets/dholera-international-airport.webp";
 import expressway from "@/app/assets/expressway.webp";
 import renew from "@/app/assets/ReNew-power.webp";
@@ -13,282 +15,235 @@ import solarPark from "@/app/assets/solar-park.webp";
 import tata from "@/app/assets/tata-semicon.webp";
 
 export default function InteractiveMap() {
-  const [selectedArea, setSelectedArea] = useState(null);
-  const [modalOpen, setModalOpen] = useState(false);
-  const [modalPosition, setModalPosition] = useState({ x: 0, y: 0 });
-  const [imageLoaded, setImageLoaded] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-  const mapContainerRef = useRef(null);
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [selectedArea, setSelectedArea] = useState(null);
+  const [modalPosition, setModalPosition] = useState({ x: 0, y: 0 });
+
   const imageRef = useRef(null);
 
-  // ✅ Detect mobile based on visual viewport
+  /* 🧭 Detect mobile */
   useEffect(() => {
-    const checkMobile = () => {
-      const vw = window.visualViewport?.width || window.innerWidth;
-      setIsMobile(vw < 768);
-      setImageLoaded(false);
-      setTimeout(() => setImageLoaded(true), 300); // allow layout to settle
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
     };
-
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-
-    return () => window.removeEventListener("resize", checkMobile);
+    
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // Desktop coordinates
+  /* 📍 Exact pixel coordinates based on 1080x1080 (desktop) and 400x400 (mobile) */
   const desktopAreas = [
-    { id: "metro", title: "MonoRail", coords: [626, 47, 671, 95], shape: "rect", description: "Dholera MonoRail System" },
-    { id: "airport", title: "Dholera International Airport", coords: [827, 123, 872, 171], shape: "rect", description: "International Airport Project" },
-    { id: "expressway", title: "Expressway", coords: [603, 199, 646, 244], shape: "rect", description: "Dholera Expressway" },
-    { id: "abcd", title: "ABCD Building", coords: [439, 377, 482, 424], shape: "rect", description: "ABCD Building Complex" },
-    { id: "tata", title: "Tata Semicon", coords: [487, 432, 530, 477], shape: "rect", description: "Tata Semiconductor Facility" },
-    { id: "renew", title: "ReNew Power", coords: [538, 450, 581, 494], shape: "rect", description: "ReNew Power Plant" },
-    { id: "solar", title: "Solar Park", coords: [674, 681, 718, 727], shape: "rect", description: "Solar Energy Park" },
-    {
-      id: "activation",
-      title: "Activation Area",
-      coords: [486, 508, 498, 481, 574, 500, 586, 514, 555, 583, 597, 602, 625, 595, 618, 565, 617, 526, 588, 521, 568, 546],
-      shape: "poly",
-      description: "Project Activation Area",
-    },
+    { id: "metro", title: "MonoRail", coords: [580, 80, 630, 130], image: metro, description: "Dholera MonoRail System" },
+    { id: "airport", title: "Dholera International Airport", coords: [780, 150, 830, 200], image: dia, description: "International Airport Project" },
+    { id: "expressway", title: "Expressway", coords: [560, 220, 610, 270], image: expressway, description: "Dholera Expressway" },
+    { id: "abcd", title: "ABCD Building", coords: [400, 400, 450, 450], image: abcd, description: "ABCD Building Complex" },
+    { id: "tata", title: "Tata Semicon", coords: [450, 460, 500, 510], image: tata, description: "Tata Semiconductor Facility" },
+    { id: "renew", title: "ReNew Power", coords: [500, 480, 550, 530], image: renew, description: "ReNew Power Plant" },
+    { id: "solar", title: "Solar Park", coords: [620, 720, 670, 770], image: solarPark, description: "Solar Energy Park" },
   ];
 
-  // Mobile coordinates
   const mobileAreas = [
-    { id: "abcd", title: "ABCD Building", coords: [162, 135, 182, 158], shape: "rect", description: "ABCD Building Complex" },
-    { id: "expressway", title: "Expressway", coords: [219, 77, 238, 96], shape: "rect", description: "Dholera Expressway" },
+    { id: "abcd", title: "ABCD Building", coords: [160, 140, 190, 170], image: abcd, description: "ABCD Building Complex" },
+    { id: "metro", title: "MonoRail", coords: [220, 30, 250, 60], image: metro, description: "Dholera MonoRail System" },
+    { id: "airport", title: "Dholera International Airport", coords: [290, 55, 320, 85], image: dia, description: "International Airport Project" },
+    { id: "expressway", title: "Expressway", coords: [210, 85, 240, 115], image: expressway, description: "Dholera Expressway" },
+    { id: "tata", title: "Tata Semicon", coords: [170, 165, 200, 195], image: tata, description: "Tata Semiconductor Facility" },
+    { id: "renew", title: "ReNew Power", coords: [190, 175, 220, 205], image: renew, description: "ReNew Power Plant" },
+    { id: "solar", title: "Solar Park", coords: [240, 260, 270, 290], image: solarPark, description: "Solar Energy Park" },
   ];
 
   const areas = isMobile ? mobileAreas : desktopAreas;
 
-  const getAreaCenter = (coords, shape) => {
-    if (shape === "rect") {
-      const [x1, y1, x2, y2] = coords;
-      return { x: (x1 + x2) / 2, y: (y1 + y2) / 2 };
-    } else if (shape === "poly") {
-      let sumX = 0, sumY = 0;
-      for (let i = 0; i < coords.length; i += 2) {
-        sumX += coords[i];
-        sumY += coords[i + 1];
-      }
-      const pointCount = coords.length / 2;
-      return { x: sumX / pointCount, y: sumY / pointCount };
-    }
-    return { x: 0, y: 0 };
-  };
-
-  const handleAreaClick = (area, event) => {
+  /* 🧠 Calculate position for modal */
+  const handleAreaClick = (area, e) => {
     if (!imageRef.current) return;
-
-    event?.preventDefault();
-    event?.stopPropagation();
+    e.preventDefault();
+    e.stopPropagation();
 
     const imgRect = imageRef.current.getBoundingClientRect();
-    const naturalWidth = imageRef.current.naturalWidth;
-    const naturalHeight = imageRef.current.naturalHeight;
+    const scrollX = window.scrollX || window.pageXOffset;
+    const scrollY = window.scrollY || window.pageYOffset;
 
+    // Get natural image dimensions
+    const naturalWidth = isMobile ? 400 : 1080;
+    const naturalHeight = isMobile ? 400 : 1080;
+    
     const scaleX = imgRect.width / naturalWidth;
     const scaleY = imgRect.height / naturalHeight;
 
-    const areaCenter = getAreaCenter(area.coords, area.shape);
-    const scaledX = areaCenter.x * scaleX;
-    const scaledY = areaCenter.y * scaleY;
+    const [x1, y1, x2, y2] = area.coords;
+    const centerX = ((x1 + x2) / 2) * scaleX;
+    const centerY = ((y1 + y2) / 2) * scaleY;
 
-    const absoluteX = imgRect.left + scaledX;
-    const absoluteY = imgRect.top + scaledY;
-
-    const viewportWidth = window.visualViewport?.width || window.innerWidth;
-    const viewportHeight = window.visualViewport?.height || window.innerHeight;
-
-    const modalWidth = Math.min(384, viewportWidth - 32);
+    const modalWidth = Math.min(350, window.innerWidth - 40);
     const modalHeight = 400;
 
-    let finalX = absoluteX - modalWidth / 2;
-    let finalY = absoluteY + 20;
+    let left = imgRect.left + centerX - modalWidth / 2 + scrollX;
+    let top = imgRect.top + centerY + 20 + scrollY;
 
-    if (finalX < 16) finalX = 16;
-    if (finalX + modalWidth > viewportWidth - 16) {
-      finalX = viewportWidth - modalWidth - 16;
+    // Boundary checks
+    const margin = 20;
+    if (left < margin + scrollX) left = margin + scrollX;
+    if (left + modalWidth > window.innerWidth + scrollX - margin) {
+      left = window.innerWidth + scrollX - modalWidth - margin;
     }
-
-    if (finalY + modalHeight > viewportHeight - 16) {
-      finalY = absoluteY - modalHeight - 20;
+    if (top + modalHeight > window.innerHeight + scrollY - margin) {
+      top = imgRect.top + centerY - modalHeight - 20 + scrollY;
     }
+    if (top < margin + scrollY) top = scrollY + margin;
 
-    if (finalY < 16) {
-      finalY = (viewportHeight - modalHeight) / 2;
-    }
-
-    setModalPosition({ x: finalX, y: finalY });
+    setModalPosition({ x: left, y: top });
     setSelectedArea(area);
     setModalOpen(true);
   };
 
-  const closeModal = () => {
-    setModalOpen(false);
-    setSelectedArea(null);
-  };
-
-  const renderClickableAreas = () => {
+  /* 🎯 Render clickable areas */
+  const renderAreas = () => {
     if (!imageRef.current || !imageLoaded) return null;
 
     const imgRect = imageRef.current.getBoundingClientRect();
-    const naturalWidth = imageRef.current.naturalWidth;
-    const naturalHeight = imageRef.current.naturalHeight;
-
-    if (!naturalWidth || !naturalHeight || !imgRect.width) return null;
-
+    const naturalWidth = isMobile ? 400 : 1080;
+    const naturalHeight = isMobile ? 400 : 1080;
+    
     const scaleX = imgRect.width / naturalWidth;
     const scaleY = imgRect.height / naturalHeight;
 
-    console.log("✅ Image Info:", {
-      naturalWidth,
-      naturalHeight,
-      renderedWidth: imgRect.width,
-      renderedHeight: imgRect.height,
-      isMobile,
-    });
-
     return areas.map((area) => {
-      if (area.shape === "rect") {
-        const [x1, y1, x2, y2] = area.coords;
-        const left = x1 * scaleX;
-        const top = y1 * scaleY;
-        const width = (x2 - x1) * scaleX;
-        const height = (y2 - y1) * scaleY;
+      const [x1, y1, x2, y2] = area.coords;
+      
+      const left = x1 * scaleX;
+      const top = y1 * scaleY;
+      const width = (x2 - x1) * scaleX;
+      const height = (y2 - y1) * scaleY;
 
-        return (
-          <button
-            key={area.id}
-            onClick={(e) => handleAreaClick(area, e)}
-            onTouchEnd={(e) => {
-              e.preventDefault();
-              handleAreaClick(area, e);
-            }}
-            style={{
-              position: "absolute",
-              left: `${left}px`,
-              top: `${top}px`,
-              width: `${width}px`,
-              height: `${height}px`,
-            }}
-            className="border-2 border-red-500 bg-blue-500 bg-opacity-30 cursor-pointer hover:bg-opacity-50 active:bg-opacity-70 transition-colors"
-            title={area.title}
-            aria-label={area.title}
-          />
-        );
-      }
-      return null;
+      // Skip rendering if area is too small
+      if (width <= 2 || height <= 2) return null;
+
+      return (
+        <button
+          key={area.id}
+          onClick={(e) => handleAreaClick(area, e)}
+          className="absolute  transition-all duration-200 shadow-lg hover:shadow-xl"
+          style={{
+            left: `${left}px`,
+            top: `${top}px`,
+            width: `${width}px`,
+            height: `${height}px`,
+            minWidth: "12px",
+            minHeight: "12px",
+          }}
+          aria-label={area.title}
+          title={area.title}
+        >
+          
+        </button>
+      );
     });
   };
 
-  // ✅ Resize observer ensures clickable overlay stays aligned
+  /* 🪄 Auto close modal on click outside */
   useEffect(() => {
-    if (!imageRef.current) return;
-    const observer = new ResizeObserver(() => setImageLoaded(true));
-    observer.observe(imageRef.current);
-    return () => observer.disconnect();
-  }, []);
-
-  // Close modal on outside click
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (modalOpen && !event.target.closest(".modal-content")) {
-        closeModal();
+    const handleOutside = (e) => {
+      if (modalOpen && !e.target.closest(".modal-content") && !e.target.closest("button[aria-label]")) {
+        setModalOpen(false);
       }
     };
-    if (modalOpen) {
-      document.addEventListener("mousedown", handleClickOutside);
-      document.addEventListener("touchstart", handleClickOutside, { passive: true });
-    }
+    
+    document.addEventListener("mousedown", handleOutside);
+    document.addEventListener("touchstart", handleOutside);
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-      document.removeEventListener("touchstart", handleClickOutside);
+      document.removeEventListener("mousedown", handleOutside);
+      document.removeEventListener("touchstart", handleOutside);
     };
   }, [modalOpen]);
 
   return (
-    <div className="min-h-screen bg-gray-50 p-4">
-      <div className="max-w-6xl mx-auto">
-        <h1 className="text-3xl font-bold text-center mb-8 text-gray-800">
-          Interactive Dholera Map
-        </h1>
+    <div className="relative w-full min-h-screen bg-gray-50 flex flex-col items-center justify-center py-8 px-4">
+      <h1 className="text-3xl font-bold text-gray-800 mb-6 text-center">
+        Interactive Dholera Map
+      </h1>
 
-        <div className="relative bg-white rounded-lg shadow-lg p-4" ref={mapContainerRef}>
-          <div className="relative inline-block max-w-full">
-            <Image
-              ref={imageRef}
-              src={isMobile ? dholeraMapM : dholeraMap}
-              alt="Dholera Map"
-              className="w-full h-auto select-none block"
-              onLoadingComplete={() => setImageLoaded(true)} // ✅ replaced onLoad
-              draggable={false}
-            />
+      <div className="relative w-full max-w-6xl overflow-hidden rounded-2xl shadow-2xl bg-white">
+        <div className="relative w-full aspect-square max-w-4xl mx-auto">
+          <Image
+            ref={imageRef}
+            src={isMobile ? dholeraMapM : dholeraMap}
+            alt="Dholera Map"
+            fill
+            priority
+            className="object-contain select-none"
+            onLoad={() => setImageLoaded(true)}
+            onLoadingComplete={() => setImageLoaded(true)}
+            draggable={false}
+            sizes="(max-width: 768px) 100vw, 80vw"
+          />
 
-            {imageLoaded && (
-              <div
-                className="absolute top-0 left-0 w-full h-full pointer-events-none overflow-hidden"
-                style={{
-                  width: imageRef.current?.getBoundingClientRect().width + "px",
-                  height: imageRef.current?.getBoundingClientRect().height + "px",
-                }}
-              >
-                <div className="relative w-full h-full pointer-events-auto">
-                  {renderClickableAreas()}
-                </div>
-              </div>
-            )}
-          </div>
-
-          <p className="text-center text-sm text-gray-600 mt-4">
-            {isMobile ? "Tap" : "Click"} on the highlighted areas to view details
-          </p>
-
-          {isMobile && (
-            <p className="text-center text-xs text-green-600 mt-2">
-              Testing Mobile: ABCD Building & Expressway only
-            </p>
+          {/* 🔵 Clickable Areas */}
+          {imageLoaded && (
+            <div className="absolute inset-0">
+              {renderAreas()}
+            </div>
           )}
         </div>
+      </div>
 
+      <p className="text-gray-600 text-center mt-6 text-lg">
+        {isMobile ? "Tap" : "Click"} on highlighted areas to explore details.
+      </p>
+
+      {/* 🧩 Animated Modal */}
+      <AnimatePresence>
         {modalOpen && selectedArea && (
           <>
-            <div className="fixed inset-0 bg-black bg-opacity-50 z-40" onClick={closeModal} />
-            <div
-              className="fixed z-50 bg-white rounded-lg shadow-2xl modal-content overflow-hidden"
+            <motion.div
+              className="fixed inset-0 bg-transparent bg-opacity-60 z-40 backdrop-blur-sm"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setModalOpen(false)}
+            />
+            <motion.div
+              className="fixed z-50 bg-white rounded-xl shadow-2xl modal-content overflow-hidden border-2 border-gray-200"
               style={{
                 left: `${modalPosition.x}px`,
                 top: `${modalPosition.y}px`,
-                maxWidth: "calc(100vw - 32px)",
-                width: "384px",
-                maxHeight: "80vh",
+                width: "350px",
+                maxWidth: "calc(100vw - 40px)",
               }}
-              onClick={(e) => e.stopPropagation()}
+              initial={{ scale: 0.8, opacity: 0, y: 20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.8, opacity: 0, y: 20 }}
+              transition={{ type: "spring", damping: 25, stiffness: 300 }}
             >
-              <div className="sticky top-0 bg-white border-b px-4 py-3 flex items-center justify-between z-10">
-                <h2 className="text-xl font-semibold text-gray-800 pr-4">
-                  {selectedArea.title}
-                </h2>
+              <div className="flex items-center justify-between p-5 border-b border-gray-200 bg-gradient-to-r from-blue-50 to-gray-50">
+                <h2 className="text-xl font-bold text-gray-800">{selectedArea.title}</h2>
                 <button
-                  onClick={closeModal}
-                  className="text-gray-500 hover:text-gray-700 text-3xl font-light leading-none w-8 h-8 flex items-center justify-center"
-                  aria-label="Close"
+                  onClick={() => setModalOpen(false)}
+                  className="text-gray-500 hover:text-red-500 text-2xl font-light leading-6 w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100 transition-colors"
                 >
                   ×
                 </button>
               </div>
 
-              <div className="p-4 overflow-auto" style={{ maxHeight: "calc(80vh - 60px)" }}>
-                <div className="w-full aspect-video bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg shadow-md mb-3 flex items-center justify-center">
-                  <span className="text-white text-lg font-semibold">{selectedArea.title}</span>
+              <div className="p-5">
+                <div className="relative w-full h-48 mb-4 rounded-lg overflow-hidden shadow-md">
+                  <Image
+                    src={selectedArea.image}
+                    alt={selectedArea.title}
+                    fill
+                    className="object-cover"
+                    sizes="350px"
+                  />
                 </div>
-                <p className="text-gray-600">{selectedArea.description}</p>
+                <p className="text-gray-700 text-base leading-relaxed">{selectedArea.description}</p>
               </div>
-            </div>
+            </motion.div>
           </>
         )}
-      </div>
+      </AnimatePresence>
     </div>
   );
 }
