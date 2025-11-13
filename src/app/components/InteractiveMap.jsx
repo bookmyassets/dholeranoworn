@@ -262,7 +262,9 @@ export default function InteractiveMap() {
   }, [modalOpen]);
 
   return (
-    <div className="relative w-full min-h-screen bg-gray-50 flex flex-col items-center justify-center py-8 px-4">
+    <div className="bg-gray-50  h-screen">
+
+    <div className="relative w-full flex flex-col pt-8 items-center justify-center  px-4">
       <h1 className="text-3xl font-bold text-gray-800 mb-6 text-center">
         Interactive Dholera Map
       </h1>
@@ -283,7 +285,7 @@ export default function InteractiveMap() {
             onLoadingComplete={() => setImageLoaded(true)}
             draggable={false}
             sizes="(max-width: 768px) 100vw, 80vw"
-          />
+            />
 
           {/* 🔵 Clickable Areas */}
           {imageLoaded && (
@@ -306,7 +308,7 @@ export default function InteractiveMap() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setModalOpen(false)}
-            />
+              />
             <motion.div
               className="fixed z-50  rounded-xl shadow-2xl modal-content overflow-hidden "
               style={{
@@ -319,13 +321,13 @@ export default function InteractiveMap() {
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.8, opacity: 0, y: 20 }}
               transition={{ type: "spring", damping: 25, stiffness: 300 }}
-            >
+              >
               <div className="relative">
                 {/* Close button on top of image */}
                 <button
                   onClick={() => setModalOpen(false)}
                   className="absolute top-3 right-3 z-10 text-white hover:text-red-300 text-2xl font-light w-8 h-8 flex items-center justify-center rounded-full hover:bg-black/50 transition-colors bg-black/30 backdrop-blur-sm"
-                >
+                  >
                   ×
                 </button>
 
@@ -336,7 +338,7 @@ export default function InteractiveMap() {
                     alt={selectedArea.title}
                     fill
                     className="object-cover"
-                  />
+                    />
                 </div>
               </div>
             </motion.div>
@@ -344,5 +346,6 @@ export default function InteractiveMap() {
         )}
       </AnimatePresence>
     </div>
+        </div>
   );
 }
