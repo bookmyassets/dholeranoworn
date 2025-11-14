@@ -99,49 +99,49 @@ export default function InteractiveMap() {
     {
       id: "metro",
       title: "MonoRail",
-      coords: [343,201,376,236],
+      coords: [343, 201, 376, 236],
       image: metro,
       description: "Dholera MonoRail System",
     },
     {
       id: "airport",
       title: "Dholera International Airport",
-      coords: [464,252,496,285],
+      coords: [464, 252, 496, 285],
       image: dia,
       description: "International Airport Project",
     },
     {
       id: "expressway",
       title: "Expressway",
-      coords: [330,289,366,325],
+      coords: [330, 289, 366, 325],
       image: expressway,
       description: "Dholera Expressway",
     },
     {
       id: "abcd",
       title: "ABCD Building",
-      coords: [235,365,271,402],
+      coords: [235, 365, 271, 402],
       image: abcd,
       description: "ABCD Building Complex",
     },
     {
       id: "tata",
       title: "Tata Semicon",
-      coords: [274,417,308,452],
+      coords: [274, 417, 308, 452],
       image: tata,
       description: "Tata Semiconductor Facility",
     },
     {
       id: "renew",
       title: "ReNew Power",
-      coords: [319,455,355,492],
+      coords: [319, 455, 355, 492],
       image: renew,
       description: "ReNew Power Plant",
     },
     {
       id: "solar",
       title: "Solar Park",
-      coords: [367,562,403,597],
+      coords: [367, 562, 403, 597],
       image: solarPark,
       description: "Solar Energy Park",
     },
@@ -256,89 +256,91 @@ export default function InteractiveMap() {
 
   return (
     <div className="bg-gray-50  h-screen">
+      <div className="relative w-full flex flex-col pt-8 items-center justify-center  px-4">
+        <h1 className="text-3xl font-bold text-gray-800 mb-6 text-center">
+          8 Mega Projects Powering Dholera
+        </h1>
 
-    <div className="relative w-full flex flex-col pt-8 items-center justify-center  px-4">
-      <h1 className="text-3xl font-bold text-gray-800 mb-6 text-center">
-        Interactive Dholera Map
-      </h1>
-
-      <div className="relative w-full max-w-4xl overflow-hidden rounded-2xl shadow-2xl bg-white">
-        <div
-          className="relative w-full"
-          style={{ aspectRatio: isMobile ? "590/800" : "1/1" }}
-        >
-          <Image
-            ref={imageRef}
-            src={isMobile ? dholeraMapM : dholeraMap}
-            alt="Dholera Map"
-            fill
-            priority
-            className="object-contain select-none"
-            onLoad={() => setImageLoaded(true)}
-            onLoadingComplete={() => setImageLoaded(true)}
-            draggable={false}
-            sizes="(max-width: 768px) 100vw, 80vw"
+        <div className="relative w-full max-w-4xl overflow-hidden rounded-2xl shadow-2xl bg-white">
+          <div
+            className="relative w-full"
+            style={{ aspectRatio: isMobile ? "590/800" : "1/1" }}
+          >
+            <Image
+              ref={imageRef}
+              src={isMobile ? dholeraMapM : dholeraMap}
+              alt="Dholera Map"
+              fill
+              priority
+              className="object-contain select-none"
+              onLoad={() => setImageLoaded(true)}
+              onLoadingComplete={() => setImageLoaded(true)}
+              draggable={false}
+              sizes="(max-width: 768px) 100vw, 80vw"
             />
 
-          {/* 🔵 Clickable Areas */}
-          {imageLoaded && (
-            <div className="absolute inset-0">{renderAreas()}</div>
-          )}
+            {/* 🔵 Clickable Areas */}
+            {imageLoaded && (
+              <div className="absolute inset-0">{renderAreas()}</div>
+            )}
+          </div>
         </div>
-      </div>
 
-      <p className="text-gray-600 text-center mt-6 text-lg">
-        {isMobile ? "Tap" : "Click"} on highlighted areas to explore details.
-      </p>
+        <p className="text-gray-600 text-center mt-6 text-lg">
+          {isMobile ? "Tap" : "Click"} on highlighted areas to explore details.
+        </p>
 
-      {/* 🧩 Animated Modal */}
-      <AnimatePresence>
-        {modalOpen && selectedArea && (
-          <>
-            <motion.div
-              className="fixed inset-0 bg-transparent bg-opacity-60 z-40 backdrop-blur-sm"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setModalOpen(false)}
+        {/* 🧩 Animated Modal */}
+        <AnimatePresence>
+          {modalOpen && selectedArea && (
+            <>
+              <motion.div
+                className="fixed inset-0 bg-transparent bg-opacity-60 z-40 backdrop-blur-sm"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                onClick={() => setModalOpen(false)}
               />
-            <motion.div
-              className="fixed z-50  rounded-xl shadow-2xl modal-content overflow-hidden "
-              style={{
-                left: `${modalPosition.x}px`,
-                top: `${modalPosition.y}px`,
-                width: "350px",
-                maxWidth: "calc(100vw - 40px)",
-              }}
-              initial={{ scale: 0.8, opacity: 0, y: 20 }}
-              animate={{ scale: 1, opacity: 1, y: 0 }}
-              exit={{ scale: 0.8, opacity: 0, y: 20 }}
-              transition={{ type: "spring", damping: 25, stiffness: 300 }}
+              <motion.div
+                className="fixed z-50  rounded-xl shadow-2xl modal-content overflow-hidden "
+                style={{
+                  left: `${modalPosition.x}px`,
+                  top: `${modalPosition.y}px`,
+                  width: "350px",
+                  maxWidth: "calc(100vw - 40px)",
+                }}
+                initial={{ scale: 0.8, opacity: 0, y: 20 }}
+                animate={{ scale: 1, opacity: 1, y: 0 }}
+                exit={{ scale: 0.8, opacity: 0, y: 20 }}
+                transition={{ type: "spring", damping: 25, stiffness: 300 }}
               >
-              <div className="relative">
-                {/* Close button on top of image */}
-                <button
-                  onClick={() => setModalOpen(false)}
-                  className="absolute top-3 right-3 z-10 text-white hover:text-red-300 text-2xl font-light w-8 h-8 flex items-center justify-center rounded-full hover:bg-black/50 transition-colors bg-black/30 backdrop-blur-sm"
+                <div className="relative">
+                  {/* Close button on top of image */}
+                  <button
+                    onClick={() => setModalOpen(false)}
+                    className="absolute top-3 right-3 z-10 text-white hover:text-red-300 text-2xl font-light w-8 h-8 flex items-center justify-center rounded-full hover:bg-black/50 transition-colors bg-black/30 backdrop-blur-sm"
                   >
-                  ×
-                </button>
+                    ×
+                  </button>
 
-                {/* Image with correct 400x500 aspect ratio (4:5) */}
-                <div className="relative w-full" style={{ aspectRatio: "4/5" }}>
-                  <Image
-                    src={selectedArea.image}
-                    alt={selectedArea.title}
-                    fill
-                    className="object-contain"
+                  {/* Image with correct 400x500 aspect ratio (4:5) */}
+                  <div
+                    className="relative w-full"
+                    style={{ aspectRatio: "4/5" }}
+                  >
+                    <Image
+                      src={selectedArea.image}
+                      alt={selectedArea.title}
+                      fill
+                      className="object-contain"
                     />
+                  </div>
                 </div>
-              </div>
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
+              </motion.div>
+            </>
+          )}
+        </AnimatePresence>
+      </div>
     </div>
-        </div>
   );
 }
