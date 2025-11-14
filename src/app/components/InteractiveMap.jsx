@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 /* Assets */
 import dholeraMap from "@/app/assets/dholera-map-with-icons.webp";
-import dholeraMapM from "@/app/assets/dholera-map-2.webp";
+import dholeraMapM from "@/app/assets/dholera-map-3.png";
 import metro from "@/app/assets/metro.webp";
 import abcd from "@/app/assets/abcd-building.webp";
 import dia from "@/app/assets/dholera-international-airport.webp";
@@ -99,58 +99,51 @@ export default function InteractiveMap() {
     {
       id: "metro",
       title: "MonoRail",
-      coords: [344, 38, 377, 69],
+      coords: [343,201,376,236],
       image: metro,
       description: "Dholera MonoRail System",
     },
     {
       id: "airport",
       title: "Dholera International Airport",
-      coords: [488, 95, 518, 124],
+      coords: [464,252,496,285],
       image: dia,
       description: "International Airport Project",
     },
     {
       id: "expressway",
       title: "Expressway",
-      coords: [326, 147, 358, 179],
+      coords: [330,289,366,325],
       image: expressway,
       description: "Dholera Expressway",
     },
     {
       id: "abcd",
       title: "ABCD Building",
-      coords: [208, 276, 239, 308],
+      coords: [235,365,271,402],
       image: abcd,
       description: "ABCD Building Complex",
     },
     {
       id: "tata",
       title: "Tata Semicon",
-      coords: [244, 315, 274, 346],
+      coords: [274,417,308,452],
       image: tata,
       description: "Tata Semiconductor Facility",
     },
     {
       id: "renew",
       title: "ReNew Power",
-      coords: [281, 327, 311, 358],
+      coords: [319,455,355,492],
       image: renew,
       description: "ReNew Power Plant",
     },
     {
       id: "solar",
       title: "Solar Park",
-      coords: [380, 495, 410, 528],
+      coords: [367,562,403,597],
       image: solarPark,
       description: "Solar Energy Park",
-    },
-    {
-      id: "activation",
-      title: "Activation Area",
-      coords: [251, 347, 323, 433],
-      image: activationArea,
-      description: "Activation Area Development",
     },
   ];
 
