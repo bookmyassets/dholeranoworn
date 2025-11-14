@@ -6,13 +6,13 @@ import { motion, AnimatePresence } from "framer-motion";
 /* Assets */
 import dholeraMap from "@/app/assets/dholera-map-with-icons.webp";
 import dholeraMapM from "@/app/assets/dholera-map-3.png";
-import metro from "@/app/assets/metro.webp";
-import abcd from "@/app/assets/abcd-building.webp";
-import dia from "@/app/assets/dholera-international-airport.webp";
-import expressway from "@/app/assets/expressway.webp";
-import renew from "@/app/assets/ReNew-power.webp";
-import solarPark from "@/app/assets/solar-park.webp";
-import tata from "@/app/assets/tata-semicon.webp";
+import metro from "@/app/assets/metro.png";
+import abcd from "@/app/assets/abcd-building.png";
+import dia from "@/app/assets/dholera-international-airport.png";
+import expressway from "@/app/assets/expressway.png";
+import renew from "@/app/assets/ReNew-power.png";
+import solarPark from "@/app/assets/solar-park.png";
+import tata from "@/app/assets/tata-semicon.png";
 import activationArea from "@/app/assets/Activation-Area.webp";
 
 export default function InteractiveMap() {
@@ -330,7 +330,7 @@ export default function InteractiveMap() {
                     src={selectedArea.image}
                     alt={selectedArea.title}
                     fill
-                    className="object-cover"
+                    className="object-contain"
                     />
                 </div>
               </div>
