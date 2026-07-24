@@ -10,7 +10,7 @@ import { PopupFormButton } from "./Form";
 const footerLinks = [
   { label: "Why Dholera", href: "#why-dholera" },
   { label: "Why Attend", href: "#why-attend" },
-  { label: "The Vision", href: "#trendsetter" },
+  { label: "The TrendSetter", href: "#trendsetter" },
   { label: "What We Do", href: "#services" },
 ];
 

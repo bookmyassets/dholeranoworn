@@ -39,7 +39,7 @@ export default function Navbar() {
         </Link>
 
         <div className="flex items-center gap-[clamp(0.5rem,0.2rem+1.2vw,1.5rem)]">
-          <div className="hidden items-center gap-[clamp(1.25rem,0.75rem+1.5vw,2.5rem)] lg:flex">
+          <div className="hidden items-center gap-[clamp(1.25rem,0.75rem+1.5vw,2.5rem)]">
             {navigationItems.map((item) => (
               <a
                 key={item}

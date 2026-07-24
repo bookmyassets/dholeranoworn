@@ -32,7 +32,7 @@ const facts = [
   {
     value: "920",
     suffix: "sq. km",
-    label: "planned special investment region",
+    label: "Planned Special Investment Region",
   },
   {
     value: "₹6 Lakh",
@@ -42,7 +42,7 @@ const facts = [
   {
     value: "Govt of India + Govt of Gujarat",
     suffix: "",
-    label: "centre-state development partnership",
+    label: "Centre-State Development Partnership",
   },
 ];
 
