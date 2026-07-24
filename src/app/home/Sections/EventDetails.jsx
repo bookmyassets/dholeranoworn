@@ -87,17 +87,16 @@ export default function EventDetails() {
       </section>
 
       <section
-        id="bookmyassets"
+        id="trendsetter"
         aria-labelledby="trendsetter-title"
         className="bg-base px-[clamp(1rem,0.5rem+4vw,4rem)] py-[var(--space-section)] text-ink"
       >
         <div className="mx-auto w-full max-w-[90rem]">
           <div className="grid items-end gap-[clamp(2rem,1rem+4vw,6rem)] lg:grid-cols-2">
             <div>
-              <SectionEyebrow>BookMyAssets</SectionEyebrow>
               <h2
                 id="trendsetter-title"
-                className="mt-[clamp(0.75rem,0.5rem+0.8vw,1.25rem)] max-w-[15ch] font-heading text-[length:var(--fs-h2)] leading-[1.08] font-bold"
+                className="max-w-[15ch] font-heading text-[length:var(--fs-h2)] leading-[1.08] font-bold"
               >
                 A Trendsetter in Dholera
               </h2>

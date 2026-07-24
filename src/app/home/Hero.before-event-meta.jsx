@@ -9,7 +9,8 @@ import chipIcon from "@/assets/icons/chip.png";
 import freight from "@/assets/icons/train-cargo.png"
 import airport from "@/assets/icons/airplane.png"
 import { PopupFormButton } from "@/app/components/Form";
-import { FaCalendarDays, FaLocationDot } from "react-icons/fa6";
+import { FaCalendar, FaLocationArrow, FaMap } from "react-icons/fa";
+import { FaCalendarDays, FaLocationDot, FaMapLocation, FaMapLocationDot } from "react-icons/fa6";
 
 const EVENT_DATE = "2026-08-08T00:00:00+05:30";
 const EMPTY_COUNTDOWN = {
@@ -97,24 +98,17 @@ export default function Hero() {
 
       <div className="relative z-10 mx-auto grid min-h-screen w-full max-w-[90rem] items-center gap-[clamp(2.5rem,1rem+4vw,6rem)] px-[clamp(1rem,0.5rem+4vw,4rem)] pt-[clamp(8rem,7rem+4vw,11rem)] pb-[clamp(3rem,2rem+4vw,7rem)] lg:grid-cols-[1.2fr_0.8fr]">
         <div className="max-w-[52rem]">
-          <h1 className="max-w-[12ch] font-heading text-[length:var(--fs-h1)] py-4 md:py-0 leading-[0.95] font-bold tracking-[-0.04em]">
+          <p className="mb-[clamp(0.75rem,0.5rem+0.8vw,1.25rem)] flex justify-center items-center bg-accent rounded-2xl p-1 w-56 gap-2 font-special text-[length:var(--fs-special)] tracking-[0.12em] text-base uppercase">
+           <FaCalendarDays/>  08 August 2026
+          </p>
+
+          <h1 className="max-w-[12ch] font-heading text-[length:var(--fs-h1)] leading-[0.95] font-bold tracking-[-0.04em]">
             Dholera <br /> Now or Never
           </h1>
 
-          <div className="mt-[clamp(1rem,0.75rem+0.8vw,1.5rem)] flex flex-wrap items-center gap-[clamp(0.625rem,0.5rem+0.4vw,1rem)]">
-            <time
-              dateTime="2026-08-08"
-              className="inline-flex min-h-[clamp(2.5rem,2.25rem+0.6vw,2.875rem)] items-center gap-[clamp(0.5rem,0.4rem+0.3vw,0.75rem)] rounded-full bg-accent px-[clamp(1rem,0.8rem+0.6vw,1.375rem)] py-[clamp(0.5rem,0.4rem+0.25vw,0.625rem)] font-special text-[length:var(--fs-special)] tracking-[0.12em] text-base uppercase"
-            >
-              <FaCalendarDays aria-hidden="true" className="shrink-0" />
-              <span>08 August 2026</span>
-            </time>
-
-            <p className="inline-flex min-h-[clamp(2.5rem,2.25rem+0.6vw,2.875rem)] items-center gap-[clamp(0.5rem,0.4rem+0.3vw,0.75rem)] rounded-full bg-accent px-[clamp(1rem,0.8rem+0.6vw,1.375rem)] py-[clamp(0.5rem,0.4rem+0.25vw,0.625rem)] font-special text-[length:var(--fs-special)] tracking-[0.12em] text-base uppercase">
-              <FaLocationDot aria-hidden="true" className="shrink-0" />
-              <span>Location</span>
-            </p>
-          </div>
+          <p className="mb-[clamp(0.75rem,0.5rem+0.8vw,1.25rem)] mt-4 flex justify-center items-center bg-accent rounded-2xl p-1 w-56 gap-2 font-special text-[length:var(--fs-special)] tracking-[0.12em] text-base uppercase">
+           <FaLocationDot />  Location
+          </p>
 
           <div className="mt-[clamp(2rem,1.25rem+2.5vw,4rem)]">
             <p className="mb-[clamp(1rem,0.75rem+1vw,1.5rem)] font-special text-[length:var(--fs-special)] tracking-[0.08em] uppercase">
@@ -140,6 +134,13 @@ export default function Hero() {
                 </div>
               ))}
             </div>
+
+            <time
+              dateTime="2026-08-08"
+              className="sr-only"
+            >
+              8 August 2026
+            </time>
 
             <PopupFormButton className="mt-[clamp(1.75rem,1.25rem+1.6vw,3rem)] inline-flex min-h-[clamp(2.75rem,2.4rem+1vw,3.5rem)] items-center justify-center rounded-full border border-accent bg-accent px-[clamp(1.5rem,1.1rem+1.2vw,2.25rem)] font-special text-[length:var(--fs-special)] text-[var(--color-base)] transition-colors hover:bg-base hover:text-accent focus-visible:bg-base focus-visible:text-accent">
               Reserve a Free Seat
