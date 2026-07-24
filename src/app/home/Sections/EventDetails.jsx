@@ -23,13 +23,12 @@ const services = [
   "Expert Guidance",
   "Site Visit Assistance",
   "Villa Construction",
-  "Rental and Resale Support",
 ];
 
 function SectionEyebrow({ children, inverted = false }) {
   return (
     <p
-      className={`font-special text-[length:var(--fs-special)] tracking-[0.14em] uppercase ${
+      className={`font-special text-[length:var(--fs-p-special)] tracking-[0.14em] uppercase ${
         inverted ? "text-accent" : "text-accent"
       }`}
     >
@@ -48,16 +47,14 @@ export default function EventDetails() {
       >
         <div className="mx-auto grid w-full max-w-[90rem] gap-[clamp(3rem,1.5rem+5vw,7rem)] lg:grid-cols-[0.8fr_1.2fr]">
           <div>
-            <SectionEyebrow inverted>
-              Dholera Now or Never
-            </SectionEyebrow>
+            <SectionEyebrow inverted>Dholera Now or Never</SectionEyebrow>
             <h2
               id="why-attend-title"
               className="mt-[clamp(0.75rem,0.5rem+0.8vw,1.25rem)] max-w-[14ch] font-heading text-[length:var(--fs-h2)] leading-[1.08] font-bold"
             >
-              Why You Should Not Miss This Event
+              Would You Want to Miss This? Really?
             </h2>
-            <p className="mt-[clamp(1.25rem,0.85rem+1.2vw,2rem)] font-body text-[length:var(--fs-body)] leading-[1.8]">
+            <p className="mt-[clamp(1.25rem,0.85rem+1.2vw,2rem)] font-body text-[length:var(--fs-p-body)] leading-[1.8]">
               This isn&apos;t just another Real Estate seminar. It is a
               face-to-face session designed to show you where Dholera stands
               today and help you understand the opportunity with greater
@@ -93,7 +90,10 @@ export default function EventDetails() {
       >
         <div className="mx-auto w-full max-w-[90rem]">
           <div className="grid items-end gap-[clamp(2rem,1rem+4vw,6rem)] lg:grid-cols-2">
-            <div>
+            <div className="order-1 lg:order-2">
+              <p className="font-special text-[length:var(--fs-p-special)] tracking-[0.14em] pb-8 text-accent uppercase">
+                Who We Are?
+              </p>
               <h2
                 id="trendsetter-title"
                 className="max-w-[15ch] font-heading text-[length:var(--fs-h2)] leading-[1.08] font-bold"
@@ -102,9 +102,9 @@ export default function EventDetails() {
               </h2>
             </div>
 
-            <blockquote className="border-l-[clamp(0.2rem,0.15rem+0.15vw,0.3rem)] border-accent pl-[clamp(0.75rem,0.5rem+0.8vw,1.25rem)] font-special text-[clamp(1.1rem,0.9rem+0.8vw,1.6rem)] leading-snug text-accent">
-              We are not waiting for Dholera to become a city. We are helping
-              create the foundation for people to live there.
+            <blockquote className="border-l-[clamp(0.2rem,0.15rem+0.15vw,0.3rem)] mt-4 border-accent pl-[clamp(0.75rem,0.5rem+0.8vw,1.25rem)] font-special text-[clamp(1.1rem,0.9rem+0.8vw,1.6rem)] leading-snug text-accent">
+              We are not waiting for Dholera to become a city. <br />
+              We are helping create the foundation for people to live there.
             </blockquote>
           </div>
 
@@ -112,12 +112,9 @@ export default function EventDetails() {
             {foundations.map((foundation, index) => (
               <article
                 key={foundation}
-                className="relative min-h-[clamp(10rem,8rem+6vw,14rem)] rounded-[clamp(0.75rem,0.55rem+0.6vw,1.25rem)] border border-ink p-[clamp(1.25rem,0.9rem+1vw,2rem)]"
+                className="relative min-h-[clamp(8rem,6rem+4vw,12rem)] rounded-[clamp(0.75rem,0.55rem+0.6vw,1.25rem)] border border-ink p-[clamp(1.25rem,0.9rem+1vw,2rem)]"
               >
-                <span className="font-special text-[clamp(1.25rem,1rem+0.8vw,1.8rem)] text-accent">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-                <h3 className="mt-[clamp(1.5rem,1rem+1.5vw,2.5rem)] font-heading text-[clamp(1.15rem,1rem+0.5vw,1.5rem)] leading-tight font-semibold">
+                <h3 className="mt-[clamp(1.5rem,1rem+1.5vw,2.5rem)] font-heading text-[clamp(1.15rem,1rem+0.5vw,1.5rem)] leading-tight text-center font-semibold">
                   {foundation}
                 </h3>
               </article>

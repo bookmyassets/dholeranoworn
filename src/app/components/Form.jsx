@@ -290,7 +290,7 @@ export default function PopupLeadForm() {
             <h2 className="mt-[clamp(1rem,0.75rem+0.8vw,1.5rem)] font-heading text-[length:var(--fs-h2)] font-bold">
               Thank You
             </h2>
-            <p className="mt-[clamp(0.5rem,0.35rem+0.4vw,0.75rem)] font-body text-[length:var(--fs-body)]">
+            <p className="mt-[clamp(0.5rem,0.35rem+0.4vw,0.75rem)] font-body text-[length:var(--fs-p-body)]">
               We will contact you shortly.
             </p>
           </div>
@@ -303,7 +303,7 @@ export default function PopupLeadForm() {
                 className="h-auto w-[clamp(4.5rem,3.5rem+3vw,6.5rem)]"
                 priority
               />
-              <p className="mt-[clamp(1rem,0.7rem+0.8vw,1.5rem)] font-special text-[length:var(--fs-special)] tracking-[0.12em] text-accent uppercase">
+              <p className="mt-[clamp(1rem,0.7rem+0.8vw,1.5rem)] font-special text-[length:var(--fs-p-special)] tracking-[0.12em] text-accent uppercase">
                 Registration
               </p>
               <h2
@@ -312,7 +312,7 @@ export default function PopupLeadForm() {
               >
                 {FORM_CONFIG.title}
               </h2>
-              <p className="mt-[clamp(0.6rem,0.4rem+0.5vw,0.9rem)] font-body text-[length:var(--fs-body)] leading-relaxed">
+              <p className="mt-[clamp(0.6rem,0.4rem+0.5vw,0.9rem)] font-body text-[length:var(--fs-p-body)] leading-relaxed">
                 Share your details and our team will get in touch.
               </p>
             </div>
@@ -324,7 +324,7 @@ export default function PopupLeadForm() {
               {errorMessage && (
                 <p
                   role="alert"
-                  className="mb-[clamp(0.75rem,0.5rem+0.6vw,1rem)] rounded-[clamp(0.5rem,0.4rem+0.3vw,0.75rem)] border border-accent p-[clamp(0.75rem,0.55rem+0.5vw,1rem)] font-body text-[clamp(0.875rem,0.82rem+0.2vw,1rem)] text-accent"
+                  className="mb-[clamp(0.75rem,0.5rem+0.6vw,1rem)] rounded-[clamp(0.5rem,0.4rem+0.3vw,0.75rem)] border border-accent p-[clamp(0.75rem,0.55rem+0.5vw,1rem)] font-body text-[length:var(--fs-p-small)] text-accent"
                 >
                   {errorMessage}
                 </p>
@@ -389,7 +389,7 @@ export default function PopupLeadForm() {
                 {isLoading ? "Submitting…" : "Reserve My Free Seat"}
               </button>
 
-              <p className="mt-[clamp(0.75rem,0.55rem+0.5vw,1rem)] text-center font-body text-[clamp(0.75rem,0.72rem+0.12vw,0.85rem)]">
+              <p className="mt-[clamp(0.75rem,0.55rem+0.5vw,1rem)] text-center font-body text-[length:var(--fs-p-small)]">
                 Your details are kept private and secure.
               </p>
             </form>

@@ -1,6 +1,7 @@
 import "./globals.css";
 import Navbar from "./components/Navbar";
 import PopupLeadForm from "./components/Form";
+import Footer from "./components/Footer";
 
 export const metadata = {
   title: "Dholera Now or Never",
@@ -13,6 +14,7 @@ export default function RootLayout({ children }) {
       <body className="flex min-h-full flex-col">
         <Navbar />
         {children}
+        <Footer />
         <PopupLeadForm />
       </body>
     </html>

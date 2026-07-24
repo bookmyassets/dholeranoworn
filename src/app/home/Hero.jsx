@@ -97,7 +97,7 @@ export default function Hero() {
 
       <div className="relative z-10 mx-auto grid min-h-screen w-full max-w-[90rem] items-center gap-[clamp(2.5rem,1rem+4vw,6rem)] px-[clamp(1rem,0.5rem+4vw,4rem)] pt-[clamp(8rem,7rem+4vw,11rem)] pb-[clamp(3rem,2rem+4vw,7rem)] lg:grid-cols-[1.2fr_0.8fr]">
         <div className="max-w-[52rem]">
-          <h1 className="max-w-[12ch] font-heading text-[length:var(--fs-h1)] py-4 md:py-0 leading-[0.95] font-bold tracking-[-0.04em]">
+          <h1 className="max-w-[12ch] font-heading text-[length:var(--fs-h1)] py-4 md:py-0 leading-18 font-bold tracking-[-0.04em]">
             Dholera <br /> Now or Never
           </h1>
 
@@ -110,14 +110,14 @@ export default function Hero() {
               <span>08 August 2026</span>
             </time>
 
-            <p className="inline-flex min-h-[clamp(2.5rem,2.25rem+0.6vw,2.875rem)] items-center gap-[clamp(0.5rem,0.4rem+0.3vw,0.75rem)] rounded-full bg-accent px-[clamp(1rem,0.8rem+0.6vw,1.375rem)] py-[clamp(0.5rem,0.4rem+0.25vw,0.625rem)] font-special text-[length:var(--fs-special)] tracking-[0.12em] text-base uppercase">
+            <p className="inline-flex min-h-[clamp(2.5rem,2.25rem+0.6vw,2.875rem)] items-center gap-[clamp(0.5rem,0.4rem+0.3vw,0.75rem)] rounded-full bg-accent px-[clamp(1rem,0.8rem+0.6vw,1.375rem)] py-[clamp(0.5rem,0.4rem+0.25vw,0.625rem)] font-special text-[length:var(--fs-p-special)] tracking-[0.12em] text-base uppercase">
               <FaLocationDot aria-hidden="true" className="shrink-0" />
               <span>Location</span>
             </p>
           </div>
 
           <div className="mt-[clamp(2rem,1.25rem+2.5vw,4rem)]">
-            <p className="mb-[clamp(1rem,0.75rem+1vw,1.5rem)] font-special text-[length:var(--fs-special)] tracking-[0.08em] uppercase">
+            <p className="mb-[clamp(1rem,0.75rem+1vw,1.5rem)] font-special text-[length:var(--fs-p-special)] tracking-[0.08em] uppercase">
               Event begins in
             </p>
 
@@ -155,7 +155,7 @@ export default function Hero() {
                 "translate3d(calc(var(--pointer-x) * 24px), calc(var(--pointer-y) * 24px), 0)",
             }}
           >
-            <div className="overflow-hidden rounded-[clamp(1.5rem,1rem+1.5vw,3rem)] border border-base bg-base p-[clamp(0.3rem,0.2rem+0.25vw,0.5rem)] shadow-2xl">
+            <div className="overflow-hidden shadow-2xl">
               <Image
                 src={cityCentreImage}
                 alt="Dholera City Centre development"

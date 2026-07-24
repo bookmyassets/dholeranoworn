@@ -31,16 +31,16 @@ const highlights = [
 const facts = [
   {
     value: "920",
-    suffix: "sq km",
+    suffix: "sq. km",
     label: "planned special investment region",
   },
   {
-    value: "₹91,000",
+    value: "₹6 Lakh",
     suffix: "crore",
-    label: "semiconductor fab investment",
+    label: "Global Investment",
   },
   {
-    value: "GoI + GoG",
+    value: "Govt of India + Govt of Gujarat",
     suffix: "",
     label: "centre-state development partnership",
   },
@@ -78,7 +78,7 @@ export default function WhyJoin() {
         </ul>
 
         <div className="order-1 lg:order-2">
-          <p className="font-special text-[length:var(--fs-special)] tracking-[0.14em] text-accent uppercase">
+          <p className="font-special text-[length:var(--fs-p-special)] tracking-[0.14em] text-accent uppercase">
             Why Dholera?
           </p>
 
@@ -86,14 +86,14 @@ export default function WhyJoin() {
             id="why-dholera-title"
             className="mt-[clamp(0.75rem,0.5rem+0.8vw,1.25rem)] max-w-[14ch] font-heading text-[length:var(--fs-h2)] leading-[1.08] font-bold"
           >
-            From Plans to Real Progress
+            From Vision to Reality
           </h2>
 
           <blockquote className="mt-[clamp(1.5rem,1rem+1.5vw,2.5rem)] border-l-[clamp(0.2rem,0.15rem+0.15vw,0.3rem)] border-accent pl-[clamp(0.75rem,0.5rem+0.8vw,1.25rem)] font-special text-[clamp(1.1rem,0.9rem+0.8vw,1.6rem)] leading-snug text-accent">
             Be part of India&apos;s next big growth story.
           </blockquote>
 
-          <p className="mt-[clamp(1.25rem,0.85rem+1.2vw,2rem)] max-w-[42rem] font-body text-[length:var(--fs-body)] leading-[1.8]">
+          <p className="mt-[clamp(1.25rem,0.85rem+1.2vw,2rem)] max-w-[42rem] font-body text-[length:var(--fs-p-body)] leading-[1.8]">
             Dholera is a planned greenfield smart industrial city being
             developed through a partnership between the Government of India
             and the Government of Gujarat, with major transport and industrial
