@@ -54,7 +54,7 @@ export default function Navbar() {
           </div>
 
           <Link
-              href="https://wa.me/918130371647?text=Hi%20I'm%20Registering%20for%20Event"
+              href="https://wa.me/919910994247?text=Hi%20I'm%20Registering%20for%20Event"
           className="rounded-full border border-accent bg-accent px-[clamp(1rem,0.8rem+0.8vw,1.5rem)] py-[clamp(0.5rem,0.42rem+0.25vw,0.625rem)] font-special text-[length:var(--fs-special)] text-[var(--color-base)] transition-colors hover:bg-base hover:text-accent focus-visible:bg-base focus-visible:text-accent">
             Register Now
           </Link>
