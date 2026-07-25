@@ -79,8 +79,8 @@ export default function Footer() {
 
             <p className="mt-[clamp(1.25rem,0.9rem+1vw,2rem)] max-w-[28rem] font-body text-[length:var(--fs-p-body)] leading-relaxed">
               Dholera Now or Never is your opportunity to understand the
-              development, investment potential and future of one of India's
-              most ambitious planned cities.
+              Development, Investment Potential and Future of India’s First
+              Planned Smart City.
             </p>
 
             <ul

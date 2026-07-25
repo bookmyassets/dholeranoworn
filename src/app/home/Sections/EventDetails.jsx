@@ -52,7 +52,7 @@ export default function EventDetails() {
               id="why-attend-title"
               className="mt-[clamp(0.75rem,0.5rem+0.8vw,1.25rem)] max-w-[14ch] font-heading text-[length:var(--fs-h2)] leading-[1.08] font-bold"
             >
-              Would You Want to Miss This? Really?
+              Why You Should Attend This Event?
             </h2>
             <p className="mt-[clamp(1.25rem,0.85rem+1.2vw,2rem)] font-body text-[length:var(--fs-p-body)] leading-[1.8]">
               This isn&apos;t just another Real Estate seminar. It is a
