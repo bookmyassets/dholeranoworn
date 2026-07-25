@@ -6,7 +6,7 @@ import logo from "@/assets/logo.png";
 
 const OPEN_POPUP_EVENT = "open-dholera-popup-form";
 const FORM_CONFIG = {
-  title: "Reserve Your Free Seat",
+  title: "Join the Dholera Investors Meet",
   dataLayerEvent: "lead_form",
 };
 
@@ -233,9 +233,7 @@ export default function PopupLeadForm() {
                 className="h-auto w-[clamp(4.5rem,3.5rem+3vw,6.5rem)]"
                 priority
               />
-              <p className="mt-[clamp(1rem,0.7rem+0.8vw,1.5rem)] font-special text-[length:var(--fs-p-special)] tracking-[0.12em] text-accent uppercase">
-                Registration
-              </p>
+             
               <h2
                 id="popup-form-title"
                 className="mt-[clamp(0.4rem,0.25rem+0.4vw,0.65rem)] font-heading text-[length:var(--fs-h2)] leading-tight font-bold"
@@ -309,7 +307,7 @@ export default function PopupLeadForm() {
                 disabled={isLoading}
                 className="mt-[clamp(1.25rem,0.9rem+1vw,1.75rem)] inline-flex min-h-[clamp(3rem,2.6rem+1vw,3.75rem)] w-full items-center justify-center rounded-full border border-accent bg-accent px-[clamp(1.25rem,1rem+0.8vw,1.75rem)] font-special text-[length:var(--fs-special)] text-[var(--color-base)] transition-colors hover:bg-base hover:text-accent focus-visible:bg-base focus-visible:text-accent disabled:cursor-not-allowed disabled:border-ink disabled:bg-ink"
               >
-                {isLoading ? "Submitting…" : "Reserve My Free Seat"}
+                {isLoading ? "Submitting…" : "Register For Free"}
               </button>
 
               <p className="mt-[clamp(0.75rem,0.55rem+0.5vw,1rem)] text-center font-body text-[length:var(--fs-p-small)]">

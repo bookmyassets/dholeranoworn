@@ -14,6 +14,7 @@ const footerLinks = [
   { label: "Why Attend", href: "#why-attend" },
   { label: "The TrendSetter", href: "#trendsetter" },
   { label: "What We Do", href: "#services" },
+  { label: "FAQ", href: "#faq" },
 ];
 
 const socialLinks = [

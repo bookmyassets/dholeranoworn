@@ -88,6 +88,67 @@ body {
   transform: scaleX(1);
 }
 
+.faq-line::after {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 1px;
+  background: var(--color-ink);
+  content: "";
+  pointer-events: none;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 800ms cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.faq-line.is-visible::after {
+  transform: scaleX(1);
+}
+
+.faq-answer {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition:
+    grid-template-rows 450ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 300ms ease;
+}
+
+.faq-answer.is-open {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+.faq-toggle::before,
+.faq-toggle::after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 2px;
+  background: var(--color-accent);
+  content: "";
+  transition: transform 350ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.faq-toggle::before {
+  transform: translate(-50%, -50%);
+}
+
+.faq-toggle::after {
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.faq-toggle.is-open::before {
+  transform: translate(-50%, -50%) rotate(180deg);
+}
+
+.faq-toggle.is-open::after {
+  transform: translate(-50%, -50%) rotate(180deg);
+}
+
 /* Countdown motion */
 .event-clock-item {
   animation:
@@ -148,11 +209,19 @@ body {
 
   .motion-circle > div,
   .motion-circle > div > span:last-child,
-  .service-line::after {
+  .service-line::after,
+  .faq-line::after,
+  .faq-answer,
+  .faq-toggle::before,
+  .faq-toggle::after {
     transition: none;
   }
 
   .service-line::after {
+    transform: none;
+  }
+
+  .faq-line::after {
     transform: none;
   }
 
