@@ -28,7 +28,7 @@ const services = [
 function SectionEyebrow({ children, inverted = false }) {
   return (
     <p
-      className={`font-special text-[length:var(--fs-p-special)] tracking-[0.14em] uppercase ${
+      className={`font-semibold text-[length:var(--fs-p-special)] tracking-[0.14em] uppercase ${
         inverted ? "text-accent" : "text-accent"
       }`}
     >
@@ -65,21 +65,21 @@ export default function EventDetails() {
             </PopupFormButton>
           </div>
 
-          <ol className="grid gap-[clamp(0.75rem,0.5rem+0.8vw,1.25rem)] sm:grid-cols-2">
-            {eventTopics.map((topic, index) => (
+          <ul className="grid gap-[clamp(0.75rem,0.5rem+0.8vw,1.25rem)] sm:grid-cols-2">
+            {eventTopics.map((service, index) => (
               <li
-                key={topic}
-                className="flex min-h-[clamp(6rem,5rem+3vw,8rem)] items-center gap-[clamp(0.75rem,0.55rem+0.6vw,1.1rem)] rounded-[clamp(0.75rem,0.55rem+0.6vw,1.25rem)] border border-base p-[clamp(1rem,0.75rem+0.8vw,1.5rem)]"
+                key={service}
+                data-reveal="line"
+                className="service-line relative flex items-center gap-[clamp(0.75rem,0.55rem+0.6vw,1.1rem)] py-[clamp(0.9rem,0.7rem+0.6vw,1.25rem)] font-body text-[length:var(--fs-body)] font-medium"
+                style={{ "--reveal-delay": `${index * 90}ms` }}
               >
-                <span className="flex h-[clamp(2.25rem,2rem+0.8vw,2.9rem)] w-[clamp(2.25rem,2rem+0.8vw,2.9rem)] shrink-0 items-center justify-center rounded-full bg-accent font-special text-[clamp(0.75rem,0.7rem+0.2vw,0.95rem)]">
+                <span className="font-special text-[length:var(--fs-special)] text-accent">
                   {String(index + 1).padStart(2, "0")}
                 </span>
-                <span className="font-body text-[length:var(--fs-body)] leading-snug font-medium">
-                  {topic}
-                </span>
+                {service}
               </li>
             ))}
-          </ol>
+          </ul>
         </div>
       </section>
 
@@ -88,37 +88,47 @@ export default function EventDetails() {
         aria-labelledby="trendsetter-title"
         className="bg-base px-[clamp(1rem,0.5rem+4vw,4rem)] py-[var(--space-section)] text-ink"
       >
-        <div className="mx-auto w-full max-w-[90rem]">
-          <div className="grid items-end gap-[clamp(2rem,1rem+4vw,6rem)] lg:grid-cols-2">
-            <div className="order-1 lg:order-2">
-              <p className="font-special text-[length:var(--fs-p-special)] tracking-[0.14em] pb-8 text-accent uppercase">
-                Who We Are?
-              </p>
-              <h2
-                id="trendsetter-title"
-                className="max-w-[15ch] font-heading text-[length:var(--fs-h2)] leading-[1.08] font-bold"
+        <div className="mx-auto grid w-full max-w-[90rem] items-center gap-[clamp(3rem,1.5rem+5vw,8rem)] lg:grid-cols-[0.95fr_1.05fr]">
+          <ul className="order-2 grid grid-cols-2 gap-x-[clamp(1rem,0.5rem+3vw,4rem)] gap-y-[clamp(2rem,1rem+3vw,4.5rem)] lg:order-1">
+            {foundations.map((foundation, index) => (
+              <li
+                key={foundation}
+                data-reveal="circle"
+                className="motion-circle flex flex-col items-center text-center"
+                style={{ "--reveal-delay": `${index * 100}ms` }}
               >
-                A Trendsetter in Dholera
-              </h2>
-            </div>
+                <div className="relative flex h-[clamp(7.5rem,13vw,10rem)] w-[clamp(7.5rem,13vw,10rem)] items-center justify-center rounded-full border border-ink bg-base px-[clamp(0.75rem,0.5rem+0.8vw,1.25rem)]">
+                  <span className="font-heading text-[clamp(1rem,0.88rem+0.45vw,1.3rem)] leading-tight font-semibold">
+                    {foundation}
+                  </span>
 
-            <blockquote className="border-l-[clamp(0.2rem,0.15rem+0.15vw,0.3rem)] mt-4 border-accent pl-[clamp(0.75rem,0.5rem+0.8vw,1.25rem)] font-special text-[clamp(1.1rem,0.9rem+0.8vw,1.6rem)] leading-snug text-accent">
-              We are not waiting for Dholera to become a city. <br />
+                  <span className="absolute top-0 right-0 flex h-[clamp(2.1rem,3.5vw,2.75rem)] w-[clamp(2.1rem,3.5vw,2.75rem)] items-center justify-center rounded-full bg-accent font-special text-[clamp(0.75rem,0.7rem+0.2vw,0.95rem)] text-[var(--color-base)]">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                </div>
+              </li>
+            ))}
+          </ul>
+
+          <div data-reveal="right" className="order-1 lg:order-2">
+            <p className="font-special text-[length:var(--fs-p-special)] font-semibold tracking-[0.14em] text-accent uppercase">
+              Who We Are?
+            </p>
+
+            <h2
+              id="trendsetter-title"
+              className="mt-[clamp(0.75rem,0.5rem+0.8vw,1.25rem)] max-w-[15ch] font-heading text-[length:var(--fs-h2)] leading-[1.08] font-bold"
+            >
+              A Trendsetter in Dholera
+            </h2>
+
+            <blockquote className="mt-[clamp(1.5rem,1rem+1.5vw,2.5rem)] border-l-[clamp(0.2rem,0.15rem+0.15vw,0.3rem)] border-accent pl-[clamp(0.75rem,0.5rem+0.8vw,1.25rem)] font-special text-[clamp(1.1rem,0.9rem+0.8vw,1.6rem)] leading-snug text-accent">
+              We are not waiting for Dholera to become a city.
+            </blockquote>
+
+            <blockquote className="mt-[clamp(1rem,0.75rem+0.8vw,1.5rem)] border-l-[clamp(0.2rem,0.15rem+0.15vw,0.3rem)] border-accent pl-[clamp(0.75rem,0.5rem+0.8vw,1.25rem)] font-special text-[clamp(1.1rem,0.9rem+0.8vw,1.6rem)] leading-snug text-accent">
               We are helping create the foundation for people to live there.
             </blockquote>
-          </div>
-
-          <div className="mt-[clamp(2.5rem,1.5rem+3vw,5rem)] grid gap-[clamp(1rem,0.6rem+1.2vw,1.75rem)] sm:grid-cols-2 lg:grid-cols-4">
-            {foundations.map((foundation, index) => (
-              <article
-                key={foundation}
-                className="relative min-h-[clamp(8rem,6rem+4vw,12rem)] rounded-[clamp(0.75rem,0.55rem+0.6vw,1.25rem)] border border-ink p-[clamp(1.25rem,0.9rem+1vw,2rem)]"
-              >
-                <h3 className="mt-[clamp(1.5rem,1rem+1.5vw,2.5rem)] font-heading text-[clamp(1.15rem,1rem+0.5vw,1.5rem)] leading-tight text-center font-semibold">
-                  {foundation}
-                </h3>
-              </article>
-            ))}
           </div>
         </div>
       </section>
@@ -146,7 +156,9 @@ export default function EventDetails() {
             {services.map((service, index) => (
               <li
                 key={service}
-                className="flex items-center gap-[clamp(0.75rem,0.55rem+0.6vw,1.1rem)] border-b border-base py-[clamp(0.9rem,0.7rem+0.6vw,1.25rem)] font-body text-[length:var(--fs-body)] font-medium"
+                data-reveal="line"
+                className="service-line relative flex items-center gap-[clamp(0.75rem,0.55rem+0.6vw,1.1rem)] py-[clamp(0.9rem,0.7rem+0.6vw,1.25rem)] font-body text-[length:var(--fs-body)] font-medium"
+                style={{ "--reveal-delay": `${index * 90}ms` }}
               >
                 <span className="font-special text-[length:var(--fs-special)] text-accent">
                   {String(index + 1).padStart(2, "0")}

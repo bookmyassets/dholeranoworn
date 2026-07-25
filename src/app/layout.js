@@ -2,6 +2,7 @@ import "./globals.css";
 import Navbar from "./components/Navbar";
 import PopupLeadForm from "./components/Form";
 import Footer from "./components/Footer";
+import ScrollAnimations from "./components/ScrollAnimations";
 
 export const metadata = {
   title: "Dholera Now or Never",
@@ -12,6 +13,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className="h-full antialiased">
       <body className="flex min-h-full flex-col">
+        <ScrollAnimations />
         <Navbar />
         {children}
         <Footer />

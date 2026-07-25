@@ -6,6 +6,8 @@ import {
   FaYoutube,
 } from "react-icons/fa6";
 import { PopupFormButton } from "./Form";
+import Image from "next/image";
+import logo from "@/assets/logo-white.png";
 
 const footerLinks = [
   { label: "Why Dholera", href: "#why-dholera" },
@@ -43,7 +45,7 @@ export default function Footer() {
       <div className="mx-auto w-full max-w-[90rem] px-[clamp(1rem,0.5rem+4vw,4rem)]">
         <div className="grid gap-[clamp(2rem,1rem+3vw,4rem)] border-b border-base py-[clamp(3rem,2rem+4vw,6rem)] lg:grid-cols-[1fr_auto] lg:items-end">
           <div>
-            <p className="font-special text-[length:var(--fs-p-special)] tracking-[0.14em] text-accent uppercase">
+            <p className="font-semibold text-[length:var(--fs-p-special)] tracking-[0.14em] text-accent uppercase">
               08 August 2026
             </p>
             <h2 className="mt-[clamp(0.75rem,0.5rem+0.8vw,1.25rem)] max-w-[16ch] font-heading text-[length:var(--fs-h2)] leading-[1.08] font-bold">
@@ -67,23 +69,18 @@ export default function Footer() {
               aria-label="Return to the top"
               className="inline-flex items-center gap-[clamp(0.625rem,0.5rem+0.35vw,0.875rem)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
             >
-              <span
-                aria-hidden="true"
-                className="h-[clamp(2.75rem,2.4rem+0.9vw,3.5rem)] w-[clamp(0.25rem,0.2rem+0.12vw,0.35rem)] bg-accent"
+              <Image
+                src={logo}
+                alt="Dholera Now or Never"
+                className="h-auto w-[clamp(5.5rem,7vw,7.5rem)]"
+                sizes="7.5rem"
               />
-              <span className="flex flex-col">
-                <span className="font-special text-[clamp(0.675rem,0.62rem+0.18vw,0.8rem)] leading-none tracking-[0.26em] uppercase">
-                  Dholera
-                </span>
-                <span className="mt-[clamp(0.25rem,0.2rem+0.12vw,0.35rem)] font-heading text-[clamp(1.1rem,1rem+0.35vw,1.35rem)] leading-none font-bold whitespace-nowrap">
-                  Now <span className="text-accent">or</span> Never
-                </span>
-              </span>
             </Link>
 
             <p className="mt-[clamp(1.25rem,0.9rem+1vw,2rem)] max-w-[28rem] font-body text-[length:var(--fs-p-body)] leading-relaxed">
-              A face-to-face event designed to help you make better-informed
-              decisions about Dholera.
+              Dholera Now or Never is your opportunity to understand the
+              development, investment potential and future of one of India's
+              most ambitious planned cities.
             </p>
 
             <ul
@@ -164,7 +161,9 @@ export default function Footer() {
         </div>
 
         <div className="flex flex-col gap-2 border-t border-base py-[clamp(1.25rem,1rem+0.8vw,1.75rem)] font-body text-[clamp(0.75rem,0.7rem+0.18vw,0.875rem)] sm:flex-row sm:items-center sm:justify-between">
-          <p className="text-[length:var(--fs-p-small)]">© 2026 Dholera Now or Never.</p>
+          <p className="text-[length:var(--fs-p-small)]">
+            © 2026 Dholera Now or Never.
+          </p>
           <p className="font-special text-[length:var(--fs-p-special)] tracking-[0.08em] text-accent uppercase">
             Decisions begin here
           </p>

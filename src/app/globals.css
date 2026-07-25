@@ -1,36 +1,170 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&family=Marcellus&display=swap");
 @import "tailwindcss";
 
-@font-face {
-  font-family: "Akwe Pro";
-  src: url("/fonts/akwe-pro/ROHH  Akwe Pro Regular.otf") format("opentype");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
+:root {
+  --background: #ffffff;
+  --foreground: #17171a;
+  --fs-h1: clamp(3rem, 1.2rem + 3.5vw, 4.5rem);
+  --fs-h2: clamp(1.875rem, 1rem + 2vw, 2.75rem);
+  --fs-body: clamp(1rem, 0.95rem + 0.3vw, 1.125rem);
+  --fs-special: clamp(0.875rem, 0.8rem + 0.4vw, 1.125rem);
+  --space-section: clamp(3rem, 2rem + 4vw, 8rem);
 }
 
-@font-face {
-  font-family: "Akwe Pro";
-  src: url("/fonts/akwe-pro/ROHH  Akwe Pro Medium.otf") format("opentype");
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
+@theme {
+  --color-background: #ffffff;
+  --color-foreground: #17171a;
+  --color-ink: #17171a;
+  --color-accent: #c91f2e;
+  --color-base: #ffffff;
+  --font-heading: "Playfair Display", serif;
+  --font-body: "Inter", sans-serif;
+  --font-special: "Marcellus", serif;
 }
 
-@font-face {
-  font-family: "Akwe Pro";
-  src: url("/fonts/akwe-pro/ROHH  Akwe Pro DemiBold.otf") format("opentype");
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body);
 }
 
-@font-face {
-  font-family: "Akwe Pro";
-  src: url("/fonts/akwe-pro/ROHH  Akwe Pro Bold.otf") format("opentype");
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
+/* Scroll motion */
+[data-reveal] {
+  opacity: 0;
+  transform: translate3d(0, clamp(1.25rem, 1rem + 1vw, 2rem), 0);
+  transition:
+    opacity 700ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--reveal-delay, 0ms);
 }
+
+[data-reveal="right"] {
+  transform: translate3d(clamp(1.5rem, 1rem + 2vw, 3rem), 0, 0);
+}
+
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+.motion-circle > div {
+  transition:
+    border-color 350ms ease,
+    box-shadow 350ms ease,
+    transform 350ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.motion-circle > div > span:last-child {
+  transition: transform 350ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.motion-circle:hover > div {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 clamp(0.15rem, 0.1rem + 0.1vw, 0.25rem)
+    color-mix(in srgb, var(--color-accent) 18%, transparent);
+  transform: translateY(-0.4rem);
+}
+
+.motion-circle:hover > div > span:last-child {
+  transform: rotate(12deg) scale(1.08);
+}
+
+.service-line::after {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 1px;
+  background: var(--color-base);
+  content: "";
+  pointer-events: none;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 800ms cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.service-line.is-visible::after {
+  transform: scaleX(1);
+}
+
+/* Countdown motion */
+.event-clock-item {
+  animation:
+    clock-enter 700ms cubic-bezier(0.22, 1, 0.36, 1) both,
+    clock-breathe 3.2s ease-in-out infinite;
+  animation-delay:
+    calc(var(--clock-index) * 110ms),
+    calc(900ms + var(--clock-index) * 180ms);
+}
+
+.event-clock-value {
+  animation: clock-tick 360ms cubic-bezier(0.22, 1, 0.36, 1);
+  transform-origin: center;
+}
+
+@keyframes clock-enter {
+  from {
+    opacity: 0;
+    transform: translateY(1.25rem) scale(0.84);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes clock-breathe {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--color-accent) 0%, transparent);
+  }
+
+  50% {
+    box-shadow: 0 0 0 clamp(0.25rem, 0.15rem + 0.2vw, 0.4rem)
+      color-mix(in srgb, var(--color-accent) 16%, transparent);
+  }
+}
+
+@keyframes clock-tick {
+  from {
+    opacity: 0;
+    transform: translateY(-0.35rem) rotateX(65deg);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) rotateX(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .motion-circle > div,
+  .motion-circle > div > span:last-child,
+  .service-line::after {
+    transition: none;
+  }
+
+  .service-line::after {
+    transform: none;
+  }
+
+  .event-clock-item,
+  .event-clock-value {
+    animation: none;
+  }
+}
+
+
+/* @import "tailwindcss";
+
 
 :root {
   --background: #ffffff;
@@ -61,11 +195,4 @@ body {
   color: var(--foreground);
   font-family: var(--font-body);
 }
-
-@media (max-width: 40rem) {
-  :root {
-    --fs-p-body: calc(var(--fs-body) + 0.5rem);
-    --fs-p-special: calc(var(--fs-special) + 0.5rem);
-    --fs-p-small: calc(clamp(0.75rem, 0.72rem + 0.12vw, 0.875rem) + 0.5rem);
-  }
-}
+ */

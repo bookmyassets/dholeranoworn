@@ -36,11 +36,11 @@ const facts = [
   },
   {
     value: "₹6 Lakh",
-    suffix: "crore",
+    suffix: "Crore",
     label: "Global Investment",
   },
   {
-    value: "Govt of India + Govt of Gujarat",
+    value: "Govt. of India + Govt. of Gujarat",
     suffix: "",
     label: "Centre-State Development Partnership",
   },
@@ -56,7 +56,12 @@ export default function WhyJoin() {
       <div className="mx-auto grid w-full max-w-[90rem] items-center gap-[clamp(3rem,1.5rem+5vw,8rem)] lg:grid-cols-[0.95fr_1.05fr]">
         <ul className="order-2 grid grid-cols-2 gap-x-[clamp(1rem,0.5rem+3vw,4rem)] gap-y-[clamp(2rem,1rem+3vw,4.5rem)] lg:order-1">
           {highlights.map(({ number, title, icon }) => (
-            <li key={title} className="flex flex-col items-center text-center">
+            <li
+              key={title}
+              data-reveal="circle"
+              className="motion-circle flex flex-col items-center text-center"
+              style={{ "--reveal-delay": `${(Number(number) - 1) * 100}ms` }}
+            >
               <div className="relative flex h-[clamp(7.5rem,13vw,10rem)] w-[clamp(7.5rem,13vw,10rem)] items-center justify-center rounded-full border border-ink bg-base">
                 <Image
                   src={icon}
@@ -77,8 +82,8 @@ export default function WhyJoin() {
           ))}
         </ul>
 
-        <div className="order-1 lg:order-2">
-          <p className="font-special text-[length:var(--fs-p-special)] tracking-[0.14em] text-accent uppercase">
+        <div data-reveal="right" className="order-1 lg:order-2">
+          <p className="font-special text-[length:var(--fs-p-special)]  font-semibold  tracking-[0.14em] text-accent uppercase">
             Why Dholera?
           </p>
 
@@ -109,10 +114,10 @@ export default function WhyJoin() {
                 <dt className="font-special text-[clamp(1.25rem,1rem+0.8vw,1.8rem)] text-accent">
                   {value}
                   {suffix && (
-                    <span className="ml-[0.3em] text-[0.6em]">{suffix}</span>
+                    <span className="ml-[0.3em] text-[1em]">{suffix}</span>
                   )}
                 </dt>
-                <dd className="mt-[clamp(0.35rem,0.25rem+0.25vw,0.5rem)] font-body text-[clamp(0.8rem,0.76rem+0.15vw,0.9rem)] leading-relaxed">
+                <dd className="mt-[clamp(0.35rem,0.25rem+0.25vw,0.5rem)] font-body text-[clamp(1rem,0.76rem+0.15vw,1.2rem)] leading-relaxed">
                   {label}
                 </dd>
               </div>
