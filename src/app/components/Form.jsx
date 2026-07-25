@@ -7,8 +7,6 @@ import logo from "@/assets/logo.png";
 const OPEN_POPUP_EVENT = "open-dholera-popup-form";
 const FORM_CONFIG = {
   title: "Reserve Your Free Seat",
-  source: "Dholera NoN Popup",
-  tags: ["Dholera Investment", "Popup Lead", "Dholera NoN"],
   dataLayerEvent: "lead_form",
 };
 
@@ -143,27 +141,22 @@ export default function PopupLeadForm() {
 
   const submitLead = async () => {
     try {
-      const response = await fetch(
-        "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${process.env.NEXT_PUBLIC_TELECRM_API_KEY}`,
-          },
-          body: JSON.stringify({
-            fields: {
-              name: formData.fullName,
-              phone: formData.mobileNumber,
-              source: getLeadSource(),
-            },
-            source: FORM_CONFIG.source,
-            tags: FORM_CONFIG.tags,
-          }),
+      const response = await fetch("/api/leads", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
         },
-      );
+        body: JSON.stringify({
+          fullName: formData.fullName,
+          mobileNumber: formData.mobileNumber,
+          source: getLeadSource(),
+        }),
+      });
 
-      if (!response.ok) throw new Error("Error submitting form");
+      if (!response.ok) {
+        const result = await response.json().catch(() => ({}));
+        throw new Error(result.error || "Error submitting form");
+      }
 
       setFormData({ fullName: "", mobileNumber: "" });
       setShowThankYou(true);
