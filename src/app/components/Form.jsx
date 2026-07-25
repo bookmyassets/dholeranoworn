@@ -68,12 +68,8 @@ export default function PopupLeadForm() {
   });
   const [errorMessage, setErrorMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
-  const [recaptchaLoaded, setRecaptchaLoaded] = useState(!siteKey);
   const firstInputRef = useRef(null);
   const previousFocusRef = useRef(null);
-  const recaptchaRef = useRef(null);
-  const recaptchaWidgetId = useRef(null);
   const successTimerRef = useRef(null);
 
   const closePopup = useCallback(() => {
@@ -118,31 +114,6 @@ export default function PopupLeadForm() {
   }, [closePopup, isOpen]);
 
   useEffect(() => {
-    if (!siteKey || window.grecaptcha) {
-      setRecaptchaLoaded(true);
-      return undefined;
-    }
-
-    const existingScript = document.getElementById("dholera-recaptcha-script");
-    if (existingScript) {
-      existingScript.addEventListener("load", () => setRecaptchaLoaded(true), {
-        once: true,
-      });
-      return undefined;
-    }
-
-    const script = document.createElement("script");
-    script.id = "dholera-recaptcha-script";
-    script.src = "https://www.google.com/recaptcha/api.js";
-    script.async = true;
-    script.defer = true;
-    script.onload = () => setRecaptchaLoaded(true);
-    document.head.appendChild(script);
-
-    return undefined;
-  }, [siteKey]);
-
-  useEffect(() => {
     return () => {
       if (successTimerRef.current) {
         window.clearTimeout(successTimerRef.current);
@@ -170,7 +141,7 @@ export default function PopupLeadForm() {
     return true;
   };
 
-  const submitVerifiedLead = async (recaptchaToken = "") => {
+  const submitLead = async () => {
     try {
       const response = await fetch(
         "https://api.telecrm.in/enterprise/67a30ac2989f94384137c2ff/autoupdatelead",
@@ -188,7 +159,6 @@ export default function PopupLeadForm() {
             },
             source: FORM_CONFIG.source,
             tags: FORM_CONFIG.tags,
-            recaptchaToken,
           }),
         },
       );
@@ -207,10 +177,6 @@ export default function PopupLeadForm() {
       setErrorMessage("Unable to submit the form. Please try again.");
     } finally {
       setIsLoading(false);
-
-      if (window.grecaptcha && recaptchaWidgetId.current !== null) {
-        window.grecaptcha.reset(recaptchaWidgetId.current);
-      }
     }
   };
 
@@ -221,36 +187,7 @@ export default function PopupLeadForm() {
     if (!validateForm()) return;
 
     setIsLoading(true);
-
-    if (!siteKey) {
-      submitVerifiedLead();
-      return;
-    }
-
-    if (!recaptchaLoaded || !window.grecaptcha) {
-      setErrorMessage("Security verification is still loading.");
-      setIsLoading(false);
-      return;
-    }
-
-    try {
-      if (recaptchaWidgetId.current === null) {
-        recaptchaWidgetId.current = window.grecaptcha.render(
-          recaptchaRef.current,
-          {
-            sitekey: siteKey,
-            callback: submitVerifiedLead,
-            theme: "light",
-          },
-        );
-      } else {
-        window.grecaptcha.execute(recaptchaWidgetId.current);
-      }
-    } catch (error) {
-      console.error("reCAPTCHA error:", error);
-      setErrorMessage("Unable to verify the request. Please try again.");
-      setIsLoading(false);
-    }
+    submitLead();
   };
 
   if (!isOpen) return null;
@@ -374,16 +311,9 @@ export default function PopupLeadForm() {
                 </div>
               </div>
 
-              {siteKey && (
-                <div
-                  ref={recaptchaRef}
-                  className="mt-[clamp(1rem,0.75rem+0.8vw,1.5rem)] flex justify-center"
-                />
-              )}
-
               <button
                 type="submit"
-                disabled={isLoading || !recaptchaLoaded}
+                disabled={isLoading}
                 className="mt-[clamp(1.25rem,0.9rem+1vw,1.75rem)] inline-flex min-h-[clamp(3rem,2.6rem+1vw,3.75rem)] w-full items-center justify-center rounded-full border border-accent bg-accent px-[clamp(1.25rem,1rem+0.8vw,1.75rem)] font-special text-[length:var(--fs-special)] text-[var(--color-base)] transition-colors hover:bg-base hover:text-accent focus-visible:bg-base focus-visible:text-accent disabled:cursor-not-allowed disabled:border-ink disabled:bg-ink"
               >
                 {isLoading ? "Submitting…" : "Reserve My Free Seat"}
