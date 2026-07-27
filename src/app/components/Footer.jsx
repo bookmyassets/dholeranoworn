@@ -13,7 +13,7 @@ const footerLinks = [
   { label: "Why Dholera", href: "#why-dholera" },
   { label: "Why Attend", href: "#why-attend" },
   { label: "The TrendSetter", href: "#trendsetter" },
-  { label: "What We Do", href: "#services" },
+  { label: "What We Offer", href: "#services" },
   { label: "FAQ", href: "#faq" },
 ];
 
