@@ -95,7 +95,7 @@ export default function WhyJoin() {
           </h2>
 
           <blockquote className="mt-[clamp(1.5rem,1rem+1.5vw,2.5rem)] border-l-[clamp(0.2rem,0.15rem+0.15vw,0.3rem)] border-accent pl-[clamp(0.75rem,0.5rem+0.8vw,1.25rem)] font-special text-[clamp(1.1rem,0.9rem+0.8vw,1.6rem)] leading-snug text-accent">
-            Be part of India&apos;s next big growth story.
+            Be part of India&apos;s next Big Growth story.
           </blockquote>
 
           <p className="mt-[clamp(1.25rem,0.85rem+1.2vw,2rem)] max-w-[42rem] font-body text-[length:var(--fs-p-body)] leading-[1.8]">

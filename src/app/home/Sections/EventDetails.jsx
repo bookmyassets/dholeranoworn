@@ -140,12 +140,12 @@ export default function EventDetails() {
       >
         <div className="mx-auto grid w-full max-w-[90rem] gap-[clamp(3rem,1.5rem+5vw,7rem)] lg:grid-cols-[0.8fr_1.2fr]">
           <div>
-            <SectionEyebrow inverted>What We Do</SectionEyebrow>
+            <SectionEyebrow inverted>What We Offer</SectionEyebrow>
             <h2
               id="services-title"
               className="mt-[clamp(0.75rem,0.5rem+0.8vw,1.25rem)] max-w-[16ch] font-heading text-[length:var(--fs-h2)] leading-[1.08] font-bold"
             >
-              From Understanding Dholera to Making Better Decisions
+              Helping You Invest in Dholera with Confidence
             </h2>
             <PopupFormButton className="mt-[clamp(1.75rem,1.25rem+1.6vw,3rem)] inline-flex min-h-[clamp(2.75rem,2.4rem+1vw,3.5rem)] items-center justify-center rounded-full border border-accent bg-accent px-[clamp(1.5rem,1.1rem+1.2vw,2.25rem)] font-special text-[length:var(--fs-special)] text-[var(--color-base)] transition-colors hover:bg-base hover:text-accent focus-visible:bg-base focus-visible:text-accent">
               Reserve a Free Seat Today
