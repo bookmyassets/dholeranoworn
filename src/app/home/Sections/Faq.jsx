@@ -11,7 +11,7 @@ const faqs = [
   {
     question: "When and where is the event taking place?",
     answer:
-      "The event will take place on 8 August 2026, from 10:00 AM to 6:00 PM, at ABC Hall, Gurgaon.",
+      "The event will take place on 8 August 2026, from 10:00 AM to 08:00 PM, at Sec 48, Gurgaon.",
   },
   {
     question: "Who should attend this Dholera event?",
