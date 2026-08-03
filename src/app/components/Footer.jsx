@@ -141,7 +141,7 @@ export default function Footer() {
                   Location
                 </dt>
                 <dd className="mt-1 font-special text-[length:var(--fs-special)]">
-                  -------
+                  Sec 48, Gurugram
                 </dd>
               </div>
               <div>

@@ -135,7 +135,7 @@ export default function Faq() {
             </p>
             <div className="relative mt-[clamp(1.75rem,1.25rem+1.5vw,2.75rem)]">
               <p className="font-special text-[length:var(--fs-special)] text-[color:var(--color-base)] opacity-70">
-                8 August 2026 · Gurgaon
+                8 August 2026 · Sec 48, Gurugram
               </p>
               <a
                 href="https://wa.me/919910994247?text=Hi%20I'm%20Registering%20for%20Event"
