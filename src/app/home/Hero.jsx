@@ -125,7 +125,7 @@ export default function Hero() {
                   href="https://www.bookmyassets.com/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-semibold"
+                  className="font-semibold underline"
                 >
                   {" "}
                   BookMyAssets{" "}
@@ -210,7 +210,7 @@ export default function Hero() {
           </div>
 
           <div
-            className="absolute top-[42%] -right-10 z-10 transition-transform duration-200 ease-out motion-reduce:!transform-none"
+            className="absolute top-[38%] -right-10 z-10 transition-transform duration-200 ease-out motion-reduce:!transform-none"
             style={{
               transform:
                 "translate3d(calc(var(--pointer-x) * 42px), calc(var(--pointer-y) * 42px), 0)",
@@ -231,7 +231,7 @@ export default function Hero() {
           </div>
 
           <div
-            className="absolute bottom-[34%] left-0 z-10 transition-transform duration-200 ease-out motion-reduce:!transform-none"
+            className="absolute top-[61%] left-0 z-10 transition-transform duration-200 ease-out motion-reduce:!transform-none"
             style={{
               transform:
                 "translate3d(calc(var(--pointer-x) * -46px), calc(var(--pointer-y) * -46px), 0)",
@@ -254,7 +254,7 @@ export default function Hero() {
             </div>
           </div>
           <div
-            className="absolute -right-10 bottom-[8%] transition-transform duration-200 ease-out motion-reduce:!transform-none"
+            className="absolute top-[84%] -right-10 transition-transform duration-200 ease-out motion-reduce:!transform-none"
             style={{
               transform:
                 "translate3d(calc(var(--pointer-x) * 42px), calc(var(--pointer-y) * 42px), 0)",
