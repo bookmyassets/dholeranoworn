@@ -120,7 +120,7 @@ export default function Hero() {
             <p className="inline-flex min-h-[clamp(2.5rem,2.25rem+0.6vw,2.875rem)] items-center gap-[clamp(0.5rem,0.4rem+0.3vw,0.75rem)] rounded-full bg-accent px-[clamp(1rem,0.8rem+0.6vw,1.375rem)] py-[clamp(0.5rem,0.4rem+0.25vw,0.625rem)] font-special text-[length:var(--fs-p-special)] tracking-[0.12em] text-base uppercase">
               {/*  <FaLocationDot aria-hidden="true" className="shrink-0" /> */}
               <span>
-                In Association with, {" "}
+                In Collaboration with {" "}
                 <a
                   href="https://www.bookmyassets.com/"
                   target="_blank"
