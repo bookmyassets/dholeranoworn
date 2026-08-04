@@ -22,6 +22,24 @@ const faqs = [
     question: "Is registration for the event free?",
     answer: "Yes, the event is completely free of cost.",
   },
+  {
+    question: "Who is BookMyAssets?",
+    answer: (
+      <>
+        <a
+          href="https://www.bookmyassets.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="underline underline-offset-4 transition-colors duration-300 hover:text-accent"
+        >
+          BookMyAssets (BMA Group of Companies)
+        </a>{" "}
+        is a trusted real estate developer in Dholera, helping investors with
+        verified opportunities, legal guidance, due diligence, site visits, and
+        complete support for a smooth investment journey.
+      </>
+    ),
+  },
 ];
 
 export default function Faq() {

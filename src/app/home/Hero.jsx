@@ -6,8 +6,8 @@ import heroimg from "@/assets/bgImg.webp";
 import cityCentreImage from "@/assets/abcd.png";
 import solarPanelIcon from "@/assets/icons/solar-panel.png";
 import chipIcon from "@/assets/icons/chip.png";
-import freight from "@/assets/icons/train-cargo.png"
-import airport from "@/assets/icons/airplane.png"
+import freight from "@/assets/icons/train-cargo.png";
+import airport from "@/assets/icons/airplane.png";
 import { PopupFormButton } from "@/app/components/Form";
 import { FaCalendarDays, FaLocationDot } from "react-icons/fa6";
 
@@ -47,10 +47,8 @@ export default function Hero() {
     if (event.pointerType !== "mouse") return;
 
     const bounds = event.currentTarget.getBoundingClientRect();
-    const pointerX =
-      ((event.clientX - bounds.left) / bounds.width - 0.5) * 2;
-    const pointerY =
-      ((event.clientY - bounds.top) / bounds.height - 0.5) * 2;
+    const pointerX = ((event.clientX - bounds.left) / bounds.width - 0.5) * 2;
+    const pointerY = ((event.clientY - bounds.top) / bounds.height - 0.5) * 2;
 
     heroRef.current?.style.setProperty("--pointer-x", pointerX.toFixed(3));
     heroRef.current?.style.setProperty("--pointer-y", pointerY.toFixed(3));
@@ -97,9 +95,27 @@ export default function Hero() {
 
       <div className="relative z-10 mx-auto grid min-h-screen w-full max-w-[90rem] items-center gap-[clamp(2.5rem,1rem+4vw,6rem)] px-[clamp(1rem,0.5rem+4vw,4rem)] pt-[clamp(8rem,7rem+4vw,11rem)] pb-[clamp(3rem,2rem+4vw,7rem)] lg:grid-cols-[1.2fr_0.8fr]">
         <div className="max-w-[52rem]">
-          <h1 className="max-w-[12ch] font-heading text-[length:var(--fs-h1)] py-4 md:py-0 leading-18 font-bold tracking-[-0.04em]">
+          <h1 className="max-w-[12ch] font-heading text-[length:var(--fs-h1)] py-2 md:py-0 leading-18 font-bold tracking-[-0.04em]">
             Dholera <br /> Now or Never
           </h1>
+
+          <div className="mt-[clamp(1rem,0.75rem+0.8vw,1.5rem)] flex flex-wrap items-center gap-[clamp(0.625rem,0.5rem+0.4vw,1rem)]">
+            <p className="inline-flex min-h-[clamp(2.5rem,2.25rem+0.6vw,2.875rem)] items-center gap-[clamp(0.5rem,0.4rem+0.3vw,0.75rem)] rounded-full text-accent px-[clamp(1rem,0.8rem+0.6vw,1.375rem)] py-[clamp(0.5rem,0.4rem+0.25vw,0.625rem)] font-special text-[length:var(--fs-p-special)] tracking-[0.12em] bg-base border-accent border-2 uppercase">
+              {/*  <FaLocationDot aria-hidden="true" className="shrink-0" /> */}
+              <span>
+                In Association with, <br />{" "}
+                <a
+                  href="https://www.bookmyassets.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-semibold"
+                >
+                  {" "}
+                  BookMyAssets{" "}
+                </a>
+              </span>
+            </p>
+          </div>
 
           <div className="mt-[clamp(1rem,0.75rem+0.8vw,1.5rem)] flex flex-wrap items-center gap-[clamp(0.625rem,0.5rem+0.4vw,1rem)]">
             <time
@@ -115,6 +131,7 @@ export default function Hero() {
               <span>Sec 48, Gurugram</span>
             </p>
           </div>
+          
 
           <div className="mt-[clamp(2rem,1.25rem+2.5vw,4rem)]">
             <p className="mb-[clamp(1rem,0.75rem+1vw,1.5rem)] font-special text-[length:var(--fs-p-special)] tracking-[0.08em] uppercase">
@@ -170,7 +187,7 @@ export default function Hero() {
           </div>
 
           <div
-            className="absolute top-[15%] left-0 z-10 transition-transform duration-200 ease-out motion-reduce:!transform-none"
+            className="absolute top-[15%] -left-20 z-10 transition-transform duration-200 ease-out motion-reduce:!transform-none"
             style={{
               transform:
                 "translate3d(calc(var(--pointer-x) * -36px), calc(var(--pointer-y) * -36px), 0)",
@@ -185,13 +202,13 @@ export default function Hero() {
                 />
               </span>
               <span className="font-special text-[length:var(--fs-special)] whitespace-nowrap text-ink">
-                Green Energy
+               Dholera Solar Park
               </span>
             </div>
           </div>
 
           <div
-            className="absolute top-[42%] right-0 z-10 transition-transform duration-200 ease-out motion-reduce:!transform-none"
+            className="absolute top-[42%] -right-20 z-10 transition-transform duration-200 ease-out motion-reduce:!transform-none"
             style={{
               transform:
                 "translate3d(calc(var(--pointer-x) * 42px), calc(var(--pointer-y) * 42px), 0)",
@@ -206,13 +223,13 @@ export default function Hero() {
                 />
               </span>
               <span className="font-special text-[length:var(--fs-special)] whitespace-nowrap text-ink">
-                Semiconductor
+               TATA Semiconductor
               </span>
             </div>
           </div>
 
           <div
-            className="absolute bottom-[34%] left-0 z-10 transition-transform duration-200 ease-out motion-reduce:!transform-none"
+            className="absolute bottom-[34%] -left-36 z-10 transition-transform duration-200 ease-out motion-reduce:!transform-none"
             style={{
               transform:
                 "translate3d(calc(var(--pointer-x) * -46px), calc(var(--pointer-y) * -46px), 0)",
@@ -230,18 +247,18 @@ export default function Hero() {
                 />
               </span>
               <span className="font-special text-[length:var(--fs-special)] whitespace-nowrap text-ink">
-                Freight Corridor
+                Dedicated Freight Corridor
               </span>
             </div>
           </div>
           <div
-            className="absolute right-0 bottom-[8%] transition-transform duration-200 ease-out motion-reduce:!transform-none"
+            className="absolute -right-36 bottom-[8%] transition-transform duration-200 ease-out motion-reduce:!transform-none"
             style={{
               transform:
                 "translate3d(calc(var(--pointer-x) * 42px), calc(var(--pointer-y) * 42px), 0)",
             }}
           >
-             <div className="flex items-center gap-[clamp(0.5rem,0.35rem+0.4vw,0.75rem)] rounded-full border border-accent bg-base p-[clamp(0.4rem,0.3rem+0.25vw,0.6rem)] pr-[clamp(0.85rem,0.65rem+0.6vw,1.25rem)] shadow-2xl">
+            <div className="flex items-center gap-[clamp(0.5rem,0.35rem+0.4vw,0.75rem)] rounded-full border border-accent bg-base p-[clamp(0.4rem,0.3rem+0.25vw,0.6rem)] pr-[clamp(0.85rem,0.65rem+0.6vw,1.25rem)] shadow-2xl">
               <span className="flex h-[clamp(2.75rem,4vw,3.5rem)] w-[clamp(2.75rem,4vw,3.5rem)] shrink-0 items-center justify-center rounded-full bg-accent">
                 <Image
                   src={airport}
@@ -250,7 +267,7 @@ export default function Hero() {
                 />
               </span>
               <span className="font-special text-[length:var(--fs-special)] whitespace-nowrap text-ink">
-                International Airport
+               Dholera International Airport
               </span>
             </div>
           </div>
