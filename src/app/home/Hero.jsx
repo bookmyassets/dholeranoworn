@@ -11,7 +11,7 @@ import airport from "@/assets/icons/airplane.png"
 import { PopupFormButton } from "@/app/components/Form";
 import { FaCalendarDays, FaLocationDot } from "react-icons/fa6";
 
-const EVENT_DATE = "2026-08-08T00:00:00+05:30";
+const EVENT_DATE = "2026-08-08T10:00:00+05:30";
 const EMPTY_COUNTDOWN = {
   days: "--",
   hours: "--",
