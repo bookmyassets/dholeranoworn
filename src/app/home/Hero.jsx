@@ -9,9 +9,11 @@ import chipIcon from "@/assets/icons/chip.png";
 import freight from "@/assets/icons/train-cargo.png";
 import airport from "@/assets/icons/airplane.png";
 import { PopupFormButton } from "@/app/components/Form";
-import { FaCalendarDays, FaLocationDot } from "react-icons/fa6";
+import { FaCalendarDays, FaCity, FaKey, FaLocationDot } from "react-icons/fa6";
+import { GiPartyPopper } from "react-icons/gi";
 
 const EVENT_DATE = "2026-08-08T10:00:00+05:30";
+const COUNTDOWN_FINALE_DURATION = 1_400;
 const EMPTY_COUNTDOWN = {
   days: "--",
   hours: "--",
@@ -19,28 +21,65 @@ const EMPTY_COUNTDOWN = {
   seconds: "--",
 };
 
-function getTimeLeft() {
-  const distance = Math.max(new Date(EVENT_DATE).getTime() - Date.now(), 0);
+function getCountdownState() {
+  const distance = new Date(EVENT_DATE).getTime() - Date.now();
+
+  if (distance <= 0) {
+    return {
+      isComplete: true,
+      timeLeft: { days: "00", hours: "00", minutes: "00", seconds: "00" },
+    };
+  }
 
   return {
-    days: String(Math.floor(distance / 86_400_000)).padStart(2, "0"),
-    hours: String(Math.floor((distance / 3_600_000) % 24)).padStart(2, "0"),
-    minutes: String(Math.floor((distance / 60_000) % 60)).padStart(2, "0"),
-    seconds: String(Math.floor((distance / 1_000) % 60)).padStart(2, "0"),
+    isComplete: false,
+    timeLeft: {
+      days: String(Math.floor(distance / 86_400_000)).padStart(2, "0"),
+      hours: String(Math.floor((distance / 3_600_000) % 24)).padStart(2, "0"),
+      minutes: String(Math.floor((distance / 60_000) % 60)).padStart(2, "0"),
+      seconds: String(Math.floor((distance / 1_000) % 60)).padStart(2, "0"),
+    },
   };
 }
 
 export default function Hero() {
   const heroRef = useRef(null);
   const [timeLeft, setTimeLeft] = useState(EMPTY_COUNTDOWN);
+  const [isCountdownFinishing, setIsCountdownFinishing] = useState(false);
+  const [isCountdownComplete, setIsCountdownComplete] = useState(false);
 
   useEffect(() => {
-    const updateCountdown = () => setTimeLeft(getTimeLeft());
+    let countdownInterval;
+    let celebrationTimeout;
 
-    updateCountdown();
-    const countdownInterval = window.setInterval(updateCountdown, 1_000);
+    const updateCountdown = () => {
+      const countdown = getCountdownState();
 
-    return () => window.clearInterval(countdownInterval);
+      setTimeLeft(countdown.timeLeft);
+
+      if (countdown.isComplete) {
+        setIsCountdownFinishing(true);
+
+        if (countdownInterval) window.clearInterval(countdownInterval);
+        if (!celebrationTimeout) {
+          celebrationTimeout = window.setTimeout(() => {
+            setIsCountdownComplete(true);
+          }, COUNTDOWN_FINALE_DURATION);
+        }
+      }
+
+      return countdown.isComplete;
+    };
+
+    const isAlreadyComplete = updateCountdown();
+    if (!isAlreadyComplete) {
+      countdownInterval = window.setInterval(updateCountdown, 1_000);
+    }
+
+    return () => {
+      if (countdownInterval) window.clearInterval(countdownInterval);
+      if (celebrationTimeout) window.clearTimeout(celebrationTimeout);
+    };
   }, []);
 
   const handlePointerMove = (event) => {
@@ -71,7 +110,7 @@ export default function Hero() {
       ref={heroRef}
       onPointerMove={handlePointerMove}
       onPointerLeave={resetPointerPosition}
-      className="relative isolate min-h-screen w-full overflow-hidden bg-ink text-[var(--color-base)]"
+      className="relative isolate h-screen w-full overflow-hidden bg-ink text-[var(--color-base)]"
       style={{ "--pointer-x": 0, "--pointer-y": 0 }}
     >
       <div
@@ -133,33 +172,94 @@ export default function Hero() {
           </div>
 
           <div className="mt-[clamp(2rem,1.25rem+2.5vw,4rem)]">
-            <p className="mb-[clamp(1rem,0.75rem+1vw,1.5rem)] font-special text-[length:var(--fs-p-special)] tracking-[0.08em] uppercase">
-              Event begins in
-            </p>
-
-            <div
-              className="grid max-w-[40rem] gap-[clamp(0.75rem,0.4rem+1.2vw,1.5rem)] grid-cols-4"
-              aria-label="Countdown to 8 August 2026"
-              role="timer"
-            >
-              {countdownItems.map(({ label, value }, index) => (
-                <div
-                  key={label}
-                  className="event-clock-item relative flex aspect-square w-[clamp(5.5rem,9vw,7.5rem)] flex-col items-center justify-center rounded-full border-[clamp(0.2rem,0.15rem+0.15vw,0.3rem)] border-accent bg-ink after:absolute after:-top-[clamp(0.25rem,0.15rem+0.3vw,0.5rem)] after:left-1/2 after:h-[clamp(0.6rem,0.45rem+0.3vw,0.85rem)] after:w-[clamp(0.6rem,0.45rem+0.3vw,0.85rem)] after:-translate-x-1/2 after:rounded-full after:bg-accent"
-                  style={{ "--clock-index": index }}
-                >
-                  <span
-                    key={value}
-                    className="event-clock-value font-special text-[clamp(1.4rem,1rem+1.4vw,2.25rem)] leading-none"
-                  >
-                    {value}
-                  </span>
-                  <span className="mt-[clamp(0.25rem,0.15rem+0.25vw,0.5rem)] font-body text-[clamp(0.675rem,0.63rem+0.18vw,0.8rem)] font-medium">
-                    {label}
-                  </span>
+            {isCountdownComplete ? (
+              <div
+                className="event-live-panel relative max-w-[40rem] overflow-hidden rounded-[clamp(1.25rem,0.9rem+1vw,2rem)] border border-accent bg-ink px-[clamp(1.25rem,0.85rem+1.5vw,2.5rem)] py-[clamp(1.75rem,1.15rem+2vw,3rem)] text-center"
+                role="status"
+                aria-live="polite"
+              >
+                <div className="event-confetti" aria-hidden="true">
+                  {Array.from({ length: 14 }, (_, index) => (
+                    <span
+                      key={index}
+                      style={{
+                        "--confetti-index": index,
+                        "--confetti-left": `${4 + ((index * 37) % 92)}%`,
+                      }}
+                    />
+                  ))}
                 </div>
-              ))}
-            </div>
+
+                <GiPartyPopper
+                  aria-hidden="true"
+                  className="event-party-popper event-party-popper-left absolute bottom-[clamp(0.75rem,0.5rem+1vw,1.5rem)] left-[clamp(0.75rem,0.45rem+1vw,1.5rem)] z-10 text-[clamp(2.75rem,2rem+2.5vw,4.5rem)] text-accent"
+                />
+                <GiPartyPopper
+                  aria-hidden="true"
+                  className="event-party-popper event-party-popper-right absolute right-[clamp(0.75rem,0.45rem+1vw,1.5rem)] bottom-[clamp(0.75rem,0.5rem+1vw,1.5rem)] z-10 text-[clamp(2.75rem,2rem+2.5vw,4.5rem)] text-accent"
+                />
+
+                <div className="relative z-10 mx-auto max-w-[28rem]">
+                  <div
+                    className="event-property-mark relative mx-auto -mt-[clamp(0.5rem,0.35rem+0.45vw,0.8rem)] mb-[clamp(0.75rem,0.55rem+0.7vw,1.25rem)] flex h-[clamp(4.5rem,3.5rem+3vw,6.5rem)] w-[clamp(4.5rem,3.5rem+3vw,6.5rem)] items-center justify-center rounded-full border-[clamp(0.2rem,0.15rem+0.15vw,0.3rem)] border-accent bg-[var(--color-base)] text-ink"
+                    aria-hidden="true"
+                  >
+                    <FaCity className="text-[clamp(2rem,1.5rem+1.7vw,3.25rem)]" />
+                    <span className="absolute -right-[clamp(0.2rem,0.1rem+0.4vw,0.5rem)] -bottom-[clamp(0.2rem,0.1rem+0.4vw,0.5rem)] flex h-[clamp(1.75rem,1.35rem+1.2vw,2.5rem)] w-[clamp(1.75rem,1.35rem+1.2vw,2.5rem)] items-center justify-center rounded-full bg-accent text-[var(--color-base)]">
+                      <FaKey className="text-[clamp(0.8rem,0.65rem+0.5vw,1.2rem)]" />
+                    </span>
+                  </div>
+
+                  <span className="mb-[clamp(0.4rem,0.3rem+0.3vw,0.625rem)] inline-flex rounded-full bg-accent px-[clamp(0.7rem,0.55rem+0.4vw,1rem)] py-[clamp(0.25rem,0.2rem+0.15vw,0.375rem)] font-special text-[clamp(0.7rem,0.64rem+0.2vw,0.8rem)] tracking-[0.16em] text-[var(--color-base)] uppercase">
+                    Dholera : Now or Never is live
+                  </span>
+                  <p className="font-heading text-[clamp(1.7rem,1.15rem+2vw,3rem)] leading-[1.05] font-bold tracking-[-0.03em]">
+                    Event Begins Now
+                  </p>
+                  <p className="mx-auto mt-[clamp(0.5rem,0.35rem+0.45vw,0.75rem)] max-w-[30ch] font-special text-[length:var(--fs-special)] text-[var(--color-base)]">
+                    Step inside the future of Dholera real estate.
+                  </p>
+                </div>
+              </div>
+            ) : (
+              <>
+                <p className="mb-[clamp(1rem,0.75rem+1vw,1.5rem)] font-special text-[length:var(--fs-p-special)] tracking-[0.08em] uppercase">
+                  {isCountdownFinishing
+                    ? "Countdown complete"
+                    : "Event begins in"}
+                </p>
+
+                <div
+                  className={`grid max-w-[40rem] grid-cols-4 gap-[clamp(0.75rem,0.4rem+1.2vw,1.5rem)] ${
+                    isCountdownFinishing ? "event-countdown-finale" : ""
+                  }`}
+                  aria-label={
+                    isCountdownFinishing
+                      ? "Countdown complete"
+                      : "Countdown to 8 August 2026"
+                  }
+                  role="timer"
+                >
+                  {countdownItems.map(({ label, value }, index) => (
+                    <div
+                      key={label}
+                      className="event-clock-item relative flex aspect-square w-[clamp(5.5rem,9vw,7.5rem)] flex-col items-center justify-center rounded-full border-[clamp(0.2rem,0.15rem+0.15vw,0.3rem)] border-accent bg-ink after:absolute after:-top-[clamp(0.25rem,0.15rem+0.3vw,0.5rem)] after:left-1/2 after:h-[clamp(0.6rem,0.45rem+0.3vw,0.85rem)] after:w-[clamp(0.6rem,0.45rem+0.3vw,0.85rem)] after:-translate-x-1/2 after:rounded-full after:bg-accent"
+                      style={{ "--clock-index": index }}
+                    >
+                      <span
+                        key={value}
+                        className="event-clock-value font-special text-[clamp(1.4rem,1rem+1.4vw,2.25rem)] leading-none"
+                      >
+                        {value}
+                      </span>
+                      <span className="mt-[clamp(0.25rem,0.15rem+0.25vw,0.5rem)] font-body text-[clamp(0.675rem,0.63rem+0.18vw,0.8rem)] font-medium">
+                        {label}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </>
+            )}
 
             <PopupFormButton className="mt-[clamp(1.75rem,1.25rem+1.6vw,3rem)] inline-flex min-h-[clamp(2.75rem,2.4rem+1vw,3.5rem)] items-center justify-center rounded-full border border-accent bg-accent px-[clamp(1.5rem,1.1rem+1.2vw,2.25rem)] font-special text-[length:var(--fs-special)] text-[var(--color-base)] transition-colors hover:bg-base hover:text-accent focus-visible:bg-base focus-visible:text-accent">
               Reserve a Free Seat Today
@@ -167,9 +267,9 @@ export default function Hero() {
           </div>
         </div>
 
-        <div className="relative mx-auto -mb-[clamp(3rem,2rem+4vw,7rem)] h-[clamp(29rem,48vw,46rem)] w-full max-w-[34rem] self-end hidden md:block">
+        <div className="relative mx-auto mb-0 h-[clamp(29rem,48vw,46rem)] w-full max-w-[34rem] self-end hidden md:block">
           <div
-            className="absolute inset-x-[clamp(2rem,1rem+4vw,5rem)] bottom-20 transition-transform duration-200 ease-out motion-reduce:!transform-none"
+            className="absolute inset-x-[clamp(2rem,1rem+4vw,5rem)] bottom-[clamp(5.5rem,4.75rem+1.5vw,7rem)] transition-transform duration-200 ease-out motion-reduce:!transform-none"
             style={{
               transform:
                 "translate3d(calc(var(--pointer-x) * 24px), calc(var(--pointer-y) * 24px), 0)",
