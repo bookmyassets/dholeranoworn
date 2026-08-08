@@ -214,7 +214,7 @@ export default function Hero() {
                     Dholera : Now or Never is live
                   </span>
                   <p className="font-heading text-[clamp(1.7rem,1.15rem+2vw,3rem)] leading-[1.05] font-bold tracking-[-0.03em]">
-                    Event Begins Now
+                    Event is Live
                   </p>
                   <p className="mx-auto mt-[clamp(0.5rem,0.35rem+0.45vw,0.75rem)] max-w-[30ch] font-special text-[length:var(--fs-special)] text-[var(--color-base)]">
                     Step inside the future of Dholera real estate.
