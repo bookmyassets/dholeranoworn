@@ -1,9 +1,57 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { FiArrowRight, FiCalendar, FiPhone, FiUser } from "react-icons/fi";
 
 export default function HeroRegistrationForm() {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [message, setMessage] = useState("");
+  const [hasError, setHasError] = useState(false);
+  const submittingRef = useRef(false);
+
+  async function handleSubmit(event) {
+    event.preventDefault();
+    if (submittingRef.current) return;
+
+    const form = event.currentTarget;
+    const data = new FormData(form);
+    const fullName = String(data.get("fullName") || "").trim();
+    const mobileNumber = String(data.get("mobileNumber") || "").trim();
+    setMessage("");
+    setHasError(false);
+
+    if (!fullName || !/^\d{10}$/.test(mobileNumber)) {
+      setHasError(true);
+      setMessage("Please enter your name and a valid 10-digit mobile number.");
+      return;
+    }
+
+    submittingRef.current = true;
+    setIsSubmitting(true);
+    try {
+      const response = await fetch("/api/leads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ fullName, mobileNumber, source: "Dholera NoN" }),
+        signal: AbortSignal.timeout(25000),
+      });
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok || result.success !== true) {
+        throw new Error("Lead submission failed");
+      }
+
+      form.reset();
+      setMessage("Thank you! Our team will contact you shortly.");
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ event: "lead_form" });
+    } catch {
+      setHasError(true);
+      setMessage("Unable to submit the form. Please try again.");
+    } finally {
+      submittingRef.current = false;
+      setIsSubmitting(false);
+    }
+  }
 
   return (
     <section
@@ -23,7 +71,7 @@ export default function HeroRegistrationForm() {
 
       <div className="hero-registration-rule" aria-hidden="true" />
 
-      <form onChange={() => setPreviewMessage("")}>
+      <form onSubmit={handleSubmit} onChange={() => setMessage("")} aria-busy={isSubmitting}>
         <div className="hero-registration-field">
           <label htmlFor="hero-full-name">Full Name</label>
           <div className="hero-registration-input">
@@ -37,6 +85,7 @@ export default function HeroRegistrationForm() {
               pattern=".*\S.*"
               title="Please enter your full name."
               maxLength={100}
+              disabled={isSubmitting}
               required
             />
           </div>
@@ -56,19 +105,23 @@ export default function HeroRegistrationForm() {
               inputMode="numeric"
               autoComplete="tel-national"
               placeholder="Enter your mobile number"
-              aria-describedby="hero-mobile-hint"
               pattern="[0-9]{10}"
               title="Please enter a 10-digit mobile number without the country code."
               maxLength={10}
+              disabled={isSubmitting}
               required
             />
           </div>
         </div>
 
-        <button type="submit" className="hero-registration-submit">
-          Submit <FiArrowRight aria-hidden="true" />
+        <button type="submit" className="hero-registration-submit" disabled={isSubmitting}>
+          {isSubmitting ? "Submitting…" : "Submit"} <FiArrowRight aria-hidden="true" />
         </button>
-        
+        {message && (
+          <p className="hero-registration-note" role={hasError ? "alert" : "status"}>
+            {message}
+          </p>
+        )}
       </form>
     </section>
   );

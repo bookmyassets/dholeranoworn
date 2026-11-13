@@ -1,8 +1,5 @@
 import { NextResponse } from "next/server";
 
-const TELECRM_ENTERPRISE_ID =
-  process.env.TELECRM_ENTERPRISE_ID || "67a30ac2989f94384137c2ff";
-
 function normalizePhone(value) {
   const digits = value.replace(/\D/g, "");
   return digits.length === 10 ? `91${digits}` : digits;
@@ -10,23 +7,23 @@ function normalizePhone(value) {
 
 export async function POST(request) {
   try {
-    const { fullName, mobileNumber, source } = await request.json();
-    const name = fullName?.trim();
-    const phone = normalizePhone(mobileNumber || "");
+    const body = await request.json().catch(() => null);
+    const { fullName, mobileNumber, source } = body || {};
+    const name = typeof fullName === "string" ? fullName.trim() : "";
+    const phone = typeof mobileNumber === "string" ? normalizePhone(mobileNumber) : "";
 
-    if (!name || !/^\d{10,15}$/.test(phone)) {
+    if (!name || name.length > 100 || !/^\d{10,15}$/.test(phone)) {
       return NextResponse.json(
         { error: "Please enter valid contact details." },
         { status: 400 },
       );
     }
 
-    const apiKey =
-      process.env.TELECRM_API_KEY ||
-      process.env.NEXT_PUBLIC_TELECRM_API_KEY;
+    const apiKey = process.env.TELECRM_API_KEY;
+    const enterpriseId = process.env.TELECRM_ENTERPRISE_ID;
 
-    if (!apiKey) {
-      console.error("TeleCRM API key is not configured.");
+    if (!apiKey || !enterpriseId) {
+      console.error("TeleCRM credentials are not configured.");
       return NextResponse.json(
         { error: "Lead service is not configured." },
         { status: 503 },
@@ -34,7 +31,7 @@ export async function POST(request) {
     }
 
     const response = await fetch(
-      `https://next-api.telecrm.in/enterprise/${TELECRM_ENTERPRISE_ID}/autoupdatelead`,
+      `https://next-api.telecrm.in/enterprise/${encodeURIComponent(enterpriseId)}/autoupdatelead`,
       {
         method: "POST",
         headers: {
@@ -45,28 +42,42 @@ export async function POST(request) {
           fields: {
             name,
             phone,
-            source: source || "Dholera NoN",
+            source: typeof source === "string" && source.trim()
+              ? source.trim().slice(0, 100)
+              : "Dholera NoN",
           },
         }),
         cache: "no-store",
+        signal: AbortSignal.timeout(20000),
       },
     );
 
     if (!response.ok) {
-      const responseText = await response.text();
-      console.error(
-        `TeleCRM submission failed with status ${response.status}:`,
-        responseText,
-      );
+      console.error(`TeleCRM submission failed with status ${response.status}.`);
       return NextResponse.json(
         { error: "Unable to submit the form." },
         { status: 502 },
       );
     }
 
+    const responseText = (await response.text()).trim();
+    let result;
+    try {
+      result = JSON.parse(responseText);
+    } catch {
+      result = null;
+    }
+    const accepted = result
+      ? ["Created", "Updated"].includes(result.status) && !result.errorMessage
+      : /^(ok|success)$/i.test(responseText);
+    if (!accepted) {
+      console.error("TeleCRM did not confirm lead acceptance.");
+      return NextResponse.json({ error: "Unable to submit the form." }, { status: 502 });
+    }
+
     return NextResponse.json({ success: true });
   } catch (error) {
-    console.error("Lead submission error:", error);
+    console.error("Lead submission error:", error.name);
     return NextResponse.json(
       { error: "Unable to submit the form." },
       { status: 500 },
