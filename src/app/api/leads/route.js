@@ -25,7 +25,7 @@ export async function POST(request) {
     if (!apiKey || !enterpriseId) {
       console.error("TeleCRM credentials are not configured.");
       return NextResponse.json(
-        { error: "Lead service is not configured." },
+        { error: "Lead service credentials are missing. Please contact our team." },
         { status: 503 },
       );
     }
@@ -54,8 +54,17 @@ export async function POST(request) {
 
     if (!response.ok) {
       console.error(`TeleCRM submission failed with status ${response.status}.`);
+      const reason = response.status === 401 || response.status === 403
+        ? "The lead service rejected authentication. Please contact our team."
+        : response.status === 429
+          ? "The lead service is receiving too many requests. Please try again shortly."
+          : response.status === 400 || response.status === 422
+            ? "The lead service rejected the submitted details. Please verify your name and mobile number."
+            : response.status >= 500
+              ? "The lead service is temporarily unavailable. Please try again shortly."
+              : "The lead service rejected the submission. Please contact our team.";
       return NextResponse.json(
-        { error: "Unable to submit the form." },
+        { error: reason },
         { status: 502 },
       );
     }
@@ -72,7 +81,11 @@ export async function POST(request) {
       : /^(ok|success)$/i.test(responseText);
     if (!accepted) {
       console.error("TeleCRM did not confirm lead acceptance.");
-      return NextResponse.json({ error: "Unable to submit the form." }, { status: 502 });
+      return NextResponse.json({
+        error: result?.status === "Error"
+          ? "The lead service reported an error and did not accept your details. Please contact our team."
+          : "The lead service returned an unexpected response. Submission could not be confirmed. Please contact our team.",
+      }, { status: 502 });
     }
 
     return NextResponse.json({ success: true });
@@ -85,12 +98,17 @@ export async function POST(request) {
       connectionCodes: error.cause?.errors?.map((cause) => cause.code),
     }));
     const connectionFailed = error.name === "TypeError" && Boolean(error.cause);
+    const connectionReason = networkCode === "EACCES" || networkCode === "EPERM"
+      ? "The server's network permissions blocked the lead service connection. Please contact our team."
+      : networkCode === "ENOTFOUND" || networkCode === "EAI_AGAIN"
+        ? "The server could not locate the lead service. Please try again shortly."
+        : "The server could not connect to the lead service. Please try again shortly.";
     return NextResponse.json(
       {
         error: timedOut
           ? "The lead service timed out. Please try again shortly."
           : connectionFailed
-            ? "Unable to connect to the lead service. Please try again shortly."
+            ? connectionReason
             : "Unable to submit the form.",
       },
       { status: timedOut ? 504 : connectionFailed ? 502 : 500 },

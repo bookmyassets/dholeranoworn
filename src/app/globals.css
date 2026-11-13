@@ -47,8 +47,20 @@ body {
 }
 
 .lead-notification .Toastify__close-button {
-  color: var(--color-ink);
+  color: inherit;
   opacity: 1;
+}
+
+.Toastify__toast.lead-notification.Toastify__toast--success {
+  background: #15803d;
+  border-color: #15803d;
+  color: var(--color-base);
+}
+
+.Toastify__toast.lead-notification.Toastify__toast--error {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: var(--color-base);
 }
 
 @media (max-width: 30rem) {

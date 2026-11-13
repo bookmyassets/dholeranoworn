@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
+import { getLeadErrorMessage } from "../lib/lead-errors";
 import logo from "@/assets/logo.png";
 
 const OPEN_POPUP_EVENT = "open-dholera-popup-form";
@@ -152,6 +153,7 @@ export default function PopupLeadForm() {
           mobileNumber: formData.mobileNumber,
           source: getLeadSource(),
         }),
+        signal: AbortSignal.timeout(25000),
       });
 
       const result = await response.json().catch(() => ({}));
@@ -169,9 +171,7 @@ export default function PopupLeadForm() {
       successTimerRef.current = window.setTimeout(closePopup, 3_000);
     } catch (error) {
       console.error("Form submission error:", error);
-      const message = error.name === "Error"
-        ? error.message
-        : "Unable to submit the form. Please try again.";
+      const message = getLeadErrorMessage(error);
       setErrorMessage(message);
       toast.error(message);
     } finally {

@@ -2,6 +2,7 @@
 
 import { useRef, useState } from "react";
 import { toast } from "react-toastify";
+import { getLeadErrorMessage } from "../lib/lead-errors";
 import { FiArrowRight, FiCalendar, FiPhone, FiUser } from "react-icons/fi";
 
 export default function HeroRegistrationForm() {
@@ -24,6 +25,7 @@ export default function HeroRegistrationForm() {
     if (!fullName || !/^\d{10}$/.test(mobileNumber)) {
       setHasError(true);
       setMessage("Please enter your name and a valid 10-digit mobile number.");
+      toast.error("Please enter your name and a valid 10-digit mobile number.");
       return;
     }
 
@@ -47,9 +49,7 @@ export default function HeroRegistrationForm() {
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push({ event: "lead_form" });
     } catch (error) {
-      const errorMessage = error.name === "Error"
-        ? error.message
-        : "Unable to submit the form. Please try again.";
+      const errorMessage = getLeadErrorMessage(error);
       setHasError(true);
       setMessage(errorMessage);
       toast.error(errorMessage);
@@ -71,7 +71,6 @@ export default function HeroRegistrationForm() {
         </span>
         <div>
           <h2 id="hero-registration-title">Reserve Your Spot</h2>
-          <p>Share your details and our team will contact you.</p>
         </div>
       </div>
 
