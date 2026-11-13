@@ -75,9 +75,9 @@ export default function WhyJoin() {
                 </span>
               </div>
 
-              <h3 className="mt-[clamp(0.75rem,0.5rem+0.8vw,1.25rem)] max-w-[15rem] font-heading text-[clamp(1rem,0.88rem+0.45vw,1.3rem)] leading-tight font-semibold">
+              <h2 className="mt-[clamp(0.75rem,0.5rem+0.8vw,1.25rem)] max-w-[15rem] font-heading text-[clamp(1rem,0.88rem+0.45vw,1.3rem)] leading-tight font-semibold">
                 {title}
-              </h3>
+              </h2>
             </li>
           ))}
         </ul>
