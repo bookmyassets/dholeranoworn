@@ -1,16 +1,24 @@
-@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&family=Marcellus&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&family=DM+Sans:wght@600;700&family=Manrope:wght@400;500;600&family=Marcellus&display=swap");
 @import "tailwindcss";
 
 :root {
   --background: #ffffff;
   --foreground: #17171a;
-  --fs-h1: clamp(2.1875rem, 1.8359375rem + 1.5625vw, 3.125rem);
+  --fs-h1: clamp(2.25rem, 1.5rem + 3vw, 4.5rem);
   --fs-h2: clamp(1.875rem, 1rem + 2vw, 2.75rem);
   --fs-lead: clamp(1rem, 0.953125rem + 0.208333vw, 1.125rem);
-  --fs-body: clamp(0.875rem, 0.828125rem + 0.208333vw, 1rem);
-  --fs-special: var(--fs-body);
-  --fs-p-body: var(--fs-body);
+  --fs-body: clamp(1rem, 0.953125rem + 0.208333vw, 1.125rem);
+  --fs-special: clamp(0.875rem, 0.828125rem + 0.208333vw, 1rem);
+  --fs-p-body: clamp(1rem, 0.953125rem + 0.208333vw, 1.125rem);
+  --fs-p-small: clamp(0.8125rem, 0.765625rem + 0.208333vw, 0.9375rem);
+  --fs-p-special: clamp(0.8125rem, 0.765625rem + 0.208333vw, 0.9375rem);
   --space-section: clamp(3rem, 2rem + 4vw, 8rem);
+  --header-height: clamp(5.5rem, 4.5rem + 4vw, 7rem);
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--header-height) + clamp(0.75rem, 0.5rem + 1vw, 1.5rem));
 }
 
 @theme {
@@ -19,8 +27,8 @@
   --color-ink: #17171a;
   --color-accent: #c91f2e;
   --color-base: #ffffff;
-  --font-heading: "Playfair Display", serif;
-  --font-body: "Inter", sans-serif;
+  --font-heading: "DM Sans", sans-serif;
+  --font-body: "Manrope", sans-serif;
   --font-special: "Marcellus", serif;
 }
 
@@ -29,6 +37,51 @@ body {
   color: var(--foreground);
   font-family: var(--font-body);
   font-size: var(--fs-body);
+  line-height: 1.7;
+}
+
+/* Compact content sections; hero sizing keeps its own tokens. */
+.content-section {
+  --fs-h2: clamp(1.375rem, 1.075rem + 1vw, 1.875rem);
+  --fs-body: clamp(0.875rem, 0.8rem + 0.25vw, 1rem);
+  --fs-p-body: var(--fs-body);
+  --fs-special: var(--fs-body);
+  --fs-p-special: var(--fs-body);
+  --space-section: clamp(1.75rem, 1rem + 2vw, 3rem);
+  font-size: var(--fs-body);
+}
+
+@media (max-width: 47.999rem) {
+  .content-section {
+    text-align: center;
+  }
+
+  .content-section h2,
+  .content-section p,
+  .content-section header {
+    margin-inline: auto;
+  }
+
+  .content-section li,
+  .content-section article,
+  .content-section aside {
+    text-align: left;
+  }
+}
+
+@layer base {
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-heading);
+  }
+
+  button,
+  input,
+  select,
+  textarea {
+    font: inherit;
+  }
 }
 
 .Toastify__toast-container.lead-notifications {
@@ -430,6 +483,10 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
   [data-reveal] {
     opacity: 1;
     transform: none;

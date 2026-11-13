@@ -53,19 +53,16 @@ export default function Hero() {
 
       <div className="hero-layout relative z-10 mx-auto grid min-h-screen w-full max-w-[90rem] grid-cols-1 items-center px-[clamp(1rem,0.5rem+4vw,4rem)] pt-[clamp(8rem,6rem+4vw,10rem)] pb-[clamp(3rem,2rem+4vw,6rem)]">
         <div className="min-w-0">
-          <h1 className="max-w-[12ch] font-heading text-[length:var(--fs-h1)] leading-[1.12] font-bold tracking-[-0.04em]">
-            Dholera <br /> Now or Never
+          <h1 className="max-w-[18ch] font-heading text-[length:var(--fs-h1)] leading-[1.08] font-bold tracking-[-0.04em] text-balance">
+            Dholera Investor Event in Gurgaon
           </h1>
+          <p className="mt-[clamp(1rem,0.75rem+0.8vw,1.5rem)] max-w-[36ch] font-body text-[length:var(--fs-lead)] leading-relaxed font-medium text-pretty">
+            Understand Dholera Before You Invest.
+          </p>
 
           <div className="mt-[clamp(2rem,1.25rem+2.5vw,4rem)]">
             <EventCountdown />
 
-            <a href="#hero-registration" onClick={(event) => {
-              event.preventDefault();
-              document.getElementById("hero-full-name")?.focus();
-            }} className="mt-[clamp(1.75rem,1.25rem+1.6vw,3rem)] inline-flex min-h-[clamp(2.75rem,2.4rem+1vw,3.5rem)] items-center justify-center rounded-full border border-accent bg-accent px-[clamp(1.5rem,1.1rem+1.2vw,2.25rem)] font-special text-[length:var(--fs-special)] text-[var(--color-base)] transition-colors hover:bg-base hover:text-accent focus-visible:bg-base focus-visible:text-accent">
-              Reserve a Free Seat Today
-            </a>
           </div>
         </div>
         <HeroRegistrationForm />

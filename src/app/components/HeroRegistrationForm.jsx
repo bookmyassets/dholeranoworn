@@ -70,11 +70,13 @@ export default function HeroRegistrationForm() {
           <FiCalendar />
         </span>
         <div>
-          <h2 id="hero-registration-title">Reserve Your Spot</h2>
+          <h2 id="hero-registration-title">Reserve Your Seat</h2>
+          <p>Join Dholera Now or Never Investor Event</p>
         </div>
       </div>
 
       <div className="hero-registration-rule" aria-hidden="true" />
+
 
       <form onSubmit={handleSubmit} onChange={() => setMessage("")} aria-busy={isSubmitting}>
         <div className="hero-registration-field">
@@ -120,7 +122,7 @@ export default function HeroRegistrationForm() {
         </div>
 
         <button type="submit" className="hero-registration-submit" disabled={isSubmitting}>
-          {isSubmitting ? "Submitting…" : "Submit"} <FiArrowRight aria-hidden="true" />
+          {isSubmitting ? "Submitting…" : "Join the Investor Event"} <FiArrowRight aria-hidden="true" />
         </button>
         {message && (
           <p className="hero-registration-note" role={hasError ? "alert" : "status"}>

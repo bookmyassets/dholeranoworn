@@ -1,174 +1,199 @@
-import { PopupFormButton } from "@/app/components/Form";
+import { PopupFormButton } from '@/app/components/Form'
+import {
+  FiArrowRight,
+  FiGrid,
+  FiMapPin,
+  FiShield,
+  FiTrendingUp,
+  FiCheckCircle,
+  FiFileText,
+  FiSearch,
+  FiUsers,
+  FiHome,
+  FiLayers,
+  FiArrowUpRight
+} from 'react-icons/fi'
+import styles from './EventDetails.module.css'
+const topicIcons = [
+  FiGrid,
+  FiMapPin,
+  FiShield,
+  FiTrendingUp
+]
 
 const eventTopics = [
-  "Understanding the Dholera vision",
-  "Latest developments in Dholera",
-  "Explore top real estate opportunities",
-  "Understand locations and pricing",
-  "Get clarity on legal documents and approvals",
-  "Speak directly with property experts",
-];
+  "India's First Greenfield Smart City",
+  'Strategic Location and Connectivity',
+  'Government Backed Developments',
+  'High Appreciation Potential'
+]
 
 const foundations = [
-  "Livable Homes",
-  "Habitation",
-  "Real Development",
-  "The Basics of a Future City",
-];
+  'Livable Homes',
+  'Habitation',
+  'Real Development',
+  'The Basics of a Future City'
+]
+
+const foundationIcons = [FiHome, FiUsers, FiGrid, FiLayers]
 
 const services = [
-  "Verified Dholera Opportunities",
-  "Legal and Documentation Support",
-  "Due Diligence Team",
-  "Expert Guidance",
-  "Site Visit Assistance",
-  "Villa Construction",
-];
+  'Verified Dholera Opportunities',
+  'Legal and Documentation Support',
+  'Due Diligence Team',
+  'Expert Guidance',
+  'Site Visit Assistance',
+  'Villa Construction'
+]
 
-function SectionEyebrow({ children, inverted = false }) {
+const serviceIcons = [FiCheckCircle, FiFileText, FiSearch, FiUsers, FiMapPin, FiHome]
+
+function SectionArtwork () {
   return (
-    <p
-      className={`font-semibold text-[length:var(--fs-p-special)] tracking-[0.14em] uppercase ${
-        inverted ? "text-accent" : "text-accent"
-      }`}
-    >
-      {children}
-    </p>
-  );
+        <svg
+          className={styles.artwork}
+          viewBox='0 0 1440 740'
+          preserveAspectRatio='xMidYMax slice'
+          fill='none'
+          aria-hidden='true'
+        >
+          <g stroke='currentColor' strokeWidth='1'>
+            <path d='M0 680H1440M65 680v-28h20v28m12 0v-59h25v59m14 0v-34h19v34m17 0v-92h26v92m16 0v-123l32 12v111m15 0v-47h22v47m18 0v-99h29v99m18 0v-143l30-18 22 18v143m-38-150v150m14-158v158m38 0v-62h20v62m15 0v-94l29-15 22 15v94m-35-100v100m52 0v-40h24v40m18 0v-85l29-12v97' />
+            <path d='M680 740c100-95 235-49 412-111s194-127 348-160M905 740c-145-89 140-52 296-132s152-126 239-157M930 740c-143-81 131-53 287-132s147-117 223-144M1440 0c-57 88-87 137-177 191' />
+          </g>
+        </svg>
+  )
 }
 
-export default function EventDetails() {
+export default function EventDetails () {
   return (
     <>
       <section
-        id="why-attend"
-        aria-labelledby="why-attend-title"
-        className="bg-ink px-[clamp(1rem,0.5rem+4vw,4rem)] py-[var(--space-section)] text-[var(--color-base)]"
+        id='why-attend'
+        aria-labelledby='why-attend-title'
+        className={`content-section ${styles.attend}`}
       >
-        <div className="mx-auto grid w-full max-w-[90rem] gap-[clamp(3rem,1.5rem+5vw,7rem)] lg:grid-cols-[0.8fr_1.2fr]">
-          <div>
-            <SectionEyebrow inverted>Dholera Now or Never</SectionEyebrow>
-            <h2
-              id="why-attend-title"
-              className="mt-[clamp(0.75rem,0.5rem+0.8vw,1.25rem)] max-w-[14ch] font-heading text-[length:var(--fs-h2)] leading-[1.08] font-bold"
-            >
-              Why You Should Attend This Event?
+        <SectionArtwork />
+        <div className={styles.attendLayout}>
+          <div className={styles.intro} data-reveal>
+            <h2 id='why-attend-title' className={styles.title}>
+              Why Should One Not Miss This Investor Event in Gurgaon?
             </h2>
-            <p className="mt-[clamp(1.25rem,0.85rem+1.2vw,2rem)] font-body text-[length:var(--fs-p-body)] leading-[1.8]">
-              This isn&apos;t just another Real Estate seminar. It is a
-              face-to-face session designed to show you where Dholera stands
-              today and help you understand the opportunity with greater
-              clarity.
+            <p className={styles.description}>
+              Dholera Now or Never event in Gurgaon is the opportunity for
+              Investors to understand the Actual development of Dholera, explore
+              residential plot investments, and get clarity before making an
+              investment decision in Dholera Smart City.
             </p>
-            <PopupFormButton className="mt-[clamp(1.75rem,1.25rem+1.6vw,3rem)] inline-flex min-h-[clamp(2.75rem,2.4rem+1vw,3.5rem)] items-center justify-center rounded-full border border-accent bg-accent px-[clamp(1.5rem,1.1rem+1.2vw,2.25rem)] font-special text-[length:var(--fs-special)] text-[var(--color-base)] transition-colors hover:bg-base hover:text-accent focus-visible:bg-base focus-visible:text-accent">
-              Reserve a Free Seat Today
+          </div>
+          <ul className={styles.topics}>
+            {eventTopics.map((topic, index) => {
+              const Icon = topicIcons[index]
+              return (
+                <li
+                  key={topic}
+                  data-reveal
+                  style={{ '--reveal-delay': `${index * 70}ms` }}
+                  className={styles.topic}
+                >
+                  <span className={styles.topicIcon}>
+                    <Icon aria-hidden='true' />
+                  </span>
+                  <span>{topic}</span>
+                </li>
+              )
+            })}
+          </ul>
+          <div className={styles.action} data-reveal>
+            <PopupFormButton className={styles.cta}>
+              Reserve Your Slot Today <FiArrowRight aria-hidden='true' />
             </PopupFormButton>
           </div>
-
-          <ul className="grid gap-[clamp(0.75rem,0.5rem+0.8vw,1.25rem)] sm:grid-cols-2">
-            {eventTopics.map((service, index) => (
-              <li
-                key={service}
-                data-reveal="line"
-                className="service-line relative flex items-center gap-[clamp(0.75rem,0.55rem+0.6vw,1.1rem)] py-[clamp(0.9rem,0.7rem+0.6vw,1.25rem)] font-body text-[length:var(--fs-body)] font-medium"
-                style={{ "--reveal-delay": `${index * 90}ms` }}
-              >
-                <span className="font-special text-[length:var(--fs-special)] text-accent">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-                {service}
-              </li>
-            ))}
-          </ul>
         </div>
       </section>
-
       <section
-        id="trendsetter"
-        aria-labelledby="trendsetter-title"
-        className="bg-base px-[clamp(1rem,0.5rem+4vw,4rem)] py-[var(--space-section)] text-ink"
+        id='trendsetter'
+        aria-labelledby='trendsetter-title'
+        className={`content-section ${styles.trendsetter}`}
       >
-        <div className="mx-auto grid w-full max-w-[90rem] items-center gap-[clamp(3rem,1.5rem+5vw,8rem)] lg:grid-cols-[0.95fr_1.05fr]">
-          <ul className="order-2 grid grid-cols-2 gap-x-[clamp(1rem,0.5rem+3vw,4rem)] gap-y-[clamp(2rem,1rem+3vw,4.5rem)] lg:order-1">
-            {foundations.map((foundation, index) => (
-              <li
-                key={foundation}
-                data-reveal="circle"
-                className="motion-circle flex flex-col items-center text-center"
-                style={{ "--reveal-delay": `${index * 100}ms` }}
-              >
-                <div className="relative flex h-[clamp(7.5rem,13vw,10rem)] w-[clamp(7.5rem,13vw,10rem)] items-center justify-center rounded-full border border-ink bg-base px-[clamp(0.75rem,0.5rem+0.8vw,1.25rem)]">
-                  <span className="font-heading text-[clamp(1rem,0.88rem+0.45vw,1.3rem)] leading-tight font-semibold">
-                    {foundation}
-                  </span>
-
-                  <span className="absolute top-0 right-0 flex h-[clamp(2.1rem,3.5vw,2.75rem)] w-[clamp(2.1rem,3.5vw,2.75rem)] items-center justify-center rounded-full bg-accent font-special text-[clamp(0.75rem,0.7rem+0.2vw,0.95rem)] text-[var(--color-base)]">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-                </div>
-              </li>
-            ))}
-          </ul>
-
-          <div data-reveal="right" className="order-1 lg:order-2">
-            <p className="font-special text-[length:var(--fs-p-special)] font-semibold tracking-[0.14em] text-accent uppercase">
-              Who We Are?
-            </p>
-
-            <h2
-              id="trendsetter-title"
-              className="mt-[clamp(0.75rem,0.5rem+0.8vw,1.25rem)] max-w-[15ch] font-heading text-[length:var(--fs-h2)] leading-[1.08] font-bold"
-            >
+        <div className={styles.trendsetterLayout}>
+          <ol className={styles.foundations} aria-label='Our city-building foundations'>
+            {foundations.map((foundation, index) => {
+              const Icon = foundationIcons[index]
+              return (
+                <li key={foundation} data-reveal className={styles.foundation}
+                  style={{ '--reveal-delay': `${index * 80}ms` }}>
+                  <span className={styles.foundationIcon}><Icon aria-hidden='true' /></span>
+                  <h3>{foundation}</h3>
+                  <span className={styles.foundationRule} aria-hidden='true' />
+                </li>
+              )
+            })}
+          </ol>
+          <div data-reveal='right' className={styles.trendsetterDetails}>
+            <p className={styles.eyebrow}>Who We Are?</p>
+            <h2 id='trendsetter-title' className={styles.trendsetterTitle}>
               A Trendsetter in Dholera
             </h2>
-
-            <blockquote className="mt-[clamp(1.5rem,1rem+1.5vw,2.5rem)] border-l-[clamp(0.2rem,0.15rem+0.15vw,0.3rem)] border-accent pl-[clamp(0.75rem,0.5rem+0.8vw,1.25rem)] font-special text-[clamp(1.1rem,0.9rem+0.8vw,1.6rem)] leading-snug text-accent">
-              We are not waiting for Dholera to become a city.
-            </blockquote>
-
-            <blockquote className="mt-[clamp(1rem,0.75rem+0.8vw,1.5rem)] border-l-[clamp(0.2rem,0.15rem+0.15vw,0.3rem)] border-accent pl-[clamp(0.75rem,0.5rem+0.8vw,1.25rem)] font-special text-[clamp(1.1rem,0.9rem+0.8vw,1.6rem)] leading-snug text-accent">
-              We are helping create the foundation for people to live there.
-            </blockquote>
+            <p className={styles.trendsetterDescription}>
+              We are a real-estate and development company focused on shaping
+              livable, well-planned communities in Dholera. From early
+              infrastructure to everyday living, we bring together development,
+              people, and opportunity to build a future-ready city.
+            </p>
+            <div className={styles.trendsetterActions}>
+              <PopupFormButton className={styles.consultation}>
+                Reserve Your Consultation <FiArrowUpRight aria-hidden='true' />
+              </PopupFormButton>
+              <a href='#services' className={styles.vision}>
+                Explore Our Vision <FiArrowUpRight aria-hidden='true' />
+              </a>
+            </div>
           </div>
         </div>
       </section>
 
       <section
-        id="services"
-        aria-labelledby="services-title"
-        className="bg-ink px-[clamp(1rem,0.5rem+4vw,4rem)] py-[var(--space-section)] text-[var(--color-base)]"
+        id='services'
+        aria-labelledby='services-title'
+        className={`content-section ${styles.attend}`}
       >
-        <div className="mx-auto grid w-full max-w-[90rem] gap-[clamp(3rem,1.5rem+5vw,7rem)] lg:grid-cols-[0.8fr_1.2fr]">
-          <div>
-            <SectionEyebrow inverted>What We Offer</SectionEyebrow>
+        <SectionArtwork />
+        <div className={`${styles.attendLayout} ${styles.servicesLayout}`}>
+          <div className={styles.intro} data-reveal>
             <h2
-              id="services-title"
-              className="mt-[clamp(0.75rem,0.5rem+0.8vw,1.25rem)] max-w-[16ch] font-heading text-[length:var(--fs-h2)] leading-[1.08] font-bold"
+              id='services-title'
+              className={styles.title}
             >
               Helping You Invest in Dholera with Confidence
             </h2>
-            <PopupFormButton className="mt-[clamp(1.75rem,1.25rem+1.6vw,3rem)] inline-flex min-h-[clamp(2.75rem,2.4rem+1vw,3.5rem)] items-center justify-center rounded-full border border-accent bg-accent px-[clamp(1.5rem,1.1rem+1.2vw,2.25rem)] font-special text-[length:var(--fs-special)] text-[var(--color-base)] transition-colors hover:bg-base hover:text-accent focus-visible:bg-base focus-visible:text-accent">
-              Reserve a Free Seat Today
-            </PopupFormButton>
           </div>
 
-          <ul className="grid gap-[clamp(0.75rem,0.5rem+0.8vw,1.25rem)] sm:grid-cols-2">
-            {services.map((service, index) => (
+          <ul className={styles.topics}>
+            {services.map((service, index) => {
+              const Icon = serviceIcons[index]
+              return (
               <li
                 key={service}
-                data-reveal="line"
-                className="service-line relative flex items-center gap-[clamp(0.75rem,0.55rem+0.6vw,1.1rem)] py-[clamp(0.9rem,0.7rem+0.6vw,1.25rem)] font-body text-[length:var(--fs-body)] font-medium"
-                style={{ "--reveal-delay": `${index * 90}ms` }}
+                data-reveal
+                className={styles.topic}
+                style={{ '--reveal-delay': `${index * 90}ms` }}
               >
-                <span className="font-special text-[length:var(--fs-special)] text-accent">
-                  {String(index + 1).padStart(2, "0")}
+                <span className={styles.topicIcon}>
+                  <Icon aria-hidden='true' />
                 </span>
-                {service}
+                <span>{service}</span>
               </li>
-            ))}
+              )
+            })}
           </ul>
+          <div className={styles.action} data-reveal>
+            <PopupFormButton className={styles.cta}>
+              Reserve Your Slot Today <FiArrowRight aria-hidden='true' />
+            </PopupFormButton>
+          </div>
         </div>
       </section>
     </>
-  );
+  )
 }

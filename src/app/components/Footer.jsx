@@ -44,24 +44,6 @@ export default function Footer() {
   return (
     <footer className="bg-ink text-[var(--color-base)]">
       <div className="mx-auto w-full max-w-[90rem] px-[clamp(1rem,0.5rem+4vw,4rem)]">
-        <div className="grid gap-[clamp(2rem,1rem+3vw,4rem)] border-b border-base py-[clamp(3rem,2rem+4vw,6rem)] lg:grid-cols-[1fr_auto] lg:items-end">
-          <div>
-            <p className="font-semibold text-[length:var(--fs-p-special)] tracking-[0.14em] text-accent uppercase">
-              08 August 2026
-            </p>
-            <h2 className="mt-[clamp(0.75rem,0.5rem+0.8vw,1.25rem)] max-w-[16ch] font-heading text-[length:var(--fs-h2)] leading-[1.08] font-bold">
-              Dholera Now or Never
-            </h2>
-            <p className="mt-[clamp(1rem,0.75rem+0.8vw,1.5rem)] max-w-[38rem] font-body text-[length:var(--fs-p-body)] leading-relaxed">
-              Understand Dholera, explore the opportunities, and get clarity
-              directly from property experts.
-            </p>
-          </div>
-
-          <PopupFormButton className="inline-flex min-h-[clamp(3rem,2.7rem+0.8vw,3.75rem)] w-fit items-center justify-center rounded-full border border-accent bg-accent px-[clamp(1.5rem,1.1rem+1.2vw,2.25rem)] font-special text-[length:var(--fs-special)] text-[var(--color-base)] transition-colors hover:bg-base hover:text-accent focus-visible:bg-base focus-visible:text-accent">
-            Reserve Your Free Seat
-          </PopupFormButton>
-        </div>
 
         <div className="grid gap-[clamp(2.5rem,1.5rem+3vw,5rem)] py-[clamp(2.5rem,1.5rem+3vw,4.5rem)] sm:grid-cols-2 lg:grid-cols-[1.2fr_0.8fr_0.8fr]">
           <div>
@@ -133,7 +115,7 @@ export default function Footer() {
                   Date
                 </dt>
                 <dd className="mt-1 font-special text-[length:var(--fs-special)]">
-                  <time dateTime="2026-08-08">08 August 2026</time>
+                  <time dateTime="2026-08-08">21 November 2026 & 22 November 2026</time>
                 </dd>
               </div>
               <div>
@@ -141,7 +123,7 @@ export default function Footer() {
                   Location
                 </dt>
                 <dd className="mt-1 font-special text-[length:var(--fs-special)]">
-                  Sec 48, Gurugram
+                  Jmd Megapolis, Sec 48, Gurugram
                 </dd>
               </div>
               <div>

@@ -6,9 +6,36 @@ import ScrollAnimations from "./components/ScrollAnimations";
 import LeadNotifications from "./components/LeadNotifications";
 
 export const metadata = {
+  metadataBase: new URL("https://www.dholeranowornever.com"),
   title: "Dholera Investment Event in Gurgaon | Dholera Now or Never ",
   description: "Dholera Now or Never is a Dholera investment event in Gurgaon. Discover the latest developments, investment opportunities and future of India's first planned smart city.",
-  keywords:"Dholera event in Gurgaon, Investment Events in Gurgaon, Dholera investment event, Dholera investor event, Dholera real estate event, Dholera event 2026, Dholera Smart City Investment, Dholera Event Near Me, Dholera Latest Event, Dholera investment opportunities, Dholera Smart City investment, Dholera property investment, Dholera seminar in Gurgaon, Dholera Latest Event, Dhoera Upcoming Investment Events, Dholera investment seminar,"
+  keywords: [
+    "Dholera Smart City",
+    "Dholera SIR",
+    "Dholera Investment",
+    "Event in Dholera",
+    "Dholera Investor Meetup",
+    "Dholera Investor Meet Gurgaon",
+    "Dholera Now Or Never",
+    "Dholera Investment Event Gurgaon",
+    "Dholera event in Gurgaon",
+    "Investment Events in Gurgaon",
+    "Dholera investment event",
+    "Dholera investor event",
+    "Dholera real estate event",
+    "Dholera event 2026",
+    "Dholera Smart City Investment",
+    "Dholera Event Near Me",
+    "Dholera Latest Event",
+    "Dholera investment opportunities",
+    "Dholera property investment",
+    "Dholera seminar in Gurgaon",
+    "Dholera Upcoming Investment Events",
+    "Dholera investment seminar",
+  ],
+  alternates: {
+    canonical: "/",
+  },
 };
 
 export default function RootLayout({ children }) {
