@@ -19,7 +19,7 @@
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   align-items: stretch;
-  gap: clamp(0.625rem, 0.4rem + 0.75vw, 1rem);
+  gap: clamp(0.5rem, 0.35rem + 0.5vw, 0.75rem);
   padding: 0;
   margin: 0;
   list-style: none;
@@ -31,12 +31,14 @@
   isolation: isolate;
   overflow: hidden;
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+  gap: clamp(0.375rem, 0.25rem + 0.4vw, 0.625rem);
+  justify-content: flex-start;
   align-self: stretch;
   min-width: 0;
-  min-height: clamp(10rem, 8.5rem + 3vw, 12rem);
-  padding: clamp(0.875rem, 0.65rem + 0.75vw, 1.25rem);
+  min-height: clamp(5.5rem, 5rem + 1.5vw, 7rem);
+  padding: clamp(0.5rem, 0.35rem + 0.4vw, 0.75rem);
   border: 1px solid var(--color-ink);
   border-radius: clamp(1rem, 0.75rem + 0.75vw, 1.5rem);
   background: var(--color-base);
@@ -44,16 +46,9 @@
   transition: background-color 300ms ease, border-color 300ms ease, color 300ms ease, box-shadow 300ms ease;
 }
 
-.cardTop {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: clamp(0.5rem, 0.25rem + 1vw, 1rem);
-  margin-bottom: clamp(0.75rem, 0.5rem + 0.75vw, 1rem);
-}
-
 .iconFrame {
   display: grid;
+  flex-shrink: 0;
   place-items: center;
   width: clamp(2.5rem, 2rem + 1vw, 3rem);
   aspect-ratio: 1;
@@ -69,18 +64,15 @@
   stroke-width: 1.25;
 }
 
-.number {
-  color: var(--color-accent);
-  font-family: var(--font-special);
-  font-size: var(--fs-body);
-  line-height: 1;
-  transition: color 300ms ease;
+.cardContent {
+  flex: 1;
+  min-width: 0;
 }
 
 .highlight h3 {
   position: relative;
   z-index: 1;
-  max-width: 18ch;
+  margin: 0;
   font-family: var(--font-heading);
   font-size: var(--why-body-size);
   font-weight: 600;
@@ -90,9 +82,11 @@
 }
 
 .cardRule {
+  display: block;
+  flex-shrink: 0;
   width: clamp(1.5rem, 1rem + 1vw, 2.5rem);
   height: 2px;
-  margin-top: clamp(1rem, 0.75rem + 0.75vw, 1.5rem);
+  margin-top: clamp(0.375rem, 0.25rem + 0.4vw, 0.625rem);
   background: var(--color-accent);
   transition: background-color 300ms ease;
 }
@@ -113,6 +107,7 @@
 .details { min-width: 0; order: 1; }
 
 .title {
+  margin: 0;
   font-family: var(--font-heading);
   color: var(--color-ink);
   font-size: var(--why-heading-size);
@@ -123,11 +118,21 @@
 
 .description {
   max-width: 100%;
-  margin-top: clamp(0.875rem, 0.625rem + 0.75vw, 1.25rem);
+  margin: clamp(0.875rem, 0.625rem + 0.75vw, 1.25rem) 0 0;
   font-size: var(--why-body-size);
   line-height: 1.6;
-  text-wrap: pretty;
+  text-align: left;
+  text-align-last: left;
+  text-wrap: wrap;
 }
+
+.descriptionWrap {
+  width: 100%;
+  max-width: 100%;
+  margin-top: clamp(1.25rem, 1rem + 1vw, 2rem);
+}
+
+.descriptionWrap > .description:first-child { margin-top: 0; }
 
 .quote {
   margin-top: clamp(0.875rem, 0.625rem + 0.75vw, 1.25rem);
@@ -190,7 +195,6 @@
   }
 
   .highlight:hover .iconFrame,
-  .highlight:hover .number,
   .highlight:hover .cardIllustration { color: var(--color-base); }
   .highlight:hover .cardRule { background: var(--color-base); }
   .highlight:hover .cardIllustration { transform: scale(1.05); }
@@ -203,11 +207,12 @@
 }
 
 @media (max-width: 47.999rem) {
+  .details { text-align: center; }
   .action { justify-content: center; }
   .quote { border-left: 0; padding-left: 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .highlight, .iconFrame, .number, .cardRule, .cardIllustration { transition: none; }
+  .highlight, .iconFrame, .cardRule, .cardIllustration { transition: none; }
   .highlight:hover .cardIllustration { transform: none; }
 }

@@ -3,8 +3,6 @@ import {
   FiArrowRight,
   FiGrid,
   FiMapPin,
-  FiShield,
-  FiTrendingUp,
   FiCheckCircle,
   FiFileText,
   FiSearch,
@@ -16,16 +14,18 @@ import {
 import styles from './EventDetails.module.css'
 const topicIcons = [
   FiGrid,
+  FiHome,
   FiMapPin,
-  FiShield,
-  FiTrendingUp
+  FiFileText,
+  FiUsers
 ]
 
 const eventTopics = [
-  "India's First Greenfield Smart City",
-  'Strategic Location and Connectivity',
-  'Government Backed Developments',
-  'High Appreciation Potential'
+  "Discover Dholera's Latest Developments",
+  'Explore Residential Plot Investment Opportunities',
+  'Understand Plot Locations & Pricing',
+  'Get Clarity on Legal Documents & Approvals',
+  'Connect Directly with Dholera Experts'
 ]
 
 const foundations = [

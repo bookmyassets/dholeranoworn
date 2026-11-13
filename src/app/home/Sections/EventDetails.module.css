@@ -95,10 +95,11 @@
 }
 
 .trendsetterDescription {
-  margin-top: clamp(0.875rem, 0.625rem + 0.75vw, 1.25rem);
+  margin-top: clamp(1.25rem, 1rem + 1vw, 2rem);
   font-size: var(--trendsetter-body-size);
   line-height: 1.6;
-  text-wrap: pretty;
+  text-align: left;
+  text-wrap: wrap;
 }
 
 .trendsetterQuotes {
@@ -193,12 +194,13 @@
 }
 
 .description {
-  max-width: 46ch;
-  margin-top: clamp(0.875rem, 0.625rem + 0.75vw, 1.25rem);
+  width: 100%;
+  margin: clamp(1.25rem, 1rem + 1vw, 2rem) 0 0;
   font-family: var(--font-body);
   font-size: var(--fs-body);
   line-height: 1.6;
-  text-wrap: pretty;
+  text-align: left;
+  text-wrap: wrap;
 }
 
 .topics {
