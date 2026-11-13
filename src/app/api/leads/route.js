@@ -77,10 +77,23 @@ export async function POST(request) {
 
     return NextResponse.json({ success: true });
   } catch (error) {
-    console.error("Lead submission error:", error.name);
+    const networkCode = error.cause?.code;
+    const timedOut = error.name === "TimeoutError" || error.name === "AbortError";
+    console.error("Lead submission error:", JSON.stringify({
+      name: error.name,
+      code: networkCode,
+      connectionCodes: error.cause?.errors?.map((cause) => cause.code),
+    }));
+    const connectionFailed = error.name === "TypeError" && Boolean(error.cause);
     return NextResponse.json(
-      { error: "Unable to submit the form." },
-      { status: 500 },
+      {
+        error: timedOut
+          ? "The lead service timed out. Please try again shortly."
+          : connectionFailed
+            ? "Unable to connect to the lead service. Please try again shortly."
+            : "Unable to submit the form.",
+      },
+      { status: timedOut ? 504 : connectionFailed ? 502 : 500 },
     );
   }
 }

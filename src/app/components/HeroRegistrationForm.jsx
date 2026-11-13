@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
+import { toast } from "react-toastify";
 import { FiArrowRight, FiCalendar, FiPhone, FiUser } from "react-icons/fi";
 
 export default function HeroRegistrationForm() {
@@ -37,16 +38,21 @@ export default function HeroRegistrationForm() {
       });
       const result = await response.json().catch(() => ({}));
       if (!response.ok || result.success !== true) {
-        throw new Error("Lead submission failed");
+        throw new Error(result.error || "Unable to submit the form. Please try again.");
       }
 
       form.reset();
       setMessage("Thank you! Our team will contact you shortly.");
+      toast.success("Thank you! Your details have been submitted. Our team will contact you shortly.");
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push({ event: "lead_form" });
-    } catch {
+    } catch (error) {
+      const errorMessage = error.name === "Error"
+        ? error.message
+        : "Unable to submit the form. Please try again.";
       setHasError(true);
-      setMessage("Unable to submit the form. Please try again.");
+      setMessage(errorMessage);
+      toast.error(errorMessage);
     } finally {
       submittingRef.current = false;
       setIsSubmitting(false);

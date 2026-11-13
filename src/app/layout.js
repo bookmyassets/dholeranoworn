@@ -3,6 +3,7 @@ import Navbar from "./components/Navbar";
 import PopupLeadForm from "./components/Form";
 import Footer from "./components/Footer";
 import ScrollAnimations from "./components/ScrollAnimations";
+import LeadNotifications from "./components/LeadNotifications";
 
 export const metadata = {
   title: "Dholera Investment Event in Gurgaon | Dholera Now or Never ",
@@ -19,6 +20,7 @@ export default function RootLayout({ children }) {
         {children}
         <Footer />
         <PopupLeadForm />
+        <LeadNotifications />
       </body>
     </html>
   );

@@ -31,6 +31,26 @@ body {
   font-size: var(--fs-body);
 }
 
+.Toastify__toast-container {
+  --toastify-z-index: 1000;
+  --toastify-toast-width: clamp(18rem, 85vw, 24rem);
+}
+
+.Toastify__toast.lead-notification {
+  background: var(--color-base);
+  color: var(--color-ink);
+  border: 1px solid var(--color-accent);
+  box-shadow: none;
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  padding: clamp(1rem, 0.85rem + 0.5vw, 1.5rem);
+}
+
+.lead-notification .Toastify__close-button {
+  color: var(--color-ink);
+  opacity: 1;
+}
+
 /* Inline hero registration */
 .hero-layout {
   gap: clamp(2.5rem, 1rem + 4vw, 5rem);

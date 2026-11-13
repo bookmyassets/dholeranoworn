@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { toast } from "react-toastify";
 import logo from "@/assets/logo.png";
 
 const OPEN_POPUP_EVENT = "open-dholera-popup-form";
@@ -153,13 +154,14 @@ export default function PopupLeadForm() {
         }),
       });
 
-      if (!response.ok) {
-        const result = await response.json().catch(() => ({}));
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok || result.success !== true) {
         throw new Error(result.error || "Error submitting form");
       }
 
       setFormData({ fullName: "", mobileNumber: "" });
       setShowThankYou(true);
+      toast.success("Thank you! Your details have been submitted. Our team will contact you shortly.");
 
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push({ event: FORM_CONFIG.dataLayerEvent });
@@ -167,7 +169,11 @@ export default function PopupLeadForm() {
       successTimerRef.current = window.setTimeout(closePopup, 3_000);
     } catch (error) {
       console.error("Form submission error:", error);
-      setErrorMessage("Unable to submit the form. Please try again.");
+      const message = error.name === "Error"
+        ? error.message
+        : "Unable to submit the form. Please try again.";
+      setErrorMessage(message);
+      toast.error(message);
     } finally {
       setIsLoading(false);
     }
