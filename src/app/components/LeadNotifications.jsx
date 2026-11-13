@@ -13,6 +13,7 @@ export default function LeadNotifications() {
       closeOnClick
       pauseOnHover
       theme="light"
+      className="lead-notifications"
       toastClassName="lead-notification"
     />
   );
