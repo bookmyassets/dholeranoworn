@@ -55,6 +55,8 @@ export default function Navbar() {
           <Image
             src={isScrolled || isMenuOpen ? logoBlack : logo}
             alt="logo"
+            sizes="(max-width: 600px) 96px, 112px"
+            loading="eager"
             className="h-full w-full object-contain"
           />
         </Link>

@@ -1,6 +1,6 @@
 .content {
-  --font-heading: "Playfair Display", serif;
-  --font-body: "Inter", sans-serif;
+  --font-heading: var(--font-playfair), serif;
+  --font-body: var(--font-inter), sans-serif;
   width: 100%;
   max-width: clamp(38rem, 55vw, 48rem);
 }

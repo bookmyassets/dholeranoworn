@@ -1,9 +1,29 @@
 import "./globals.css";
+import { Inter, Marcellus, Playfair_Display } from "next/font/google";
 import Navbar from "./components/Navbar";
 import PopupLeadForm from "./components/Form";
 import Footer from "./components/Footer";
 import ScrollAnimations from "./components/ScrollAnimations";
 import LeadNotifications from "./components/LeadNotifications";
+
+const headingFont = Playfair_Display({
+  subsets: ["latin"],
+  weight: ["600", "700"],
+  display: "optional",
+  variable: "--font-playfair",
+});
+const bodyFont = Inter({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  display: "optional",
+  variable: "--font-inter",
+});
+const specialFont = Marcellus({
+  subsets: ["latin"],
+  weight: "400",
+  display: "optional",
+  variable: "--font-marcellus",
+});
 
 export const metadata = {
   metadataBase: new URL("https://www.dholeranowornever.com"),
@@ -40,7 +60,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className="h-full antialiased">
+    <html lang="en" className={`h-full antialiased ${headingFont.variable} ${bodyFont.variable} ${specialFont.variable}`}>
       <body className="flex min-h-full flex-col">
         <ScrollAnimations />
         <Navbar />

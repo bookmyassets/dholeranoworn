@@ -8,8 +8,8 @@
 }
 
 .trendsetter {
-  --font-heading: 'Playfair Display', serif;
-  --font-body: 'Inter', sans-serif;
+  --font-heading: var(--font-playfair), serif;
+  --font-body: var(--font-inter), sans-serif;
   --trendsetter-heading-size: clamp(1.625rem, 1.325rem + 1vw, 2.25rem);
   --trendsetter-body-size: var(--fs-section-body);
   padding: calc(var(--space-section) + clamp(0.5rem, 0.25rem + 1vw, 1rem))

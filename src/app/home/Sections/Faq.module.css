@@ -1,8 +1,7 @@
-@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap");
 
 .section {
-  --faq-heading: "Playfair Display", serif;
-  --faq-body: "Inter", sans-serif;
+  --faq-heading: var(--font-playfair), serif;
+  --faq-body: var(--font-inter), sans-serif;
   --faq-gutter: clamp(1rem, 0.5rem + 4vw, 4rem);
   --faq-row-gap: clamp(0.875rem, 0.5rem + 1.5vw, 2rem);
   --faq-number-width: clamp(1.5rem, 1rem + 1vw, 2.25rem);

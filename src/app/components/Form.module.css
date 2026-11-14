@@ -1,4 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@600;700&display=swap");
 
 .backdrop {
   position: fixed;
@@ -25,7 +24,7 @@
   border-radius: clamp(1.5rem, 3vw, 2.25rem);
   background: var(--color-base);
   color: var(--color-ink);
-  font-family: "Inter", sans-serif;
+  font-family: var(--font-inter), sans-serif;
   font-size: clamp(0.875rem, 0.8rem + 0.3vw, 1rem);
   line-height: 1.5;
   box-shadow: 0 clamp(1rem, 3vw, 2rem) clamp(2rem, 6vw, 5rem) rgb(from var(--color-ink) r g b / 30%);
@@ -51,7 +50,7 @@
 .title {
   margin-top: clamp(1.5rem, 3.5dvh, 2rem);
   text-align: center;
-  font-family: "Playfair Display", serif;
+  font-family: var(--font-playfair), serif;
   font-size: clamp(1.5rem, 0.9rem + 2.2vmin, 2.25rem);
   font-weight: 700;
   line-height: 1.16;
@@ -96,7 +95,7 @@
   border-radius: 999rem;
   background: var(--color-accent);
   color: var(--color-base);
-  font-family: "Marcellus", serif;
+  font-family: var(--font-marcellus), serif;
   font-size: clamp(1.125rem, 0.95rem + 0.6vw, 1.5rem);
   cursor: pointer;
   transition: background 150ms, color 150ms;
