@@ -237,7 +237,7 @@ export default function PopupLeadForm() {
                 <label htmlFor="popup-mobile-number" className="sr-only">Mobile number</label>
                 <div className={styles.inputGroup}>
                   <input id="popup-mobile-number" name="mobileNumber" type="tel" inputMode="numeric"
-                    autoComplete="tel-national" value={formData.mobileNumber} onChange={handleChange}
+                    autoComplete="tel" value={formData.mobileNumber} onChange={handleChange}
                     maxLength={10} pattern="[0-9]{10}" title="Please enter a 10-digit mobile number without the country code."
                     required placeholder="Mobile number" />
                 </div>

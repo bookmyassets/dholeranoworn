@@ -67,26 +67,26 @@ export default function Hero() {
             <EventCountdown />
           </div>
 
-          <dl className={styles.schedule} aria-label="Event dates and timings">
+          <div className={styles.schedule} role="group" aria-label="Event dates and timings">
             <div className={styles.detail}>
               <span className={styles.icon}><FiCalendar aria-hidden="true" /></span>
-              <div className={styles.detailText}>
+              <dl className={styles.detailText}>
                 <dt>Event dates</dt>
                 <dd className={styles.value}>
                   <time dateTime="2026-11-21">21</time> &amp; <time dateTime="2026-11-22">22 November 2026</time>
                 </dd>
-              </div>
+              </dl>
             </div>
             <div className={styles.detail}>
               <span className={styles.icon}><FiClock aria-hidden="true" /></span>
-              <div className={styles.detailText}>
+              <dl className={styles.detailText}>
                 <dt>Event timings</dt>
                 <dd className={styles.value}>
                   <span className={styles.timeRange}>9:00 AM &ndash; 8:00 PM</span>{" "}
                 </dd>
-              </div>
+              </dl>
             </div>
-          </dl>
+          </div>
 
         </div>
         <HeroRegistrationForm />

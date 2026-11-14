@@ -112,7 +112,7 @@ export default function HeroRegistrationForm () {
               name='mobileNumber'
               type='tel'
               inputMode='numeric'
-              autoComplete='tel-national'
+              autoComplete='tel'
               placeholder='Mobile number'
               pattern='[0-9]{10}'
               title='Please enter a 10-digit mobile number without the country code.'
