@@ -8,7 +8,7 @@ import styles from "./Form.module.css";
 
 const OPEN_POPUP_EVENT = "open-dholera-popup-form";
 const FORM_CONFIG = {
-  title: "Reserve Your Seat for the Dholera Investors Meet",
+  title: "Reserve Your Exclusive Slot",
   dataLayerEvent: "lead_form",
 };
 
@@ -246,7 +246,7 @@ export default function PopupLeadForm() {
                 {isLoading ? "Submitting..." : "Register Now"}
               </button>
             </form>
-            <p className={styles.availability}>Limited seats available</p>
+            <p className={styles.availability}>Get Expert Consultation</p>
           </>
         )}
       </div>

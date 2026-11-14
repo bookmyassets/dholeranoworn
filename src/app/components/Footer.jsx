@@ -123,7 +123,7 @@ export default function Footer() {
                   Location
                 </dt>
                 <dd className="mt-1 font-special text-[length:var(--fs-special)]">
-                  Jmd Megapolis, Sec 48, Gurugram
+                  Unit 601, 6th floor, Jmd Megapolis, Sec 48, Gurgaon 122018
                 </dd>
               </div>
               <div>
