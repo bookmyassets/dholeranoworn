@@ -8,6 +8,7 @@
   --fs-h2: clamp(1.875rem, 1rem + 2vw, 2.75rem);
   --fs-lead: clamp(1rem, 0.953125rem + 0.208333vw, 1.125rem);
   --fs-body: clamp(1rem, 0.953125rem + 0.208333vw, 1.125rem);
+  --fs-section-body: clamp(1rem, 0.925rem + 0.25vw, 1.125rem);
   --fs-special: clamp(0.875rem, 0.828125rem + 0.208333vw, 1rem);
   --fs-p-body: clamp(1rem, 0.953125rem + 0.208333vw, 1.125rem);
   --fs-p-small: clamp(0.8125rem, 0.765625rem + 0.208333vw, 0.9375rem);
@@ -24,7 +25,7 @@ html {
 @theme {
   --color-background: #ffffff;
   --color-foreground: #17171a;
-  --color-ink: #17171a;
+  --color-ink: #0f0f0f;
   --color-accent: #c91f2e;
   --color-base: #ffffff;
   --font-heading: "DM Sans", sans-serif;
@@ -52,11 +53,17 @@ body {
 }
 
 @media (max-width: 47.999rem) {
+  :root {
+    --fs-body: var(--fs-section-body);
+    --fs-lead: var(--fs-section-body);
+    --fs-p-body: var(--fs-section-body);
+  }
+
   .content-section {
+    --fs-body: var(--fs-section-body);
     text-align: center;
   }
 
-  .content-section h2,
   .content-section p,
   .content-section header {
     margin-inline: auto;
@@ -74,6 +81,8 @@ body {
   h2,
   h3 {
     font-family: var(--font-heading);
+    text-align: left;
+    margin-inline: 0;
   }
 
   button,
@@ -186,7 +195,7 @@ body {
 
 .hero-registration h2 {
   font-family: var(--font-heading);
-  font-size: clamp(1.5rem, 1.3125rem + 0.833333vw, 2rem);
+  font-size: clamp(1.25rem, 1.125rem + 0.5vw, 1.5rem);
   font-weight: 700;
   line-height: 1.2;
 }

@@ -39,7 +39,7 @@ export default function Faq() {
     <section id="faq" aria-labelledby="faq-title" className={styles.section}>
       <div className={styles.container}>
         <header className={styles.header}>
-          <h2 id="faq-title" className={styles.title}>FAQs</h2>
+          <h2 id="faq-title" className={styles.title}>FAQ<span className={styles.titleAccent}>s</span></h2>
           <span className={styles.headerRule} aria-hidden="true" />
         </header>
 
@@ -49,7 +49,6 @@ export default function Faq() {
               key={question}
               name="event-faq"
               className={styles.item}
-              open={index === 0}
             >
               <summary className={styles.question}>
                 <span className={styles.number} aria-hidden="true">

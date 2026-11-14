@@ -74,7 +74,7 @@ export default function HeroRegistrationForm () {
           <FiCalendar />
         </span>
         <div>
-          <h2 id='hero-registration-title'>Book Your Session</h2>
+          <h2 id='hero-registration-title'>Book Your Consultation</h2>
         </div>
       </div>
 

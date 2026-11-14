@@ -105,9 +105,9 @@ export default function EventDetails () {
             })}
           </ul>
           <div className={styles.action} data-reveal>
-            <PopupFormButton className={styles.cta}>
+            <a href="https://wa.me/919910994247?text=Hi%20I'm%20Registering%20for%20Event" className={styles.cta}>
               Reserve Your Slot Today <FiArrowRight aria-hidden='true' />
-            </PopupFormButton>
+            </a>
           </div>
         </div>
       </section>
@@ -133,7 +133,7 @@ export default function EventDetails () {
           <div data-reveal='right' className={styles.trendsetterDetails}>
             <p className={styles.eyebrow}>Who We Are?</p>
             <h2 id='trendsetter-title' className={styles.trendsetterTitle}>
-              A Trendsetter in Dholera
+              A Trendsetter in <span className={styles.titleAccent}>Dholera</span>
             </h2>
             <p className={styles.trendsetterDescription}>
               We are a real-estate and development company focused on shaping
@@ -141,14 +141,7 @@ export default function EventDetails () {
               infrastructure to everyday living, we bring together development,
               people, and opportunity to build a future-ready city.
             </p>
-            <div className={styles.trendsetterActions}>
-              <PopupFormButton className={styles.consultation}>
-                Reserve Your Consultation <FiArrowUpRight aria-hidden='true' />
-              </PopupFormButton>
-              <a href='#services' className={styles.vision}>
-                Explore Our Vision <FiArrowUpRight aria-hidden='true' />
-              </a>
-            </div>
+          
           </div>
         </div>
       </section>
@@ -189,7 +182,7 @@ export default function EventDetails () {
           </ul>
           <div className={styles.action} data-reveal>
             <PopupFormButton className={styles.cta}>
-              Reserve Your Slot Today <FiArrowRight aria-hidden='true' />
+              Reserve Your Session <FiArrowRight aria-hidden='true' />
             </PopupFormButton>
           </div>
         </div>

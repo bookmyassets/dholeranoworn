@@ -21,9 +21,9 @@
 .header {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   margin-bottom: clamp(2rem, 1.25rem + 2vw, 3.5rem);
-  text-align: center;
+  text-align: left;
 }
 
 .eyebrow {
@@ -42,6 +42,10 @@
   font-weight: 600;
   line-height: 1.15;
   letter-spacing: -0.035em;
+}
+
+.titleAccent {
+  color: var(--color-accent);
 }
 
 .headerRule {
@@ -148,6 +152,12 @@
   text-decoration: underline;
   text-underline-offset: 0.2em;
   overflow-wrap: anywhere;
+}
+
+@media (max-width: 47.999rem) {
+  .answer {
+    font-size: var(--fs-section-body);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

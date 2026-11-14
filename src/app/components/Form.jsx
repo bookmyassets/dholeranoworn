@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 import { getLeadErrorMessage } from "../lib/lead-errors";
-import { FiCalendar, FiCheck, FiPhoneCall, FiShield, FiUser, FiX } from "react-icons/fi";
+import { FiCheck, FiX } from "react-icons/fi";
 import styles from "./Form.module.css";
 
 const OPEN_POPUP_EVENT = "open-dholera-popup-form";
@@ -84,14 +84,28 @@ export default function PopupLeadForm() {
 
   useEffect(() => {
     const openPopup = (event) => {
+      window.removeEventListener("scroll", handleScroll);
       previousFocusRef.current = event.detail?.trigger || document.activeElement;
       setShowThankYou(false);
       setErrorMessage("");
       setIsOpen(true);
     };
 
+    const handleScroll = () => {
+      const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
+      if (scrollableHeight > 0 && window.scrollY >= scrollableHeight * 0.5) {
+        openPopup({});
+      }
+    };
+
     window.addEventListener(OPEN_POPUP_EVENT, openPopup);
-    return () => window.removeEventListener(OPEN_POPUP_EVENT, openPopup);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+
+    return () => {
+      window.removeEventListener(OPEN_POPUP_EVENT, openPopup);
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   useEffect(() => {
@@ -209,36 +223,30 @@ export default function PopupLeadForm() {
         ) : (
           <>
             <h2 id="popup-form-title" className={styles.title}>{FORM_CONFIG.title}</h2>
-            <div className={styles.benefits}>
-              <span><FiCalendar aria-hidden="true" />Free Registration</span>
-              <span><FiPhoneCall aria-hidden="true" />Quick Callback</span>
-              <span><FiShield aria-hidden="true" />Privacy Protected</span>
-            </div>
             <form onSubmit={handleSubmit} className={styles.form}>
               {errorMessage && <p role="alert" className={styles.error}>{errorMessage}</p>}
               <div className={styles.field}>
-                <label htmlFor="popup-full-name">Full Name</label>
+                <label htmlFor="popup-full-name" className="sr-only">Full name</label>
                 <div className={styles.inputGroup}>
-                  <span className={styles.inputIcon}><FiUser aria-hidden="true" /></span>
                   <input ref={firstInputRef} id="popup-full-name" name="fullName" type="text"
                     autoComplete="name" value={formData.fullName} onChange={handleChange} required
-                    placeholder="Enter your full name" />
+                    placeholder="Full name" />
                 </div>
               </div>
               <div className={styles.field}>
-                <label htmlFor="popup-mobile-number">Mobile Number</label>
+                <label htmlFor="popup-mobile-number" className="sr-only">Mobile number</label>
                 <div className={styles.inputGroup}>
-                  <span className={styles.countryCode} aria-label="India country code plus 91">IN +91</span>
                   <input id="popup-mobile-number" name="mobileNumber" type="tel" inputMode="numeric"
                     autoComplete="tel-national" value={formData.mobileNumber} onChange={handleChange}
                     maxLength={10} pattern="[0-9]{10}" title="Please enter a 10-digit mobile number without the country code."
-                    required placeholder="Enter your mobile number" />
+                    required placeholder="Mobile number" />
                 </div>
               </div>
               <button type="submit" disabled={isLoading} className={styles.submit}>
                 {isLoading ? "Submitting..." : "Register Now"}
               </button>
             </form>
+            <p className={styles.availability}>Limited seats available</p>
           </>
         )}
       </div>

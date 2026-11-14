@@ -10,7 +10,7 @@ const navigationItems = [
   { label: "Why Dholera", href: "#why-dholera" },
   { label: "Why Attend", href: "#why-attend" },
   { label: "About Us", href: "#trendsetter" },
-  { label: "Services", href: "#services" },
+  { label: "What We Offer", href: "#services" },
   { label: "FAQs", href: "#faq" },
 ];
 

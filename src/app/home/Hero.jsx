@@ -5,6 +5,8 @@ import { useRef } from "react";
 import heroimg from "@/assets/bgImg.webp";
 import HeroRegistrationForm from "@/app/components/HeroRegistrationForm";
 import EventCountdown from "@/app/components/EventCountdown";
+import { FiCalendar, FiClock } from "react-icons/fi";
+import styles from "./Hero.module.css";
 
 export default function Hero() {
   const heroRef = useRef(null);
@@ -52,18 +54,40 @@ export default function Hero() {
       <div className="absolute inset-0 bg-ink/80" />
 
       <div className="hero-layout relative z-10 mx-auto grid min-h-screen w-full max-w-[90rem] grid-cols-1 items-center px-[clamp(1rem,0.5rem+4vw,4rem)] pt-[clamp(8rem,6rem+4vw,10rem)] pb-[clamp(3rem,2rem+4vw,6rem)]">
-        <div className="min-w-0">
-          <h1 className="max-w-[18ch] font-heading text-[length:var(--fs-h1)] leading-[1.08] font-bold tracking-[-0.04em] text-balance">
-            Dholera Investor Event in Gurgaon
+        <div className={`min-w-0 ${styles.content}`}>
+          <h1 className={styles.title}>
+            <span className={styles.titleLine}>Join Dholera's Biggest</span>{" "}
+            <span className={styles.titleLine}>Investor Event in <span className="text-accent">Gurgaon</span></span>
           </h1>
-          <p className="mt-[clamp(1rem,0.75rem+0.8vw,1.5rem)] max-w-[36ch] font-body text-[length:var(--fs-lead)] leading-relaxed font-medium text-pretty">
+          <p className={styles.subtitle}>
             Understand Dholera Before You Invest.
           </p>
 
-          <div className="mt-[clamp(2rem,1.25rem+2.5vw,4rem)]">
+          <div className={styles.countdown}>
             <EventCountdown />
-
           </div>
+
+          <dl className={styles.schedule} aria-label="Event dates and timings">
+            <div className={styles.detail}>
+              <span className={styles.icon}><FiCalendar aria-hidden="true" /></span>
+              <div className={styles.detailText}>
+                <dt>Event dates</dt>
+                <dd className={styles.value}>
+                  <time dateTime="2026-11-21">21</time> &amp; <time dateTime="2026-11-22">22 November 2026</time>
+                </dd>
+              </div>
+            </div>
+            <div className={styles.detail}>
+              <span className={styles.icon}><FiClock aria-hidden="true" /></span>
+              <div className={styles.detailText}>
+                <dt>Event timings</dt>
+                <dd className={styles.value}>
+                  <span className={styles.timeRange}>9:00 AM &ndash; 8:00 PM</span>{" "}
+                </dd>
+              </div>
+            </div>
+          </dl>
+
         </div>
         <HeroRegistrationForm />
       </div>

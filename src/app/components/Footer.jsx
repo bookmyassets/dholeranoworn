@@ -14,7 +14,7 @@ const footerLinks = [
   { label: "Why Attend", href: "#why-attend" },
   { label: "The TrendSetter", href: "#trendsetter" },
   { label: "What We Offer", href: "#services" },
-  { label: "FAQ", href: "#faq" },
+  { label: "FAQs", href: "#faq" },
 ];
 
 const socialLinks = [
@@ -89,7 +89,7 @@ export default function Footer() {
 
           <nav aria-label="Footer navigation">
             <p className="font-special text-[length:var(--fs-p-special)] tracking-[0.12em] text-accent uppercase">
-              Explore
+              Quicks Links
             </p>
             <ul className="mt-[clamp(1rem,0.75rem+0.8vw,1.5rem)] grid gap-[clamp(0.75rem,0.55rem+0.5vw,1rem)]">
               {footerLinks.map(({ label, href }) => (
@@ -107,7 +107,7 @@ export default function Footer() {
 
           <div>
             <p className="font-special text-[length:var(--fs-p-special)] tracking-[0.12em] text-accent uppercase">
-              Event
+              Event Details
             </p>
             <dl className="mt-[clamp(1rem,0.75rem+0.8vw,1.5rem)] grid gap-[clamp(1rem,0.75rem+0.8vw,1.5rem)]">
               <div>
@@ -115,7 +115,7 @@ export default function Footer() {
                   Date
                 </dt>
                 <dd className="mt-1 font-special text-[length:var(--fs-special)]">
-                  <time dateTime="2026-08-08">21 November 2026 & 22 November 2026</time>
+                  <time dateTime="2026-08-08">21 & 22 November 2026</time>
                 </dd>
               </div>
               <div>

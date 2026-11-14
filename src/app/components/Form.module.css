@@ -20,7 +20,6 @@
   flex-shrink: 0;
   width: 100%;
   max-width: clamp(22rem, 42vw, 28rem);
-  min-height: min(clamp(30rem, 82dvh, 34rem), calc(100dvh - 2 * var(--viewport-gap)));
   margin-block: auto;
   padding: clamp(1.5rem, 4dvh, 2.5rem) clamp(1.25rem, 3vmin, 2.25rem);
   border-radius: clamp(1.5rem, 3vw, 2.25rem);
@@ -60,39 +59,12 @@
   text-wrap: balance;
 }
 
-.benefits {
+.form {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(0.5rem, 1.2vw, 1rem);
-  margin-block: var(--form-gap);
+  gap: clamp(1rem, 2.5dvh, 1.5rem);
+  margin-top: clamp(1.5rem, 3.5dvh, 2rem);
 }
-
-.benefits span {
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  align-items: center;
-  justify-content: center;
-  gap: clamp(0.4rem, 0.8vw, 0.75rem);
-  padding: clamp(0.3rem, 0.7dvh, 0.45rem) clamp(0.25rem, 0.5vw, 0.4rem);
-  border: 1px solid var(--color-ink);
-  border-radius: clamp(0.75rem, 1.4vw, 1rem);
-  font-family: "Marcellus", serif;
-  font-size: clamp(0.7rem, 0.6rem + 0.35vw, 0.9375rem);
-  line-height: 1.3;
-}
-
-.benefits svg {
-  flex-shrink: 0;
-  width: clamp(1.25rem, 2vw, 1.65rem);
-  height: clamp(1.25rem, 2vw, 1.65rem);
-  color: var(--color-accent);
-  stroke-width: 1.5;
-}
-
-.form { display: grid; gap: clamp(1.5rem, 3.5dvh, 2rem); }
-.field { display: grid; gap: clamp(0.4rem, 0.8vw, 0.65rem); }
-.field label { font-weight: 500; }
+.field { position: relative; }
 
 .inputGroup {
   display: flex;
@@ -103,17 +75,6 @@
 }
 
 .inputGroup:focus-within { outline: 2px solid var(--color-accent); outline-offset: 2px; }
-.inputIcon, .countryCode {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  padding-inline: clamp(0.75rem, 1.7vw, 1.5rem);
-  min-height: clamp(1.75rem, 3vw, 2.25rem);
-  border-right: 1px solid var(--color-ink);
-}
-.inputIcon svg { width: clamp(1.25rem, 2vw, 1.75rem); height: clamp(1.25rem, 2vw, 1.75rem); stroke-width: 1.5; }
-.countryCode { font-weight: 600; white-space: nowrap; }
 .inputGroup input {
   width: 100%;
   min-width: 0;
@@ -142,6 +103,17 @@
 }
 .submit:hover, .submit:focus-visible { background: var(--color-base); color: var(--color-accent); }
 .submit:disabled { cursor: wait; background: var(--color-ink); border-color: var(--color-ink); color: var(--color-base); }
+
+.availability {
+  margin: clamp(0.625rem, 1.5dvh, 0.875rem) 0 0;
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  font-size: clamp(0.75rem, 0.7rem + 0.2vw, 0.875rem);
+  line-height: 1.4;
+  font-weight:bold;
+  text-align: center;
+}
+
 .error { color: var(--color-accent); }
 .success { display: grid; justify-items: center; align-content: center; gap: var(--form-gap); min-height: clamp(18rem, 35vw, 24rem); text-align: center; }
 .success > svg { color: var(--color-accent); width: clamp(3rem, 6vw, 5rem); height: clamp(3rem, 6vw, 5rem); }

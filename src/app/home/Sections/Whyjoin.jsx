@@ -27,7 +27,7 @@ export default function WhyJoin() {
         </ol>
 
         <div className={styles.details} data-reveal="right">
-          <h2 id="why-dholera-title" className={styles.title}>Why Dholera Smart City?</h2>
+          <h2 id="why-dholera-title" className={styles.title}>Why <span className={styles.titleAccent}>Dholera Smart City ?</span></h2>
           <div className={styles.descriptionWrap}>
             <p className={styles.description}>
               Dholera Smart City is a planned greenfield industrial region in Gujarat,

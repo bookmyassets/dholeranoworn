@@ -64,10 +64,6 @@ export default function EventCountdown() {
           </div>
         ))}
       </div>
-      <p className={styles.schedule}>
-        <span><time dateTime="2026-11-21">21</time> &amp; <time dateTime="2026-11-22">22 November 2026</time></span>
-        <span>9:00 AM–8:00 PM IST</span>
-      </p>
       {/* Minute-level and phase announcements avoid speaking every second. */}
       <span className="sr-only" role="status" aria-live="polite" aria-atomic="true">
         {countdown?.announcement ?? "Loading event countdown"}
