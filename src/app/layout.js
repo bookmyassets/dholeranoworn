@@ -72,7 +72,7 @@ export default function RootLayout({ children }) {
             title="Google Tag Manager"
           />
         </noscript>
-        <Script id="google-tag-manager" strategy="afterInteractive">
+        <Script id="google-tag-manager" strategy="lazyOnload">
           {`
             window.dataLayer = window.dataLayer || [];
             (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':

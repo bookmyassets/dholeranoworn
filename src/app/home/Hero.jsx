@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useRef } from "react";
 import heroimg from "@/assets/bgImg.webp";
+import mobileHeroimg from "@/assets/bgImg-mobile.webp";
 import HeroRegistrationForm from "@/app/components/HeroRegistrationForm";
 import EventCountdown from "@/app/components/EventCountdown";
 import { FiCalendar, FiClock } from "react-icons/fi";
@@ -41,14 +42,19 @@ export default function Hero() {
             "translate3d(calc(var(--pointer-x) * -10px), calc(var(--pointer-y) * -10px), 0)",
         }}
       >
-        <Image
-          src={heroimg}
-          alt=""
-          fill
-          className="scale-105 object-cover"
-          priority
-          sizes="106vw"
-        />
+        <picture>
+          {/* One small portrait request on mobile; no competing desktop preload. */}
+          <source media="(max-width: 47.999rem)" srcSet={mobileHeroimg.src} />
+          <Image
+            src={heroimg}
+            alt=""
+            fill
+            className="scale-105 object-cover"
+            loading="eager"
+            fetchPriority="high"
+            sizes="106vw"
+          />
+        </picture>
       </div>
 
       <div className="absolute inset-0 bg-ink/80" />
