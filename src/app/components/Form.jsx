@@ -3,24 +3,34 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 import { getLeadErrorMessage } from "../lib/lead-errors";
+import { trackGtmEvent } from "../lib/gtm-events.mjs";
 import { FiCheck, FiX } from "react-icons/fi";
 import styles from "./Form.module.css";
 
 const OPEN_POPUP_EVENT = "open-dholera-popup-form";
 const FORM_CONFIG = {
   title: "Reserve Your Exclusive Slot",
-  dataLayerEvent: "lead_form",
 };
 
 export function PopupFormButton({
   children,
   className = "",
   onClick,
+  gtmCtaName,
+  gtmLocation,
   ...props
 }) {
   const handleClick = (event) => {
     onClick?.(event);
     if (event.defaultPrevented) return;
+
+    if (gtmCtaName && gtmLocation) {
+      trackGtmEvent("cta_click", {
+        cta_name: gtmCtaName,
+        cta_location: gtmLocation,
+        cta_destination: "popup_form",
+      });
+    }
 
     window.dispatchEvent(
       new CustomEvent(OPEN_POPUP_EVENT, {
@@ -180,8 +190,10 @@ export default function PopupLeadForm() {
       setShowThankYou(true);
       toast.success("Thank you! Your details have been submitted. Our team will contact you shortly.");
 
-      window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({ event: FORM_CONFIG.dataLayerEvent });
+      trackGtmEvent("popup_form_submit", {
+        form_location: "popup",
+        submission_status: "api_reported_success",
+      });
 
       successTimerRef.current = window.setTimeout(closePopup, 3_000);
     } catch (error) {

@@ -1,4 +1,5 @@
 import { PopupFormButton } from '@/app/components/Form'
+import TrackedCtaLink from '@/app/components/TrackedCtaLink'
 import {
   FiArrowRight,
   FiGrid,
@@ -105,9 +106,15 @@ export default function EventDetails () {
             })}
           </ul>
           <div className={styles.action} data-reveal>
-            <a href="https://wa.me/919910994247?text=Hi%20I'm%20Registering%20for%20Event" className={styles.cta}>
+            <TrackedCtaLink
+              href="https://wa.me/919910994247?text=Hi%20I'm%20Registering%20for%20Event"
+              className={styles.cta}
+              gtmCtaName='reserve_your_slot_today'
+              gtmLocation='why_attend'
+              gtmDestination='whatsapp'
+            >
               Reserve Your Slot Today <FiArrowRight aria-hidden='true' />
-            </a>
+            </TrackedCtaLink>
           </div>
         </div>
       </section>
@@ -181,7 +188,11 @@ export default function EventDetails () {
             })}
           </ul>
           <div className={styles.action} data-reveal>
-            <PopupFormButton className={styles.cta}>
+            <PopupFormButton
+              className={styles.cta}
+              gtmCtaName='reserve_your_session'
+              gtmLocation='services'
+            >
               Reserve Your Session <FiArrowRight aria-hidden='true' />
             </PopupFormButton>
           </div>

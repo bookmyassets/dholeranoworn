@@ -3,6 +3,7 @@
 import { useRef, useState } from 'react'
 import { toast } from 'react-toastify'
 import { getLeadErrorMessage } from '../lib/lead-errors'
+import { trackGtmEvent } from '../lib/gtm-events.mjs'
 import { FiArrowRight, FiCalendar, FiPhone, FiUser } from 'react-icons/fi'
 
 export default function HeroRegistrationForm () {
@@ -50,8 +51,10 @@ export default function HeroRegistrationForm () {
       toast.success(
         'Thank you! Your details have been submitted. Our team will contact you shortly.'
       )
-      window.dataLayer = window.dataLayer || []
-      window.dataLayer.push({ event: 'lead_form' })
+      trackGtmEvent('hero_form_submit', {
+        form_location: 'hero',
+        submission_status: 'api_reported_success'
+      })
     } catch (error) {
       const errorMessage = getLeadErrorMessage(error)
       setHasError(true)
