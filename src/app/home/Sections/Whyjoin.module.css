@@ -96,19 +96,6 @@
   transition: background-color 300ms ease;
 }
 
-.cardIllustration {
-  position: absolute;
-  right: calc(clamp(0.5rem, 0.25rem + 1vw, 1rem) * -1);
-  bottom: calc(clamp(0.75rem, 0.5rem + 1vw, 1.5rem) * -1);
-  z-index: -1;
-  width: clamp(5rem, 3rem + 6vw, 9rem);
-  height: clamp(5rem, 3rem + 6vw, 9rem);
-  color: var(--color-accent);
-  stroke-width: 0.6;
-  opacity: 0.12;
-  transition: color 300ms ease, transform 300ms ease;
-}
-
 .details { min-width: 0; order: 1; }
 
 .title {
@@ -212,5 +199,5 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .highlight, .iconFrame, .cardRule, .cardIllustration { transition: none; }
+  .highlight, .iconFrame, .cardRule { transition: none; }
 }

@@ -21,7 +21,6 @@ export default function WhyJoin() {
                 <h3>{title}</h3>
                 <span className={styles.cardRule} aria-hidden="true" />
               </div>
-              <Icon className={styles.cardIllustration} aria-hidden="true" />
             </li>
           ))}
         </ol>
