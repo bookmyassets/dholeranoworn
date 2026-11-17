@@ -44,7 +44,11 @@ export default function Hero() {
       >
         <picture>
           {/* One small portrait request on mobile; no competing desktop preload. */}
-          <source media="(max-width: 47.999rem)" srcSet={mobileHeroimg.src} />
+          <source
+            media="(max-width: 47.999rem)"
+            srcSet={`${mobileHeroimg.src} ${mobileHeroimg.width}w`}
+            sizes="106vw"
+          />
           <Image
             src={heroimg}
             alt=""
