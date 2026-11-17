@@ -131,7 +131,7 @@ export default function HeroRegistrationForm () {
           className='hero-registration-submit'
           disabled={isSubmitting}
         >
-          {isSubmitting ? 'Submitting…' : 'Join the Investor Event'}{' '}
+          {isSubmitting ? 'Submitting…' : 'Book Your Session'}{' '}
           <FiArrowRight aria-hidden='true' />
         </button>
         {message && (
