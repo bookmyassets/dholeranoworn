@@ -10,11 +10,12 @@ import Image from "next/image";
 import logo from "@/assets/logo-white.png";
 
 const footerLinks = [
-  { label: "Why Dholera", href: "#why-dholera" },
-  { label: "Why Attend", href: "#why-attend" },
-  { label: "The TrendSetter", href: "#trendsetter" },
-  { label: "What We Offer", href: "#services" },
-  { label: "FAQs", href: "#faq" },
+  { label: "Why Dholera", href: "/#why-dholera" },
+  { label: "Why Attend", href: "/#why-attend" },
+  { label: "The TrendSetter", href: "/#trendsetter" },
+  { label: "What We Offer", href: "/#services" },
+  { label: "FAQs", href: "/#faq" },
+  { label: "Privacy Policy", href: "/privacy-policy" },
 ];
 
 const socialLinks = [
@@ -48,7 +49,7 @@ export default function Footer() {
         <div className="grid gap-[clamp(2.5rem,1.5rem+3vw,5rem)] py-[clamp(2.5rem,1.5rem+3vw,4.5rem)] sm:grid-cols-2 lg:grid-cols-[1.2fr_0.8fr_0.8fr]">
           <div>
             <Link
-              href="#"
+              href="/"
               aria-label="Return to the top"
               className="inline-flex items-center gap-[clamp(0.625rem,0.5rem+0.35vw,0.875rem)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
             >

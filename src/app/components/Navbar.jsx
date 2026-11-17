@@ -2,21 +2,24 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import TrackedCtaLink from "./TrackedCtaLink";
 import { useEffect, useState } from "react";
 import logo from "@/assets/logo-white.png";
 import logoBlack from "@/assets/logo.png";
 
 const navigationItems = [
-  { label: "Why Dholera", href: "#why-dholera" },
-  { label: "Why Attend", href: "#why-attend" },
-  { label: "About Us", href: "#trendsetter" },
-  { label: "What We Offer", href: "#services" },
-  { label: "FAQs", href: "#faq" },
+  { label: "Why Dholera", href: "/#why-dholera" },
+  { label: "Why Attend", href: "/#why-attend" },
+  { label: "About Us", href: "/#trendsetter" },
+  { label: "What We Offer", href: "/#services" },
+  { label: "FAQs", href: "/#faq" },
 ];
 
 export default function Navbar() {
-  const [isScrolled, setIsScrolled] = useState(false);
+  const pathname = usePathname();
+  const [hasScrolled, setIsScrolled] = useState(false);
+  const isScrolled = hasScrolled || pathname !== "/";
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
@@ -52,7 +55,7 @@ export default function Navbar() {
         aria-label="Primary navigation"
         className="mx-auto flex h-full w-full items-center justify-between px-[clamp(1rem,0.5rem+4vw,4rem)]"
       >
-        <Link href="#" aria-label="Back to top" onClick={() => setIsMenuOpen(false)} className="h-[var(--header-height)] w-[var(--header-height)] shrink-0">
+        <Link href="/" aria-label="Back to top" onClick={() => setIsMenuOpen(false)} className="h-[var(--header-height)] w-[var(--header-height)] shrink-0">
           <Image
             src={isScrolled || isMenuOpen ? logoBlack : logo}
             alt="logo"

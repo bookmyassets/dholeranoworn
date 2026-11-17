@@ -62,11 +62,11 @@ export default function Hero() {
       <div className="hero-layout relative z-10 mx-auto grid min-h-screen w-full max-w-[90rem] grid-cols-1 items-center px-[clamp(1rem,0.5rem+4vw,4rem)] pt-[clamp(8rem,6rem+4vw,10rem)] pb-[clamp(3rem,2rem+4vw,6rem)]">
         <div className={`min-w-0 ${styles.content}`}>
           <h1 className={styles.title}>
-            <span className={styles.titleLine}>Join Dholera's Biggest</span>{" "}
-            <span className={styles.titleLine}>Investor Event in <span className="text-accent">Gurgaon</span></span>
+            <span className={styles.titleLine}>Dholera's biggest</span>{" "}
+            <span className={styles.titleLine}>investor meetup in <span className="text-accent">Gurgaon</span></span>
           </h1>
           <p className={styles.subtitle}>
-            Understand Dholera Before You Invest.
+            Understand Dholera Before You Invest
           </p>
 
           <div className={styles.countdown}>

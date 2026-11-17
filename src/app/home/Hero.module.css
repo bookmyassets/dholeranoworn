@@ -3,12 +3,13 @@
   --font-body: var(--font-inter), sans-serif;
   width: 100%;
   max-width: clamp(38rem, 55vw, 48rem);
+  container-type: inline-size;
 }
 
 .title {
   max-width: 100%;
   font-family: var(--font-heading);
-  font-size: clamp(2.125rem, 1.25rem + 3.32vw, 3.375rem);
+  font-size: clamp(1rem, 7cqi, 3.375rem);
   font-weight: 700;
   line-height: 1.12;
   letter-spacing: -0.035em;
@@ -16,7 +17,7 @@
 
 .titleLine {
   display: block;
-  text-wrap: balance;
+  white-space: nowrap;
 }
 
 .subtitle {
@@ -97,6 +98,10 @@
 }
 
 .countdown { margin-top: clamp(1.125rem, 0.875rem + 0.8vw, 1.75rem); }
+
+@media (max-width: 47.999rem) {
+  .subtitle { display: none; }
+}
 
 @media (min-width: 64rem) {
   .content {

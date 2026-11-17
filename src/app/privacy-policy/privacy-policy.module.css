@@ -1,0 +1,63 @@
+.policy {
+  width: 100%;
+  max-width: clamp(42rem, 80vw, 64rem);
+  margin-inline: auto;
+  padding: calc(var(--header-height) + clamp(2rem, 1rem + 3vw, 4rem)) clamp(1rem, 0.5rem + 3vw, 3rem) var(--space-section);
+  background: #ffffff;
+  color: #17171a;
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+
+.policy > * + * {
+  margin-top: clamp(1rem, 0.75rem + 0.8vw, 1.5rem);
+}
+
+.policy h1 {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: clamp(2.5rem, 1.75rem + 3vw, 4rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+
+.policy h1 + p {
+  margin-top: clamp(1.75rem, 1.25rem + 1.5vw, 3rem);
+}
+
+.policy h2 {
+  font-family: var(--font-heading);
+  font-size: clamp(1.25rem, 1rem + 0.8vw, 1.75rem);
+  font-weight: 600;
+  margin-top: clamp(2rem, 1.5rem + 1.5vw, 3rem);
+}
+
+.policy h3 {
+  font-family: var(--font-heading);
+  font-size: clamp(1.125rem, 1rem + 0.4vw, 1.375rem);
+  font-weight: 600;
+}
+
+.policy ul {
+  padding-left: clamp(1.25rem, 1rem + 0.8vw, 2rem);
+  list-style: disc;
+}
+
+.policy li + li {
+  margin-top: clamp(0.375rem, 0.25rem + 0.4vw, 0.75rem);
+}
+
+.policy a {
+  color: #c91f2e;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.policy a:focus-visible {
+  outline: 2px solid #c91f2e;
+  outline-offset: 4px;
+}
