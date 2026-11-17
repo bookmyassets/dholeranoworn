@@ -3,7 +3,7 @@
 import { useRef, useState } from 'react'
 import { toast } from 'react-toastify'
 import { getLeadErrorMessage } from '../lib/lead-errors'
-import { trackGtmEvent } from '../lib/gtm-events.mjs'
+import { trackConfirmedRegistration, trackGtmEvent } from '../lib/gtm-events.mjs'
 import { FiArrowRight, FiCalendar, FiPhone, FiUser } from 'react-icons/fi'
 
 export default function HeroRegistrationForm () {
@@ -46,6 +46,7 @@ export default function HeroRegistrationForm () {
         )
       }
 
+      trackConfirmedRegistration()
       form.reset()
       setMessage('Thank you! Our team will contact you shortly.')
       toast.success(

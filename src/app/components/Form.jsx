@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 import { getLeadErrorMessage } from "../lib/lead-errors";
-import { trackGtmEvent } from "../lib/gtm-events.mjs";
+import { trackConfirmedRegistration, trackGtmEvent } from "../lib/gtm-events.mjs";
 import { FiCheck, FiX } from "react-icons/fi";
 import styles from "./Form.module.css";
 
@@ -186,6 +186,7 @@ export default function PopupLeadForm() {
         throw new Error(result.error || "Error submitting form");
       }
 
+      trackConfirmedRegistration();
       setFormData({ fullName: "", mobileNumber: "" });
       setShowThankYou(true);
       toast.success("Thank you! Your details have been submitted. Our team will contact you shortly.");
