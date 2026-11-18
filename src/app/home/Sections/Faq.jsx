@@ -12,9 +12,9 @@ const faqs = [
       "Yes, Dholera Smart City is a good investment due to government-backed industrial development, improving connectivity, and planned infrastructure.",
   },
   {
-    question: "Who is BookMyAssets ?",
+    question: "Why should investors attend the Dholera Investor Meetup ?",
     answer:
-      "BookMyAssets (BMA Group of Companies) is a trusted real estate developer in Dholera, helping investors with verified opportunities, legal guidance, due diligence, site visits, and complete support for a smooth investment journey.",
+      "Investors should attend the Dholera Investor Meetup to understand vision of Dholera Smart City, explore real estate investment opportunities, and get insights from the on-ground team.",
   },
   {
     question: "When and Where is the Dholera Investor Event?",
