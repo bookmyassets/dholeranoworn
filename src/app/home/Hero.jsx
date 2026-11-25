@@ -1,13 +1,59 @@
 "use client";
 
 import Image from "next/image";
-import { useRef } from "react";
+import { Fragment, useRef } from "react";
 import heroimg from "@/assets/bgImg.webp";
 import mobileHeroimg from "@/assets/bgImg-mobile.webp";
 import HeroRegistrationForm from "@/app/components/HeroRegistrationForm";
-import EventCountdown from "@/app/components/EventCountdown";
+import EventCountdown, { useEventCountdown } from "@/app/components/EventCountdown";
+import { getEventSchedule } from "@/app/components/eventCountdown.mjs";
 import { FiCalendar, FiClock } from "react-icons/fi";
 import styles from "./Hero.module.css";
+
+const { dates, timings } = getEventSchedule();
+
+function HeroEventSchedule() {
+  const countdown = useEventCountdown();
+
+  return (
+    <>
+      <div className={styles.countdown}>
+        <EventCountdown countdown={countdown} />
+      </div>
+
+      {countdown && countdown.phase !== "ended" && (
+        <div className={styles.schedule} role="group" aria-label="Event dates and timings">
+          <div className={styles.detail}>
+            <span className={styles.icon}><FiCalendar aria-hidden="true" /></span>
+            <dl className={styles.detailText}>
+              <dt>Event dates</dt>
+              <dd className={styles.value}>
+                {dates.map(({ date, label }, index) => (
+                  <Fragment key={date}>
+                    {index > 0 && (index === dates.length - 1 ? " & " : ", ")}
+                    <time dateTime={date}>{label}</time>
+                  </Fragment>
+                ))}
+              </dd>
+            </dl>
+          </div>
+          <div className={styles.detail}>
+            <span className={styles.icon}><FiClock aria-hidden="true" /></span>
+            <dl className={styles.detailText}>
+              <dt>Event timings</dt>
+              {timings.map(({ date, label, range }) => (
+                <dd key={`${date ?? ""}-${range}`} className={styles.value}>
+                  {label && <><time dateTime={date}>{label}</time>{": "}</>}
+                  <span className={styles.timeRange}>{range}</span>
+                </dd>
+              ))}
+            </dl>
+          </div>
+        </div>
+      )}
+    </>
+  );
+}
 
 export default function Hero() {
   const heroRef = useRef(null);
@@ -73,31 +119,7 @@ export default function Hero() {
             Understand Dholera Before You Invest
           </p>
 
-          <div className={styles.countdown}>
-            <EventCountdown />
-          </div>
-
-          <div className={styles.schedule} role="group" aria-label="Event dates and timings">
-            <div className={styles.detail}>
-              <span className={styles.icon}><FiCalendar aria-hidden="true" /></span>
-              <dl className={styles.detailText}>
-                <dt>Event dates</dt>
-                <dd className={styles.value}>
-                  <time dateTime="2026-11-21">21</time> &amp; <time dateTime="2026-11-22">22 November 2026</time>
-                </dd>
-              </dl>
-            </div>
-            <div className={styles.detail}>
-              <span className={styles.icon}><FiClock aria-hidden="true" /></span>
-              <dl className={styles.detailText}>
-                <dt>Event timings</dt>
-                <dd className={styles.value}>
-                  <span className={styles.timeRange}>9:00 AM &ndash; 8:00 PM</span>{" "}
-                </dd>
-              </dl>
-            </div>
-          </div>
-
+          <HeroEventSchedule />
         </div>
         <HeroRegistrationForm />
       </div>

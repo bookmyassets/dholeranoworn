@@ -25,7 +25,7 @@ function FlipDigit({ value }) {
   );
 }
 
-export default function EventCountdown() {
+export function useEventCountdown() {
   // Identical server and initial client render; fixed tile geometry reserves space.
   const [countdown, setCountdown] = useState(null);
   useEffect(() => {
@@ -46,6 +46,10 @@ export default function EventCountdown() {
     };
   }, []);
 
+  return countdown;
+}
+
+export default function EventCountdown({ countdown }) {
   const values = countdown?.values ?? ["--", "--", "--", "--"];
   const timerLabel = countdown
     ? `${countdown.status}${countdown.phase === "ended" ? "" : `: ${values.map((value, index) => `${Number(value)} ${LABELS[index].toLowerCase()}`).join(", ")}`}`

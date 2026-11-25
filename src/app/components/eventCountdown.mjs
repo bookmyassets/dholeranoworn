@@ -3,6 +3,38 @@ export const SESSIONS = [
   { start: Date.parse("2026-11-22T09:00:00+05:30"), end: Date.parse("2026-11-22T20:00:00+05:30") },
 ];
 
+const eventTimeZone = { timeZone: "Asia/Kolkata" };
+const dateParts = new Intl.DateTimeFormat("en-GB", {
+  ...eventTimeZone, year: "numeric", month: "2-digit", day: "2-digit",
+});
+const dateLabel = new Intl.DateTimeFormat("en-GB", { ...eventTimeZone, dateStyle: "long" });
+const timeLabel = new Intl.DateTimeFormat("en-US", {
+  ...eventTimeZone, hour: "numeric", minute: "2-digit", hour12: true,
+});
+
+export function getEventSchedule(sessions = SESSIONS) {
+  const datesByDay = new Map();
+  const timings = sessions.map(({ start, end }) => {
+    const parts = Object.fromEntries(dateParts.formatToParts(start).map(({ type, value }) => [type, value]));
+    const date = `${parts.year}-${parts.month}-${parts.day}`;
+    const label = dateLabel.format(start);
+    datesByDay.set(date, label);
+    return { date, label, range: `${timeLabel.format(start)} – ${timeLabel.format(end)}` };
+  });
+  const dates = Array.from(datesByDay, ([date, label]) => ({ date, label }));
+  const [firstTiming] = timings;
+
+  return {
+    dates: dates.map(({ date, label }, index) => ({
+      date,
+      label: date.slice(0, 7) === dates[index + 1]?.date.slice(0, 7) ? label.split(" ")[0] : label,
+    })),
+    timings: firstTiming && timings.every(({ range }) => range === firstTiming.range)
+      ? [{ range: firstTiming.range }]
+      : timings,
+  };
+}
+
 export function getCountdown(now) {
   const active = SESSIONS.find(({ start, end }) => now >= start && now < end);
   const next = SESSIONS.find(({ start }) => now < start);

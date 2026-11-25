@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { getCountdown, SESSIONS } from "./eventCountdown.mjs";
+import { getCountdown, getEventSchedule, SESSIONS } from "./eventCountdown.mjs";
 
 const at = (time) => getCountdown(Date.parse(time));
 
@@ -9,6 +9,34 @@ test("IST sessions correspond to 03:30–14:30 UTC on both days", () => {
     ["2026-11-21T03:30:00.000Z", "2026-11-21T14:30:00.000Z"],
     ["2026-11-22T03:30:00.000Z", "2026-11-22T14:30:00.000Z"],
   ]);
+});
+
+test("the hero schedule displays the configured dates and shared hours", () => {
+  assert.deepEqual(getEventSchedule(), {
+    dates: [
+      { date: "2026-11-21", label: "21" },
+      { date: "2026-11-22", label: "22 November 2026" },
+    ],
+    timings: [{ range: "9:00 AM – 8:00 PM" }],
+  });
+});
+
+test("events spanning months display each date and its own hours in IST", () => {
+  const schedule = getEventSchedule([
+    { start: Date.parse("2026-11-30T03:30Z"), end: Date.parse("2026-11-30T14:30Z") },
+    { start: Date.parse("2026-11-30T19:30Z"), end: Date.parse("2026-12-01T04:30Z") },
+  ]);
+
+  assert.deepEqual(schedule, {
+    dates: [
+      { date: "2026-11-30", label: "30 November 2026" },
+      { date: "2026-12-01", label: "1 December 2026" },
+    ],
+    timings: [
+      { date: "2026-11-30", label: "30 November 2026", range: "9:00 AM – 8:00 PM" },
+      { date: "2026-12-01", label: "1 December 2026", range: "1:00 AM – 10:00 AM" },
+    ],
+  });
 });
 
 test("countdown rolls days, hours, minutes and seconds without going negative", () => {
