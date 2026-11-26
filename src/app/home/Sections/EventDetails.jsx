@@ -13,6 +13,8 @@ import {
   FiArrowUpRight
 } from 'react-icons/fi'
 import styles from './EventDetails.module.css'
+import SuccessfulEvents from './SuccessfulEvents'
+import successfulEvents from './successfulEvents.data'
 const topicIcons = [
   FiGrid,
   FiHome,
@@ -118,6 +120,7 @@ export default function EventDetails () {
           </div>
         </div>
       </section>
+      <SuccessfulEvents events={successfulEvents} />
       <section
         id='trendsetter'
         aria-labelledby='trendsetter-title'
